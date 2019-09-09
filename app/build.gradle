@@ -22,7 +22,8 @@ android {
 
         release {
             testCoverageEnabled = true
-            minifyEnabled true // shrinks the code and makes it harder to reverse engineer when released to the play store
+            minifyEnabled true
+            // shrinks the code and makes it harder to reverse engineer when released to the play store
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -51,6 +52,11 @@ dependencies {
     implementation project(":data")
     implementation project(":domain")
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 
@@ -65,11 +71,15 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxVersion"
 
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
     testImplementation "io.mockk:mockk:$rootProject.mockkVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
 
 }
 

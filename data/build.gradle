@@ -37,9 +37,12 @@ dependencies {
 
     implementation "androidx.core:core:$rootProject.supportCompatVersion"
 
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
 }

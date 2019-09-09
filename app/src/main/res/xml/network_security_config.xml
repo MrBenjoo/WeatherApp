@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+       When an app communicates with servers using a cleartext network traffic, such as HTTP, it could raise a risk of eavesdropping and tampering of content.
+       If the xml was not included and the cleartextTrafficPermitted was not set to true, then I would get the following error:
+       java.net.UnknownServiceException: CLEARTEXT communication to geocode.arcgis.com not permitted by network security policy
+
+-->
+<network-security-config>
+    <!--Set application-wide security config using base-config tag.-->
+    <base-config cleartextTrafficPermitted="true"/>
+</network-security-config>

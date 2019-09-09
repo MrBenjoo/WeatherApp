@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startPageFragment">
+    <fragment
+        android:id="@+id/startPageFragment"
+        android:name="com.benji.weatherswe.start.StartPageFragment"
+        android:label="start_page_fragment"
+        tools:layout="@layout/start_page_fragment" >
+        <action
+            android:id="@+id/action_startPageFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.benji.weatherswe.main.MainPageFragment"
+        android:label="main_page_fragment"
+        tools:layout="@layout/main_page_fragment" />
+</navigation>
