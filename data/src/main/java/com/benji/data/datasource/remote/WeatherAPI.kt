@@ -8,8 +8,8 @@ interface WeatherAPI {
 
     @GET("api/category/pmp3g/version/2/geotype/point/lon/{longitude}/lat/{latitude}/data.json")
     suspend fun getWeatherForecast(
-        @Path("longitude") longitude: String,
-        @Path("latitude") latitude: String
+        @Path("longitude") longitude: Double,
+        @Path("latitude") latitude: Double
     )
             : Weather
 

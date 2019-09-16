@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.benji.weatherswe.start.StartPageFragment">
+    tools:context="com.benji.weatherswe.searchcity.SearchCityFragment">
 
     <TextView
-        android:id="@+id/tv_info_start"
+        android:id="@+id/tv_searchcity_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:text="@string/start_info"
         android:textColor="@color/colorPrimaryTextWhite"
-        android:textSize="@dimen/subtitle_text_size"
+        android:textSize="@dimen/subtitle_one_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +22,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_start"
+        android:id="@+id/img_searchcity_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:searchIcon="@drawable/ic_search_white_24dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_info_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info_start" />
+        app:layout_constraintStart_toStartOf="@+id/tv_searchcity_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_searchcity_info"
+        app:searchIcon="@drawable/ic_search_white" />
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/autoCompleteTv_start"

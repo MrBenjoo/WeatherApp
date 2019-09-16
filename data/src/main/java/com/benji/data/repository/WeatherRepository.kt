@@ -2,6 +2,7 @@ package com.benji.data.repository
 
 import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.domain.ResultWrapper
+import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
 import retrofit2.HttpException
@@ -11,11 +12,10 @@ class WeatherRepository(private val weatherRemoteDataSource: WeatherRemoteDataSo
     IWeatherRepository {
 
     override suspend fun getWeatherForecast(
-        longitude: String,
-        latitude: String
+        latLng : Location
     ): ResultWrapper<Exception, Weather> {
         return try {
-            ResultWrapper.build { weatherRemoteDataSource.getWeatherForecast(longitude, latitude) }
+            ResultWrapper.build { weatherRemoteDataSource.getWeatherForecast(latLng) }
         } catch (exception: HttpException) {
             ResultWrapper.build { throw exception }
         }

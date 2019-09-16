@@ -1,9 +1,10 @@
-package com.benji.weatherswe.start
+package com.benji.weatherswe.searchcity
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benji.domain.ResultWrapper
+import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.CompareScore
 import com.benji.domain.domainmodel.geocoding.Suggestion
 import com.benji.domain.usecases.GetLocationCandidate
@@ -12,7 +13,7 @@ import com.benji.weatherswe.utils.returnCities
 import kotlinx.coroutines.launch
 import java.util.*
 
-class StartPageViewModel(
+class SearchCityViewModel(
     private val getLocationSuggestions: GetLocationSuggestions,
     private val getLocationCandidate: GetLocationCandidate
 ) : ViewModel() {
@@ -21,10 +22,12 @@ class StartPageViewModel(
     private var suggestions: List<Suggestion> = mutableListOf()
 
     // The suggestions that are shown in the list
-    val citySuggestions: MutableLiveData<List<String>> = MutableLiveData()
+    val citySuggestions = MutableLiveData<List<String>>()
 
     // The error message that is displayed in the fragment
-    val errorMessage : MutableLiveData<String> = MutableLiveData()
+    val errorMessage = MutableLiveData<String>()
+
+    val candidate = MutableLiveData<Candidate>()
 
 
     /**
@@ -65,7 +68,7 @@ class StartPageViewModel(
         val data = getLocationCandidate.getCandidateLocation(city, magicKey)
         when (data) {
             is ResultWrapper.Success -> {
-                val candidate = Collections.max(data.value.candidates, CompareScore())
+                candidate.value = Collections.max(data.value.candidates, CompareScore())
             }
             is ResultWrapper.Error -> errorMessage.value = data.error.message
         }

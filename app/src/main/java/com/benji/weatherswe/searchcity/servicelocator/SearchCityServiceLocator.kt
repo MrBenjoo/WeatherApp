@@ -1,4 +1,4 @@
-package com.benji.weatherswe.start.servicelocator
+package com.benji.weatherswe.searchcity.servicelocator
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -9,11 +9,11 @@ import com.benji.data.repository.GeocodingRepository
 import com.benji.domain.usecases.GetLocationCandidate
 import com.benji.domain.usecases.GetLocationSuggestions
 import com.benji.weatherswe.BaseViewModelFactory
-import com.benji.weatherswe.start.StartPageViewModel
+import com.benji.weatherswe.searchcity.SearchCityViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object StartServiceLocator {
+object SearchCityServiceLocator {
     private var geocodingRepository: GeocodingRepository? = null
 
     fun provideGetLocationSuggestionsUseCase(): GetLocationSuggestions {
@@ -42,16 +42,16 @@ object StartServiceLocator {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-    fun provideStartPageViewModel(fragment: Fragment): StartPageViewModel {
+    fun provideSearchCityViewModel(fragment: Fragment): SearchCityViewModel {
         return ViewModelProviders.of(
             fragment,
             BaseViewModelFactory {
-                StartPageViewModel(
+                SearchCityViewModel(
                     provideGetLocationSuggestionsUseCase(),
                     provideGetLocationCandidate()
                 )
             })
-            .get(StartPageViewModel::class.java)
+            .get(SearchCityViewModel::class.java)
     }
 
 

@@ -1,4 +1,4 @@
-package com.benji.weatherswe.start
+package com.benji.weatherswe.searchcity
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,21 +10,23 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.weatherswe.R
-import com.benji.weatherswe.start.servicelocator.StartServiceLocator.provideStartPageViewModel
+import com.benji.weatherswe.searchcity.servicelocator.SearchCityServiceLocator.provideSearchCityViewModel
 import com.benji.weatherswe.utils.mainActivity
+import com.benji.weatherswe.utils.navigate
+import com.benji.weatherswe.utils.sharedViewModel
 import com.benji.weatherswe.utils.showText
-import kotlinx.android.synthetic.main.start_page_fragment.*
+import kotlinx.android.synthetic.main.search_city_fragment.*
 
 
-class StartPageFragment : Fragment(), TextWatcher {
-    private lateinit var viewModel: StartPageViewModel
+class SearchCityFragment : Fragment(), TextWatcher {
+    private lateinit var viewModel: SearchCityViewModel
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.start_page_fragment, container, false)
+        return inflater.inflate(R.layout.search_city_fragment, container, false)
     }
 
     override fun afterTextChanged(text: Editable?) {
@@ -35,13 +37,23 @@ class StartPageFragment : Fragment(), TextWatcher {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = provideStartPageViewModel(this)
+        viewModel = provideSearchCityViewModel(this)
         initArrayAdapter()
         initAutoCompleteTextView()
         observeCitySuggestions()
         observeErrorMessages()
+        observeCandidate()
     }
 
+    private fun observeCandidate() {
+        viewModel.candidate.observe(
+            this,
+            Observer { candidate ->
+                sharedViewModel().candidate.value = candidate
+                navigate(R.id.action_startPageFragment_to_mainPageFragment)
+            }
+        )
+    }
 
     private fun initArrayAdapter() {
         arrayAdapter = ArrayAdapter(
@@ -54,7 +66,7 @@ class StartPageFragment : Fragment(), TextWatcher {
     private fun initAutoCompleteTextView() = with(autoCompleteTv_start) {
         setAdapter(arrayAdapter)
         threshold = 1
-        addTextChangedListener(this@StartPageFragment)
+        addTextChangedListener(this@SearchCityFragment)
         setOnItemClickListener { _, _, index, _ -> viewModel.onSuggestionClicked(index) }
     }
 

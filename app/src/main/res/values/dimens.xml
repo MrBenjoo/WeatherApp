@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Subtitles are smaller than headlines.
-    They are typically reserved for medium-emphasis text that is shorter in length.
-    Serif or sans serif typefaces work well for subtitles. -->
-    <dimen name="subtitle_text_size">16sp</dimen>
+    <dimen name="margin_24">24sp</dimen>
 
+    <dimen name="margin_18">18sp</dimen>
+
+    <dimen name="margin_16">16sp</dimen>
+
+    <dimen name="margin_14">14sp</dimen>
+
+    <dimen name="margin_12">12sp</dimen>
 
 </resources>

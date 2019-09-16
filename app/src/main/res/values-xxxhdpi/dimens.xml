@@ -1,0 +1,5 @@
+<resources>
+	<dimen name="headline_5">32sp</dimen>
+	<dimen name="subtitle_one_text_size">24sp</dimen>
+	<dimen name="subtitle_two_text_size">18sp</dimen>
+</resources>
