@@ -1,15 +1,12 @@
 package com.benji.weatherswe.weather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.weather.Weather
 import com.benji.weatherswe.R
 import com.benji.weatherswe.weather.servicelocator.WeatherServiceLocator
-import com.benji.weatherswe.utils.mainActivity
 import com.benji.weatherswe.utils.setupToolbar
 import com.benji.weatherswe.utils.sharedViewModel
 import com.benji.weatherswe.utils.sixDecimals
@@ -21,7 +18,7 @@ class WeatherFragment : Fragment() {
 
 
     private val weatherObserver = Observer<Weather> {weather ->
-        Log.d("WeatherFragment", weather.toString())
+
     }
 
     override fun onCreateView(
@@ -37,7 +34,7 @@ class WeatherFragment : Fragment() {
 
         setupToolbar(toolbar_weather, null)
         recyclerview_weather.setHasFixedSize(true)
-        recyclerview_weather.adapter = WeatherAdapter(fakeListOnlyToTest())
+        recyclerview_weather.adapter = WeatherAdapter(emptyList())
 
         viewModel = WeatherServiceLocator.provideWeatherViewModel(this)
 
@@ -50,12 +47,14 @@ class WeatherFragment : Fragment() {
             .sixDecimals())
     }
 
-    private fun fakeListOnlyToTest(): List<WeekdayForecastModel>? {
+    /*
+    private fun fakeListOnlyToTest(): List<WeekdayForecast>? {
 
         val sunnyDrawable = ContextCompat.getDrawable(mainActivity().applicationContext, R.drawable.ic_sunny)!!
-        val dayForecastModel = WeekdayForecastModel("Idag", sunnyDrawable, "18")
+        val dayForecastModel =
+            WeekdayForecast("Idag", sunnyDrawable, "18")
 
-        val list = arrayListOf<WeekdayForecastModel>()
+        val list = arrayListOf<WeekdayForecast>()
 
         for(i in 0..5) {
             list.add(dayForecastModel)
@@ -63,6 +62,7 @@ class WeatherFragment : Fragment() {
 
         return list
     }
+    */
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

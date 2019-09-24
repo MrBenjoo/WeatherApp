@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benji.weatherswe.R
+import com.benji.domain.domainmodel.weather.WeekdayForecast
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 
-class WeatherAdapter(var data: List<WeekdayForecastModel>?) : RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
+class WeatherAdapter(var data: List<WeekdayForecast>?) : RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
     private val TAG = "WeatherAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -25,13 +26,13 @@ class WeatherAdapter(var data: List<WeekdayForecastModel>?) : RecyclerView.Adapt
         data?.let {
             with(holder) {
                 day.text = it[position].day
-                image.background = it[position].image
+                //image.background = it[position].image
                 temperature.text = it[position].temperature
             }
         }
     }
 
-    fun setList(list: List<WeekdayForecastModel>) {
+    fun setList(list: List<WeekdayForecast>) {
         data = list
         notifyDataSetChanged()
     }

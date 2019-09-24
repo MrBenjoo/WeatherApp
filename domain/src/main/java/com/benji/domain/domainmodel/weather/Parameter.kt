@@ -1,7 +1,7 @@
 package com.benji.domain.domainmodel.weather
 
 data class Parameter(
-    val level: Int,
+    var level: Int,
     val levelType: String,
     val name: String,
     val unit: String,
