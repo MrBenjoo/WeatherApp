@@ -1,5 +1,7 @@
 # WeatherSwe
 
+[![Build Status](https://travis-ci.org/mrbenjoo/WeatherApp.svg?branch=master)](https://travis-ci.org/mrbenjoo/WeatherApp)
+
 WeatherSwe is an android application that provides a weather forecast up to 10 days. 
 
 
