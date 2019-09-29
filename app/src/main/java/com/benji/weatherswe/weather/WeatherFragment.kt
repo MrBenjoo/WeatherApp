@@ -1,15 +1,12 @@
 package com.benji.weatherswe.weather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.benji.domain.domainmodel.weather.Weather
+import com.benji.domain.domainmodel.weather.TenDayForecast
 import com.benji.weatherswe.R
 import com.benji.weatherswe.weather.servicelocator.WeatherServiceLocator
-import com.benji.weatherswe.utils.mainActivity
 import com.benji.weatherswe.utils.setupToolbar
 import com.benji.weatherswe.utils.sharedViewModel
 import com.benji.weatherswe.utils.sixDecimals
@@ -18,10 +15,11 @@ import kotlinx.android.synthetic.main.weather_fragment.*
 
 class WeatherFragment : Fragment() {
     private lateinit var viewModel: WeatherViewModel
+    private lateinit var weatherAdapter: WeatherAdapter
 
 
-    private val weatherObserver = Observer<Weather> {weather ->
-        Log.d("WeatherFragment", weather.toString())
+    private val weatherObserver = Observer<List<TenDayForecast>> { weekdayForecast ->
+        weatherAdapter.setList(weekdayForecast)
     }
 
     override fun onCreateView(
@@ -37,11 +35,12 @@ class WeatherFragment : Fragment() {
 
         setupToolbar(toolbar_weather, null)
         recyclerview_weather.setHasFixedSize(true)
-        recyclerview_weather.adapter = WeatherAdapter(fakeListOnlyToTest())
+        weatherAdapter = WeatherAdapter(emptyList())
+        recyclerview_weather.adapter = weatherAdapter
 
         viewModel = WeatherServiceLocator.provideWeatherViewModel(this)
 
-        viewModel.weather.observe(this, weatherObserver)
+        viewModel.listOfTenDayForecast.observe(this, weatherObserver)
 
         viewModel.getWeatherForecast(sharedViewModel()
             .candidate
@@ -49,21 +48,6 @@ class WeatherFragment : Fragment() {
             .location
             .sixDecimals())
     }
-
-    private fun fakeListOnlyToTest(): List<WeekdayForecastModel>? {
-
-        val sunnyDrawable = ContextCompat.getDrawable(mainActivity().applicationContext, R.drawable.ic_sunny)!!
-        val dayForecastModel = WeekdayForecastModel("Idag", sunnyDrawable, "18")
-
-        val list = arrayListOf<WeekdayForecastModel>()
-
-        for(i in 0..5) {
-            list.add(dayForecastModel)
-        }
-
-        return list
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

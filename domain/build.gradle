@@ -8,14 +8,14 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1'
+
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
     testImplementation "io.mockk:mockk:$rootProject.mockkVersion"
-    implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxVersion"
 
 }
 

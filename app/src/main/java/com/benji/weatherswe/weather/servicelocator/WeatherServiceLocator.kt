@@ -8,6 +8,7 @@ import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.data.repository.WeatherRepository
 import com.benji.domain.usecases.GetWeatherForecast
 import com.benji.weatherswe.BaseViewModelFactory
+import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.weather.WeatherViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -49,7 +50,7 @@ object WeatherServiceLocator {
     fun provideWeatherViewModel(fragment: Fragment): WeatherViewModel {
         return ViewModelProviders.of(
             fragment,
-            BaseViewModelFactory { WeatherViewModel(provideGetWeatherForecastUseCase()) })
+            BaseViewModelFactory { WeatherViewModel(DispatcherProvider, provideGetWeatherForecastUseCase()) })
             .get(WeatherViewModel::class.java)
     }
 
