@@ -13,7 +13,7 @@ android:
 
 
 script:
-- ./gradlew clean test build
+- chmod +x ./gradlew clean test build
 
 branches:
         only:
