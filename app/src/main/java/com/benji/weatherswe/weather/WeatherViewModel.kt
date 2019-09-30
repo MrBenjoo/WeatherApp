@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.domainmodel.weather.*
-import com.benji.domain.usecases.GetWeatherForecast
+import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.utils.DateUtils
 import com.benji.weatherswe.utils.WeatherUtils
@@ -17,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
 
 class WeatherViewModel(
     private val dispatcher: DispatcherProvider,
-    private val weatherForecastUseCase: GetWeatherForecast
+    private val weatherRepository: IWeatherRepository
 ) : ViewModel(), CoroutineScope {
 
     val weather = MutableLiveData<Weather>()
@@ -29,7 +29,7 @@ class WeatherViewModel(
         get() = dispatcher.provideUIContext() + jobTracker
 
     fun getWeatherForecast(latLng: Location) = launch {
-        val data = weatherForecastUseCase.getWeatherForecast(latLng)
+        val data = weatherRepository.getWeatherForecast(latLng)
         when (data) {
             is ResultWrapper.Success -> {
                 processWeatherData(data.value)
