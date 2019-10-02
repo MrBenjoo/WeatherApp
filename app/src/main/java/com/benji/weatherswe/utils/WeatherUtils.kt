@@ -6,13 +6,19 @@ class WeatherUtils {
 
     public fun getParameters(parameters: List<Parameter>): List<Parameter> {
         val list = mutableListOf<Parameter>()
-        val level = parameters[0].level
-        val levelType = parameters[1].levelType
-        val name = parameters[2].name
-        val unit = parameters[3].unit
-        val values = parameters[4].values
-        val parameter = Parameter(level, levelType, name, unit, values)
-        list.add(parameter)
+        parameters.forEach { parameter ->
+
+            list.add(
+                Parameter(
+                    parameter.name,
+                    parameter.levelType,
+                    parameter.level,
+                    parameter.unit,
+                    parameter.values
+                )
+            )
+        }
+
         return list
     }
 

@@ -4,16 +4,28 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DateUtils {
-    private val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-    fun getCurrentTime(): String = inputFormat.format(Calendar.getInstance().time)
+    private val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    private val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+    fun getCurrentTime(): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return inputFormat.format(Calendar.getInstance().time)
+    }
 
     fun getFormattedTime(time: String): String {
         val date = inputFormat.parse(time)
-        return inputFormat.format(date)
+        return outputFormat.format(date)
+    }
+
+    fun getHourlyTime(time : String) : String {
+        val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val date = inputFormat.parse(time)
+        return outputFormat.format(date)
     }
 
     fun getDay(time: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         var dayOfWeek = "Unknown"
         try {
             val date = inputFormat.parse(time)
@@ -23,5 +35,6 @@ class DateUtils {
         }
         return dayOfWeek
     }
+
 
 }

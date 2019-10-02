@@ -1,15 +1,14 @@
 package com.benji.weatherswe.weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.benji.domain.domainmodel.weather.TenDayForecast
+import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.weatherswe.R
+import com.benji.weatherswe.utils.*
 import com.benji.weatherswe.weather.servicelocator.WeatherServiceLocator
-import com.benji.weatherswe.utils.setupToolbar
-import com.benji.weatherswe.utils.sharedViewModel
-import com.benji.weatherswe.utils.sixDecimals
 import kotlinx.android.synthetic.main.weather_fragment.*
 
 
@@ -18,8 +17,13 @@ class WeatherFragment : Fragment() {
     private lateinit var weatherAdapter: WeatherAdapter
 
 
-    private val weatherObserver = Observer<List<TenDayForecast>> { weekdayForecast ->
+    private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
         weatherAdapter.setList(weekdayForecast)
+    }
+
+    private val listClickObserver = Observer<RowData> { rowData ->
+        sharedViewModel().currentDayForecast = rowData.dayForecast
+        navigate(R.id.action_mainPageFragment_to_currentDayFragment)
     }
 
     override fun onCreateView(
@@ -36,17 +40,22 @@ class WeatherFragment : Fragment() {
         setupToolbar(toolbar_weather, null)
         recyclerview_weather.setHasFixedSize(true)
         weatherAdapter = WeatherAdapter(emptyList())
+        weatherAdapter.rowData.observe(this, listClickObserver)
         recyclerview_weather.adapter = weatherAdapter
 
-        viewModel = WeatherServiceLocator.provideWeatherViewModel(this)
+
+        viewModel =
+            WeatherServiceLocator.provideWeatherViewModel(this, mainActivity().applicationContext)
 
         viewModel.listOfTenDayForecast.observe(this, weatherObserver)
 
-        viewModel.getWeatherForecast(sharedViewModel()
-            .candidate
-            .value!!
-            .location
-            .sixDecimals())
+        viewModel.getWeatherForecast(
+            sharedViewModel()
+                .candidate
+                .value!!
+                .location
+                .sixDecimals()
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

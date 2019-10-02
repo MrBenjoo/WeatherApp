@@ -4,14 +4,16 @@ package com.benji.weatherswe.weather
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.benji.weatherswe.R
-import com.benji.domain.domainmodel.weather.TenDayForecast
+import com.benji.domain.domainmodel.weather.DayForecast
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 
-class WeatherAdapter(var data: List<TenDayForecast>?) : RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
+class WeatherAdapter(var data: List<DayForecast>?) : RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
     private val TAG = "WeatherAdapter"
+    val rowData = MutableLiveData<RowData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,14 +27,17 @@ class WeatherAdapter(var data: List<TenDayForecast>?) : RecyclerView.Adapter<Wea
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         data?.let {
             with(holder) {
-                day.text = it[position].day
+                val forecast = it[position]
+                day.text = forecast.day
                 //image.background = it[position].image
-                temperature.text = it[position].temperature
+                temperature.text = forecast.temperature
+                bind(forecast,this@WeatherAdapter.rowData)
             }
         }
     }
 
-    fun setList(list: List<TenDayForecast>) {
+
+    fun setList(list: List<DayForecast>) {
         data = list
         notifyDataSetChanged()
     }
@@ -41,6 +46,12 @@ class WeatherAdapter(var data: List<TenDayForecast>?) : RecyclerView.Adapter<Wea
         val day = itemView.tv_main_list_day
         val image = itemView.img_main_list_weather
         val temperature = itemView.tv_main_list_temp
+
+        fun bind(forecast: DayForecast, rowData: MutableLiveData<RowData>) {
+            itemView.setOnClickListener { rowData.value = RowData(adapterPosition, forecast) }
+        }
     }
 
 }
+
+data class RowData(val position : Int, val dayForecast: DayForecast)
