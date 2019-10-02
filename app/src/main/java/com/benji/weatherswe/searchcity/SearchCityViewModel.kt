@@ -1,5 +1,6 @@
 package com.benji.weatherswe.searchcity
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,15 +8,13 @@ import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.CompareScore
 import com.benji.domain.domainmodel.geocoding.Suggestion
-import com.benji.domain.usecases.GetLocationCandidate
-import com.benji.domain.usecases.GetLocationSuggestions
+import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.utils.returnCities
 import kotlinx.coroutines.launch
 import java.util.*
 
 class SearchCityViewModel(
-    private val getLocationSuggestions: GetLocationSuggestions,
-    private val getLocationCandidate: GetLocationCandidate
+    private val geocodingRepository: IGeocodingRepository
 ) : ViewModel() {
 
     // Used to retrieve the name of the city when the user clicks on a suggestion from the list
@@ -35,7 +34,7 @@ class SearchCityViewModel(
      * a city.
      */
     fun getCitySuggestions(textSearch: String) = viewModelScope.launch {
-        val data = getLocationSuggestions.getLocationSuggestions(textSearch)
+        val data = geocodingRepository.getSuggestions(textSearch)
         when (data) {
             is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
             is ResultWrapper.Error -> errorMessage.value = data.error.message
@@ -65,7 +64,7 @@ class SearchCityViewModel(
         val city = suggestions[index].text
         val magicKey = suggestions[index].magicKey
 
-        val data = getLocationCandidate.getCandidateLocation(city, magicKey)
+        val data = geocodingRepository.getCandidateLocation(city, magicKey)
         when (data) {
             is ResultWrapper.Success -> {
                 candidate.value = Collections.max(data.value.candidates, CompareScore())

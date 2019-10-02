@@ -21,5 +21,14 @@
         android:id="@+id/mainPageFragment"
         android:name="com.benji.weatherswe.weather.WeatherFragment"
         android:label="main_page_fragment"
-        tools:layout="@layout/weather_fragment" />
+        tools:layout="@layout/weather_fragment" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_currentDayFragment"
+            app:destination="@id/currentDayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentDayFragment"
+        android:name="com.benji.weatherswe.currentday.CurrentDayFragment"
+        android:label="fragment_current_day"
+        tools:layout="@layout/fragment_current_day" />
 </navigation>

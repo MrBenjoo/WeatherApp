@@ -6,8 +6,6 @@ import com.benji.data.datasource.UrlManager
 import com.benji.data.datasource.remote.GeocodingAPI
 import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
-import com.benji.domain.usecases.GetLocationCandidate
-import com.benji.domain.usecases.GetLocationSuggestions
 import com.benji.weatherswe.BaseViewModelFactory
 import com.benji.weatherswe.searchcity.SearchCityViewModel
 import retrofit2.Retrofit
@@ -16,13 +14,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object SearchCityServiceLocator {
     private var geocodingRepository: GeocodingRepository? = null
 
-    fun provideGetLocationSuggestionsUseCase(): GetLocationSuggestions {
-        return GetLocationSuggestions(provideGeocodingRepository())
-    }
-
-    private fun provideGetLocationCandidate(): GetLocationCandidate {
-        return GetLocationCandidate(provideGeocodingRepository())
-    }
 
     private fun provideGeocodingRepository(): GeocodingRepository {
         var geocodingRepositoryTemp = geocodingRepository
@@ -47,8 +38,7 @@ object SearchCityServiceLocator {
             fragment,
             BaseViewModelFactory {
                 SearchCityViewModel(
-                    provideGetLocationSuggestionsUseCase(),
-                    provideGetLocationCandidate()
+                    provideGeocodingRepository()
                 )
             })
             .get(SearchCityViewModel::class.java)

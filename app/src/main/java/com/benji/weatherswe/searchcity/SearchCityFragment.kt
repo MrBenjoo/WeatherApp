@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.weatherswe.R
@@ -50,7 +51,8 @@ class SearchCityFragment : Fragment(), TextWatcher {
             this,
             Observer { candidate ->
                 sharedViewModel().candidate.value = candidate
-                navigate(R.id.action_startPageFragment_to_mainPageFragment)
+                val bundle = bundleOf("city" to candidate.address)
+                navigate(R.id.action_startPageFragment_to_mainPageFragment, bundle)
             }
         )
     }
