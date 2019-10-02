@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_place_white"
+        android:src="@drawable/ic_place"
         app:layout_constraintBottom_toBottomOf="@+id/tv_weather_city"
         app:layout_constraintEnd_toStartOf="@+id/tv_weather_city"
         app:layout_constraintTop_toTopOf="@+id/tv_weather_city" />
