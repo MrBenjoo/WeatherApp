@@ -1,0 +1,226 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.benji.weatherswe.currentdayhour.CurrentDayHourFragment">
+
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subtitle_two_text_size"
+        android:text="Idag"
+        android:textColor="@color/colorPrimaryTextWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subtitle_two_text_size"
+        android:text="29/8"
+        android:textColor="@color/colorPrimaryTextWhite"
+        app:layout_constraintEnd_toEndOf="@+id/tv_current_day_hour_today"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_today"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_today" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:text="13:00"
+        android:textColor="@color/colorPrimaryTextWhite"
+        app:layout_constraintEnd_toEndOf="@+id/tv_current_day_hour_date"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_date" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="56dp"
+        android:text="56"
+        android:textColor="@color/colorPrimaryTextWhite"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_time" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_two_text_size"
+        android:text="Soligt"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_temperature" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_current_day_hour_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_place"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:text="malmö"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:layout_marginStart="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_current_day_hour_place"
+        app:layout_constraintStart_toEndOf="@+id/img_current_day_hour_place"
+        app:layout_constraintTop_toTopOf="@+id/img_current_day_hour_place" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vind"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tv_current_day_hour_precipitation"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
+        app:layout_constraintTop_toBottomOf="@+id/img_current_day_hour_place" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_weather_windy"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_wind"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v_70"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_wind" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_wind_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_wind"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v_70"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_wind" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_precipitation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nederbörd"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tv_current_day_hour_thunder"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_wind" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_current_day_hour_rain_drop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rainy_drop"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_precipitation"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_precipitation" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_precipitation_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_precipitation"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_wind_value"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_precipitation" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_thunder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Åska"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/tv_current_day_hour_air_pressure"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_precipitation" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_current_day_hour_thunder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_weather_lightning"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_thunder"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_thunder" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_thunder_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_thunder"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_precipitation_value"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_thunder" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_air_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lufttryck"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_wind"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_day_hour_thunder" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_current_day_hour_air_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_weather_atmospheric_pressure"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_air_pressure"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_air_pressure" />
+
+    <TextView
+        android:id="@+id/tv_current_day_hour_air_pressure_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_current_day_hour_air_pressure"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_day_hour_thunder_value"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_day_hour_air_pressure" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
 import com.benji.weatherswe.searchcity.SearchCityViewModel
+import com.benji.weatherswe.utils.DispatcherProvider
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -38,6 +39,7 @@ object SearchCityServiceLocator {
             fragment,
             BaseViewModelFactory {
                 SearchCityViewModel(
+                    DispatcherProvider,
                     provideGeocodingRepository()
                 )
             })
