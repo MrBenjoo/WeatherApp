@@ -1,9 +1,7 @@
 package com.benji.weatherswe.weather
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.domainmodel.weather.DayForecast
@@ -17,7 +15,6 @@ import com.benji.weatherswe.utils.WeatherUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 
@@ -31,6 +28,7 @@ class WeatherViewModel(
     val weather = MutableLiveData<Weather>()
     val listOfTenDayForecast = MutableLiveData<List<DayForecast>>()
     val weatherForecastError = MutableLiveData<String>()
+
     private var jobTracker = Job()
 
     override val coroutineContext: CoroutineContext
