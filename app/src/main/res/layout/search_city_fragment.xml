@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.benji.weatherswe.searchcity.SearchCityFragment">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_place"
+        android:layout_marginBottom="11dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_searchcity_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/tv_searchcity_info"
         android:layout_width="match_parent"
@@ -20,15 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/img_searchcity_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_searchcity_info"
-        app:layout_constraintTop_toBottomOf="@+id/tv_searchcity_info"
-        app:searchIcon="@drawable/ic_search_white" />
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:id="@+id/autoCompleteTv_start"
