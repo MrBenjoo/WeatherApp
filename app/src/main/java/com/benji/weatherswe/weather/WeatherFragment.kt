@@ -37,7 +37,7 @@ class WeatherFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setupToolbar(toolbar_weather, null)
+        //setupToolbar(toolbar_weather, null)
         recyclerview_weather.setHasFixedSize(true)
         weatherAdapter = WeatherAdapter(emptyList())
         weatherAdapter.rowData.observe(this, listClickObserver)
