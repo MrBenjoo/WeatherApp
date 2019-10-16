@@ -1,6 +1,5 @@
 package com.benji.weatherswe.utils
 
-import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -26,10 +25,6 @@ fun androidx.fragment.app.Fragment.mainActivity(): MainActivity = (activity as M
 
 fun androidx.fragment.app.Fragment.navigate(id: Int) {
     view!!.findNavController().navigate(id)
-}
-
-fun androidx.fragment.app.Fragment.navigate(id: Int, bundle: Bundle) {
-    view!!.findNavController().navigate(id, bundle)
 }
 
 fun androidx.fragment.app.Fragment.sharedViewModel(): SharedViewModel {

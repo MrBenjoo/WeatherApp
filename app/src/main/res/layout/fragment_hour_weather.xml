@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/scene"
-    tools:context="com.benji.weatherswe.currentday.CurrentDayFragment">
+    tools:context="com.benji.weatherswe.hourweather.HourWeatherFragment">
 
     <TextView
-        android:id="@+id/tv_header_today"
+        android:id="@+id/tv_hour_weather_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryTextWhite"
@@ -19,15 +19,15 @@
 
 
     <TextView
-        android:id="@+id/tv_header_date"
+        android:id="@+id/tv_hour_weather_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textSize="@dimen/subtitle_one_text_size"
         android:text="29/8"
-        app:layout_constraintEnd_toEndOf="@+id/tv_header_today"
-        app:layout_constraintStart_toStartOf="@+id/tv_header_today"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header_today" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_hour_weather_today"
+        app:layout_constraintStart_toStartOf="@+id/tv_hour_weather_today"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_today" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h1_guideline"
@@ -37,7 +37,7 @@
         app:layout_constraintGuide_percent="0.10" />
 
     <TextView
-        android:id="@+id/tv_header_temp"
+        android:id="@+id/tv_hour_weather_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="28"
@@ -48,45 +48,45 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_header_weather"
+        android:id="@+id/img_hour_weather_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_sunny_weather_current"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_header_weather_symbol"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_hour_weather_symbol"
         app:layout_constraintEnd_toStartOf="@+id/v2_guideline"
-        app:layout_constraintTop_toTopOf="@+id/tv_header_temp" />
+        app:layout_constraintTop_toTopOf="@+id/tv_hour_weather_temp" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_header_place"
+        android:id="@+id/img_hour_weather_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_place"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/v1_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header_weather_symbol" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_symbol" />
 
     <TextView
-        android:id="@+id/tv_header_city"
+        android:id="@+id/tv_hour_weather_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/subtitle_one_text_size"
         android:text="malmö"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryTextWhite"
-        app:layout_constraintBottom_toBottomOf="@+id/img_header_place"
-        app:layout_constraintStart_toEndOf="@+id/img_header_place"
-        app:layout_constraintTop_toTopOf="@+id/img_header_place" />
+        app:layout_constraintBottom_toBottomOf="@+id/img_hour_weather_place"
+        app:layout_constraintStart_toEndOf="@+id/img_hour_weather_place"
+        app:layout_constraintTop_toTopOf="@+id/img_hour_weather_place" />
 
     <TextView
-        android:id="@+id/tv_header_weather_symbol"
+        android:id="@+id/tv_hour_weather_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textSize="@dimen/subtitle_two_text_size"
         android:text="Soligt"
-        app:layout_constraintEnd_toEndOf="@+id/tv_header_temp"
-        app:layout_constraintStart_toStartOf="@+id/tv_header_temp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_header_temp" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_hour_weather_temp"
+        app:layout_constraintStart_toStartOf="@+id/tv_hour_weather_temp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_temp" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -110,7 +110,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_header_place">
+        app:layout_constraintTop_toBottomOf="@+id/img_hour_weather_place">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_current_day"

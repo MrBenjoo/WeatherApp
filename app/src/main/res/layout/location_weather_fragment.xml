@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.benji.weatherswe.searchcity.SearchCityFragment">
+    tools:context="com.benji.weatherswe.locationweather.LocationWeatherFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_location_weather_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_place"
         android:layout_marginBottom="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_searchcity_info"
+        app:layout_constraintBottom_toTopOf="@+id/tv_location_weather_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_searchcity_info"
+        android:id="@+id/tv_location_weather_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
-        android:text="@string/start_info"
+        android:text="@string/location_weather_info"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textSize="@dimen/subtitle_one_text_size"
         android:textStyle="bold"
@@ -31,10 +32,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-        android:id="@+id/autoCompleteTv_start"
+        android:id="@+id/auto_complete_tv_location_weather_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/start_search_hint"
+        android:hint="@string/location_weather_search_hint"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textColorHint="@color/colorPrimaryTextWhite"
         app:layout_constraintEnd_toEndOf="parent"

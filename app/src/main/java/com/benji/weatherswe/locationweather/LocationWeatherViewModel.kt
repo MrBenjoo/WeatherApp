@@ -1,4 +1,4 @@
-package com.benji.weatherswe.searchcity
+package com.benji.weatherswe.locationweather
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class SearchCityViewModel(
+class LocationWeatherViewModel(
     private val dispatcher: DispatcherProvider,
     private val geocodingRepository: IGeocodingRepository
 ) : ViewModel(), CoroutineScope {

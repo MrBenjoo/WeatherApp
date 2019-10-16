@@ -1,4 +1,4 @@
-package com.benji.weatherswe.currentday
+package com.benji.weatherswe.hourweather
 
 
 import android.os.Bundle
@@ -12,11 +12,11 @@ import com.benji.domain.domainmodel.weather.Parameter
 import com.benji.weatherswe.R
 import com.benji.weatherswe.utils.navigate
 import com.benji.weatherswe.utils.sharedViewModel
-import kotlinx.android.synthetic.main.fragment_current_day.*
+import kotlinx.android.synthetic.main.fragment_hour_weather.*
 
 
-class CurrentDayFragment : Fragment() {
-    private val TAG = "CurrentDayFragment"
+class HourWeatherFragment : Fragment() {
+    private val TAG = "HourWeatherFragment"
 
     private val listClickObserver = Observer<Hourly> { rowData ->
         sharedViewModel().hourly = rowData
@@ -26,7 +26,7 @@ class CurrentDayFragment : Fragment() {
                 Parameter(it.name, it.levelType, it.level, it.unit, it.values)
             )
         }
-        navigate(R.id.action_currentDayFragment_to_currentDayHourFragment)
+        navigate(R.id.action_hourWeatherFragment_to_currentWeatherFragment)
     }
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class CurrentDayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current_day, container, false)
+        return inflater.inflate(R.layout.fragment_hour_weather, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,9 +45,14 @@ class CurrentDayFragment : Fragment() {
     private fun populateRecyclerView() {
         val forecast = sharedViewModel().currentDayForecast.listOfHourlyData
         recyclerview_current_day.setHasFixedSize(true)
-        val adapter = CurrentDayAdapter(forecast)
+        val adapter = HourWeatherAdapter(forecast)
         adapter.rowData.observe(this, listClickObserver)
         recyclerview_current_day.adapter = adapter
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        tv_hour_weather_date.text = sharedViewModel().todayDate
+        tv_hour_weather_city.text = sharedViewModel().candidate.address
+    }
 }

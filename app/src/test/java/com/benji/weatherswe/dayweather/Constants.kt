@@ -1,7 +1,4 @@
-package com.benji.weatherswe.weather
-
-import com.benji.domain.domainmodel.weather.Geometry
-import com.benji.domain.domainmodel.weather.Weather
+package com.benji.weatherswe.dayweather
 
 object Constants {
 

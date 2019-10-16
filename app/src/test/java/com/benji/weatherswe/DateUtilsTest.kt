@@ -1,8 +1,7 @@
 package com.benji.weatherswe
 
 import com.benji.weatherswe.utils.DateUtils
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class DateUtilsTest {

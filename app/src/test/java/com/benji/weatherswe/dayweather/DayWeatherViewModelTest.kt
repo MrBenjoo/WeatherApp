@@ -1,6 +1,7 @@
-package com.benji.weatherswe.weather
+package com.benji.weatherswe.dayweather
 
 import com.benji.domain.ResultWrapper
+import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
@@ -18,9 +19,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(InstantExecutorExtension::class)
-internal class WeatherViewModelTest {
+internal class DayWeatherViewModelTest {
 
-    private lateinit var weatherViewModel: WeatherViewModel
+    private lateinit var dayWeatherViewModel: DayWeatherViewModel
     private lateinit var weather: Weather
 
     private val weatherRepository: IWeatherRepository = mockk()
@@ -29,7 +30,7 @@ internal class WeatherViewModelTest {
 
     @BeforeEach
     fun setup() {
-        weatherViewModel = WeatherViewModel(dispatcher, weatherRepository)
+        dayWeatherViewModel = DayWeatherViewModel(dispatcher, weatherRepository)
         weather =
             Moshi.Builder().build().adapter(Weather::class.java).fromJson(Constants.JSON_WEATHER)!!
     }
@@ -46,9 +47,9 @@ internal class WeatherViewModelTest {
                 weatherRepository.getWeatherForecast(Location(13.8, 56.8))
             } returns ResultWrapper.build { weather }
 
-            weatherViewModel.getWeatherForecast(Location(13.8, 56.8))
+            dayWeatherViewModel.getWeatherForecast(Candidate("Malmö", Location(13.8, 56.8), 100))
 
-            assertEquals(weather, weatherViewModel.weather.value)
+            assertEquals(weather, dayWeatherViewModel.weather.value)
         }
 
 

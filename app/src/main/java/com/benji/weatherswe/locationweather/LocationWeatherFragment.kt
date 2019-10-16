@@ -1,4 +1,4 @@
-package com.benji.weatherswe.searchcity
+package com.benji.weatherswe.locationweather
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,27 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.weatherswe.R
-import com.benji.weatherswe.searchcity.servicelocator.SearchCityServiceLocator.provideSearchCityViewModel
+import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideSearchCityViewModel
 import com.benji.weatherswe.utils.mainActivity
 import com.benji.weatherswe.utils.navigate
 import com.benji.weatherswe.utils.sharedViewModel
 import com.benji.weatherswe.utils.showText
-import kotlinx.android.synthetic.main.search_city_fragment.*
+import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
-class SearchCityFragment : Fragment(), TextWatcher {
-    private lateinit var viewModel: SearchCityViewModel
+class LocationWeatherFragment : Fragment(), TextWatcher {
+    private lateinit var viewModel: LocationWeatherViewModel
     private lateinit var arrayAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.search_city_fragment, container, false)
+        return inflater.inflate(R.layout.location_weather_fragment, container, false)
     }
 
     override fun afterTextChanged(text: Editable?) {
@@ -50,9 +49,8 @@ class SearchCityFragment : Fragment(), TextWatcher {
         viewModel.candidate.observe(
             this,
             Observer { candidate ->
-                sharedViewModel().candidate.value = candidate
-                val bundle = bundleOf("city" to candidate.address)
-                navigate(R.id.action_startPageFragment_to_mainPageFragment, bundle)
+                sharedViewModel().candidate = candidate
+                navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
             }
         )
     }
@@ -65,10 +63,10 @@ class SearchCityFragment : Fragment(), TextWatcher {
         )
     }
 
-    private fun initAutoCompleteTextView() = with(autoCompleteTv_start) {
+    private fun initAutoCompleteTextView() = with(auto_complete_tv_location_weather_search) {
         setAdapter(arrayAdapter)
         threshold = 1
-        addTextChangedListener(this@SearchCityFragment)
+        addTextChangedListener(this@LocationWeatherFragment)
         setOnItemClickListener { _, _, index, _ -> viewModel.onSuggestionClicked(index) }
     }
 

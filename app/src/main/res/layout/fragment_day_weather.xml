@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.benji.weatherswe.weather.WeatherFragment">
+    tools:context="com.benji.weatherswe.dayweather.DayWeatherFragment">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_weather"
+        android:id="@+id/toolbar_day_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,17 +16,17 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_weather_place"
+        android:id="@+id/img_day_weather_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_place"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_weather_city"
-        app:layout_constraintEnd_toStartOf="@+id/tv_weather_city"
-        app:layout_constraintTop_toTopOf="@+id/tv_weather_city" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_day_weather_city"
+        app:layout_constraintEnd_toStartOf="@+id/tv_day_weather_city"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_city" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_weather_city"
+        android:id="@+id/tv_day_weather_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Malmö"
@@ -36,7 +36,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/horizontal_guideline_one_fourth" />
+        app:layout_constraintTop_toTopOf="@+id/h1_guideline" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_weather_day_clock"
@@ -46,26 +46,19 @@
         android:text="Torsdag, 13:00"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textSize="@dimen/subtitle_two_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/tv_weather_city"
-        app:layout_constraintStart_toStartOf="@+id/tv_weather_city"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weather_city" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_city"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_city"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_weather_city" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_guideline_middle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontal_guideline_one_fourth"
+        android:id="@+id/h1_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
     <TextView
-        android:id="@+id/tv_weather_temp"
+        android:id="@+id/tv_day_weather_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_24"
@@ -76,28 +69,28 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_weather_day_clock" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_weather_symbol"
+        android:id="@+id/img_day_weather_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_sunny_weather_current"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_weather_temp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_day_weather_temp"
         app:layout_constraintEnd_toEndOf="@+id/tv_weather_day_clock"
-        app:layout_constraintTop_toTopOf="@+id/tv_weather_temp" />
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_temp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_weather_description"
+        android:id="@+id/tv_day_weather_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12"
         android:text="Soligt"
         android:textColor="@color/colorPrimaryTextWhite"
         android:textSize="@dimen/subtitle_one_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/img_weather_symbol"
-        app:layout_constraintStart_toStartOf="@+id/tv_weather_temp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_weather_temp" />
+        app:layout_constraintEnd_toEndOf="@+id/img_day_weather_symbol"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_temp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_weather_temp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/h2_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -109,10 +102,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline">
+        app:layout_constraintTop_toTopOf="@+id/h2_guideline">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_weather"
+            android:id="@+id/recyclerview_day_weather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

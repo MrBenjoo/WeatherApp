@@ -1,4 +1,4 @@
-package com.benji.weatherswe.currentday
+package com.benji.weatherswe.hourweather
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +9,10 @@ import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
-class CurrentDayAdapter(private var listOfHourlyData: List<Hourly>) :
-    RecyclerView.Adapter<CurrentDayAdapter.MainViewHolder>() {
+class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
+    RecyclerView.Adapter<HourWeatherAdapter.MainViewHolder>() {
     val rowData = MutableLiveData<Hourly>()
-    private val TAG = "CurrentDayAdapter"
+    private val TAG = "HourWeatherAdapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -31,7 +31,7 @@ class CurrentDayAdapter(private var listOfHourlyData: List<Hourly>) :
             day.text = hourly.validTime
             temperature.text = "18C"
 
-            bind(hourly, this@CurrentDayAdapter.rowData)
+            bind(hourly, this@HourWeatherAdapter.rowData)
         }
     }
 

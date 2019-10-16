@@ -1,6 +1,6 @@
 package com.benji.weatherswe.utils
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 object DispatcherProvider {

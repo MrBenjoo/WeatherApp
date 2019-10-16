@@ -1,4 +1,4 @@
-package com.benji.weatherswe.searchcity.servicelocator
+package com.benji.weatherswe.locationweather.servicelocator
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -7,12 +7,12 @@ import com.benji.data.datasource.remote.GeocodingAPI
 import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
-import com.benji.weatherswe.searchcity.SearchCityViewModel
+import com.benji.weatherswe.locationweather.LocationWeatherViewModel
 import com.benji.weatherswe.utils.DispatcherProvider
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object SearchCityServiceLocator {
+object LocationWeatherServiceLocator {
     private var geocodingRepository: GeocodingRepository? = null
 
 
@@ -34,16 +34,16 @@ object SearchCityServiceLocator {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-    fun provideSearchCityViewModel(fragment: Fragment): SearchCityViewModel {
+    fun provideSearchCityViewModel(fragment: Fragment): LocationWeatherViewModel {
         return ViewModelProviders.of(
             fragment,
             BaseViewModelFactory {
-                SearchCityViewModel(
+                LocationWeatherViewModel(
                     DispatcherProvider,
                     provideGeocodingRepository()
                 )
             })
-            .get(SearchCityViewModel::class.java)
+            .get(LocationWeatherViewModel::class.java)
     }
 
 

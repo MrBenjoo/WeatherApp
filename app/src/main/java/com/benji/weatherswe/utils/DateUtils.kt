@@ -18,7 +18,7 @@ class DateUtils {
         return outputFormat.format(date)
     }
 
-    fun getHourlyTime(time : String) : String {
+    fun getHourlyTime(time: String): String {
         val outputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val date = inputFormat.parse(time)
         return outputFormat.format(date)
@@ -34,6 +34,18 @@ class DateUtils {
             e.printStackTrace()
         }
         return dayOfWeek
+    }
+
+    fun getTodayDate(): String {
+        val inputFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
+        return inputFormat.format(Calendar.getInstance().time)
+    }
+
+    fun getDayAndClock(): String {
+        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val day = getDay(getCurrentTime())
+        val clock = inputFormat.format(Date())
+        return "$day, $clock"
     }
 
 

@@ -1,9 +1,9 @@
-package com.benji.weatherswe.weather
+package com.benji.weatherswe.dayweather
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.benji.domain.ResultWrapper
-import com.benji.domain.domainmodel.geocoding.Location
+import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.TimeSeries
@@ -12,18 +12,18 @@ import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.utils.DateUtils
 import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.utils.WeatherUtils
+import com.benji.weatherswe.utils.sixDecimals
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class WeatherViewModel(
+class DayWeatherViewModel(
     private val dispatcher: DispatcherProvider,
-    private val weatherRepository: IWeatherRepository,
-    private val city: String
+    private val weatherRepository: IWeatherRepository
 ) : ViewModel(), CoroutineScope {
-    private val TAG = "WeatherViewModel"
+    private val TAG = "DayWeatherViewModel"
 
     val weather = MutableLiveData<Weather>()
     val listOfTenDayForecast = MutableLiveData<List<DayForecast>>()
@@ -34,18 +34,18 @@ class WeatherViewModel(
     override val coroutineContext: CoroutineContext
         get() = dispatcher.provideUIContext() + jobTracker
 
-    fun getWeatherForecast(latLng: Location) = launch {
-        val data = weatherRepository.getWeatherForecast(latLng)
+    fun getWeatherForecast(candidate: Candidate) = launch {
+        val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
         when (data) {
             is ResultWrapper.Success -> {
-                processWeatherData(data.value)
+                processWeatherData(candidate, data.value)
                 weather.value = data.value
             }
             is ResultWrapper.Error -> weatherForecastError.value = data.error.toString()
         }
     }
 
-    fun processWeatherData(weather: Weather) {
+    fun processWeatherData(candidate: Candidate, weather: Weather) {
         val dateUtils = DateUtils()
 
         var currentDate = dateUtils.getCurrentTime()
@@ -63,7 +63,7 @@ class WeatherViewModel(
                 val day = DayForecast(
                     currentDate,
                     dateUtils.getDay(currentDate),
-                    city,
+                    candidate.address,
                     "18C",
                     listOfHourlyData
                 )

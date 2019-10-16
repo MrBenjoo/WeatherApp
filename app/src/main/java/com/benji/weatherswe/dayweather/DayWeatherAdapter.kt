@@ -1,4 +1,4 @@
-package com.benji.weatherswe.weather
+package com.benji.weatherswe.dayweather
 
 
 import android.view.LayoutInflater
@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.benji.weatherswe.R
 import com.benji.domain.domainmodel.weather.DayForecast
+import com.benji.weatherswe.R
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 
-class WeatherAdapter(var data: List<DayForecast>?) : RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
+class WeatherAdapter(var data: List<DayForecast>?) :
+    RecyclerView.Adapter<WeatherAdapter.MainViewHolder>() {
     private val TAG = "WeatherAdapter"
     val rowData = MutableLiveData<RowData>()
 
@@ -31,7 +32,7 @@ class WeatherAdapter(var data: List<DayForecast>?) : RecyclerView.Adapter<Weathe
                 day.text = forecast.day
                 //image.background = it[position].image
                 temperature.text = forecast.temperature
-                bind(forecast,this@WeatherAdapter.rowData)
+                bind(forecast, this@WeatherAdapter.rowData)
             }
         }
     }
@@ -54,4 +55,4 @@ class WeatherAdapter(var data: List<DayForecast>?) : RecyclerView.Adapter<Weathe
 
 }
 
-data class RowData(val position : Int, val dayForecast: DayForecast)
+data class RowData(val position: Int, val dayForecast: DayForecast)
