@@ -8,11 +8,10 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_main_list_day"
+        android:id="@+id/tv_row_list_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
-        android:layout_marginBottom="2dp"
         android:text="Day"
         android:textSize="@dimen/subtitle_one_text_size"
         android:textStyle="bold"
@@ -22,38 +21,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_main_list_weather"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/img_row_list_weather"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_sunny"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_main_list_day"
-        app:layout_constraintEnd_toStartOf="@+id/tv_main_list_temp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_row_list_temperature"
         app:layout_constraintHorizontal_bias="0.81"
-        app:layout_constraintStart_toEndOf="@+id/tv_main_list_day"
-        app:layout_constraintTop_toTopOf="@+id/tv_main_list_day" />
+        app:layout_constraintStart_toEndOf="@+id/tv_row_list_day"
+        app:layout_constraintTop_toTopOf="@+id/tv_row_list_day"
+        app:lottie_autoPlay="true"
+
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_main_list_temp"
+        android:id="@+id/tv_row_list_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:text="11 C"
         android:textSize="@dimen/subtitle_one_text_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_main_list_day"
-        app:layout_constraintEnd_toStartOf="@+id/img_main_list_arrow"
-        app:layout_constraintTop_toTopOf="@+id/tv_main_list_day" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_row_list_day"
+        app:layout_constraintEnd_toStartOf="@+id/img_row_list_arrow"
+        app:layout_constraintTop_toTopOf="@+id/tv_row_list_day" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_main_list_arrow"
+        android:id="@+id/img_row_list_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="35dp"
         android:src="@drawable/ic_keyboard_arrow_right_black"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_main_list_day"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_row_list_day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_main_list_day" />
+        app:layout_constraintTop_toTopOf="@+id/tv_row_list_day" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

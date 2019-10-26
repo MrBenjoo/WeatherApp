@@ -6,5 +6,6 @@ data class DayForecast(
     val day: String,
     val city: String,
     val temperature: String,
-    val listOfHourlyData: List<Hourly>
+    val listOfHourlyData: List<Hourly>,
+    val weatherSymbol : Int
 )

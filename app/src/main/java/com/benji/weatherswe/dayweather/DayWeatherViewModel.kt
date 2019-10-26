@@ -64,8 +64,9 @@ class DayWeatherViewModel(
                     currentDate,
                     dateUtils.getDay(currentDate),
                     candidate.address,
-                    "18C",
-                    listOfHourlyData
+                    WeatherUtils().getHighestTemperature(listOfHourlyData),
+                    listOfHourlyData,
+                    WeatherUtils().getWeatherSymbol(listOfHourlyData)
                 )
 
                 listOfTenDayForecast.add(day)
@@ -81,7 +82,12 @@ class DayWeatherViewModel(
     private fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {
         val parameters = WeatherUtils().getParameters(timeSeries.parameters)
         val validTime = DateUtils().getHourlyTime(timeSeries.validTime)
-        val hourly = Hourly(validTime, parameters)
+        val hourly = Hourly(
+            validTime,
+            parameters,
+            WeatherUtils().getCurrentTemperature(parameters),
+            WeatherUtils().getWeatherSymbolParameter(parameters)
+        )
         return hourly
     }
 

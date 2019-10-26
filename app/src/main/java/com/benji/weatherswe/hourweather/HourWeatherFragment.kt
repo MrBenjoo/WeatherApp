@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.Parameter
 import com.benji.weatherswe.R
+import com.benji.weatherswe.utils.WeatherUtils
 import com.benji.weatherswe.utils.navigate
 import com.benji.weatherswe.utils.sharedViewModel
 import kotlinx.android.synthetic.main.fragment_hour_weather.*
@@ -52,7 +53,11 @@ class HourWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tv_hour_weather_date.text = sharedViewModel().todayDate
+        img_hour_weather_symbol.setAnimation(WeatherUtils().getWeatherSymbolImage(sharedViewModel().currentDayForecast.weatherSymbol))
+        tv_hour_weather_today.text = sharedViewModel().currentDayForecast.day
+        tv_hour_weather_date.text = sharedViewModel().currentDayForecast.date
         tv_hour_weather_city.text = sharedViewModel().candidate.address
+        tv_hour_weather_temp.text = sharedViewModel().currentDayForecast.temperature
+        tv_hour_weather_symbol.text = WeatherUtils().getWeatherSymbolText(sharedViewModel().currentDayForecast.weatherSymbol)
     }
 }

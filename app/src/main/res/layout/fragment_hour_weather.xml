@@ -47,14 +47,17 @@
         app:layout_constraintTop_toTopOf="@+id/h1_guideline" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/img_hour_weather_symbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_sunny_weather_current"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_hour_weather_symbol"
-        app:layout_constraintEnd_toStartOf="@+id/v2_guideline"
-        app:layout_constraintTop_toTopOf="@+id/tv_hour_weather_temp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_hour_weather_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_hour_weather_city"
+        app:layout_constraintTop_toTopOf="@+id/tv_hour_weather_temp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_hour_weather_place"
@@ -101,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.9026764" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_current_day"
