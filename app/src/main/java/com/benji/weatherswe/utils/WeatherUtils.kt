@@ -69,7 +69,6 @@ class WeatherUtils {
             numberOfValues++
             hourly.parameters.forEach { parameter ->
                 if (parameter.name == WeatherConstants.PARAMETER_WEATHER_SYMBOL) {
-                    Log.d("WeatherUtils", parameter.values[0])
                     weatherSymbol += parameter.values[0].toInt()
                 }
             }

@@ -7,6 +7,7 @@ import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.InstantExecutorExtension
 import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.utils.sixDecimals
 import com.squareup.moshi.Moshi
 import io.mockk.coEvery
 import io.mockk.every
@@ -27,6 +28,8 @@ internal class DayWeatherViewModelTest {
     private val weatherRepository: IWeatherRepository = mockk()
     private val dispatcher: DispatcherProvider = mockk()
 
+    private val candidate = Candidate("Malmö", Location(13.8, 56.8), 100)
+    private lateinit var nullCandidate : Candidate
 
     @BeforeEach
     fun setup() {
@@ -36,7 +39,7 @@ internal class DayWeatherViewModelTest {
     }
 
     @Test
-    fun `On Get Weather Forecast Should Return Valid Weather Object And Set MutableLiveData Value`() =
+    fun `GetWeatherForecast() With Valid Candidate Should Return Valid Weather Object`() =
         runBlocking {
 
             every {
@@ -44,13 +47,20 @@ internal class DayWeatherViewModelTest {
             } returns Dispatchers.Unconfined
 
             coEvery {
-                weatherRepository.getWeatherForecast(Location(13.8, 56.8))
+                weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
             } returns ResultWrapper.build { weather }
 
-            dayWeatherViewModel.getWeatherForecast(Candidate("Malmö", Location(13.8, 56.8), 100))
+            dayWeatherViewModel.getWeatherForecast(candidate)
 
             assertEquals(weather, dayWeatherViewModel.weather.value)
         }
+
+   @Test
+   fun `getHourlyForecastData should return valid Hourly object`() {
+       val hourly = dayWeatherViewModel.getHourlyForecastData(weather.timeSeries[0])
+       assertEquals("12:00", hourly.validTime)
+       assertEquals("12°", hourly.temp)
+   }
 
 
 }

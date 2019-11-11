@@ -75,11 +75,10 @@ class DayWeatherViewModel(
             }
         }
 
-
         this.listOfTenDayForecast.value = listOfTenDayForecast
     }
 
-    private fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {
+    fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {
         val parameters = WeatherUtils().getParameters(timeSeries.parameters)
         val validTime = DateUtils().getHourlyTime(timeSeries.validTime)
         val hourly = Hourly(

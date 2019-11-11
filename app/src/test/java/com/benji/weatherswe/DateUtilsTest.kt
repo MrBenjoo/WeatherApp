@@ -62,4 +62,10 @@ internal class DateUtilsTest {
         assertEquals("2019-01-01", dateUtils.getFormattedTime("2019-01-01T00:00:00Z"))
     }
 
+    @Test
+    fun `getHourlyTime(2019-01-01T130000Z) should return 1300`() {
+        assertEquals("13:00", dateUtils.getHourlyTime("2019-01-01T13:00:00Z"))
+    }
+
+
 }
