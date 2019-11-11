@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_header_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:text="Idag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_header_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:text="29/8"
+        app:layout_constraintEnd_toEndOf="@+id/tv_hour_weather_today"
+        app:layout_constraintStart_toStartOf="@+id/tv_hour_weather_today"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_today" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <TextView
+        android:id="@+id/tv_header_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="28"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="56dp"
+        app:layout_constraintStart_toStartOf="@+id/v1_guideline"
+        app:layout_constraintTop_toTopOf="@+id/h1_guideline" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_header_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sunny_weather_current"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_header_weather_symbol"
+        app:layout_constraintEnd_toStartOf="@+id/v2_guideline"
+        app:layout_constraintTop_toTopOf="@+id/tv_header_temp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_header_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_place"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/v1_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_header_weather_symbol" />
+
+    <TextView
+        android:id="@+id/tv_header_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subtitle_one_text_size"
+        android:text="malmö"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryTextWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/img_header_place"
+        app:layout_constraintStart_toEndOf="@+id/img_header_place"
+        app:layout_constraintTop_toTopOf="@+id/img_header_place" />
+
+    <TextView
+        android:id="@+id/tv_header_weather_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryTextWhite"
+        android:textSize="@dimen/subtitle_two_text_size"
+        android:text="Soligt"
+        app:layout_constraintEnd_toEndOf="@+id/tv_header_temp"
+        app:layout_constraintStart_toStartOf="@+id/tv_header_temp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_header_temp" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

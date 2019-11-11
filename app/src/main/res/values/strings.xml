@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">WeatherSwe</string>
-    <string name="start_info">Sök manuellt efter orten du vill se eller slå på positionering i inställningar</string>
-    <string name="start_search_hint">Sök</string>
+
+    <string name="location_weather_info">Sök manuellt efter orten du vill se eller slå på positionering i inställningar</string>
+    <string name="location_weather_search_hint">Sök</string>
+
 </resources>

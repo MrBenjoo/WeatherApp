@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start"/>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/img_hour_weather_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/v1_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/tv_hour_weather_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/img_hour_weather_place"
+            app:layout_constraintStart_toEndOf="@id/img_hour_weather_place"
+            app:layout_constraintTop_toTopOf="@id/img_hour_weather_place" />
+
+        <Constraint
+            android:id="@+id/tv_hour_weather_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/v1_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/img_hour_weather_place" />
+
+        <Constraint
+            android:id="@+id/tv_hour_weather_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_hour_weather_today"
+            app:layout_constraintStart_toEndOf="@id/tv_hour_weather_today"
+            app:layout_constraintTop_toTopOf="@id/tv_hour_weather_today" />
+
+
+        <Constraint android:id="@+id/tv_hour_weather_temp">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/img_hour_weather_symbol">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_hour_weather_symbol">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/card_view_current_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_hour_weather_symbol" />
+
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="1000">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/card_view_current_day"
+            app:touchAnchorSide="top" />
+
+    </Transition>
+
+</MotionScene>

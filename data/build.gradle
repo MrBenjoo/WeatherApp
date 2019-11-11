@@ -30,6 +30,13 @@ android {
         }
     }
 
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
 }
 
 dependencies {
@@ -38,10 +45,24 @@ dependencies {
     implementation "androidx.core:core:$rootProject.supportCompatVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
 
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:core:1.1.0'
+
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
+
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofitVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
 }

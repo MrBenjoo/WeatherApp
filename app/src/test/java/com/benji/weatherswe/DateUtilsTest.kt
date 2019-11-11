@@ -1,8 +1,7 @@
 package com.benji.weatherswe
 
 import com.benji.weatherswe.utils.DateUtils
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class DateUtilsTest {
@@ -62,5 +61,11 @@ internal class DateUtilsTest {
     fun `getFormattedTime(2019-01-01T000000Z) should return 2019-01-01`() {
         assertEquals("2019-01-01", dateUtils.getFormattedTime("2019-01-01T00:00:00Z"))
     }
+
+    @Test
+    fun `getHourlyTime(2019-01-01T130000Z) should return 1300`() {
+        assertEquals("13:00", dateUtils.getHourlyTime("2019-01-01T13:00:00Z"))
+    }
+
 
 }
