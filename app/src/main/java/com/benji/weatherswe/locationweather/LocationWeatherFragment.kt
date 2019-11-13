@@ -3,12 +3,14 @@ package com.benji.weatherswe.locationweather
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.benji.domain.domainmodel.State
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideSearchCityViewModel
 import com.benji.weatherswe.utils.mainActivity
@@ -43,6 +45,16 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         observeCitySuggestions()
         observeErrorMessages()
         observeCandidate()
+        observeState()
+    }
+
+    private fun observeState() {
+        viewModel.state.observe(
+            this,
+            Observer { state ->
+                handleState(state)
+            }
+        )
     }
 
     private fun observeCandidate() {
@@ -79,6 +91,20 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
                 arrayAdapter.notifyDataSetChanged()
             }
         )
+    }
+
+    private fun handleState(state: State?) {
+        when (state) {
+            State.InFlight -> {
+                loading_location_bar.visibility = View.VISIBLE
+            }
+            State.Complete, State.Idle, State.Gone -> {
+                loading_location_bar.visibility = View.GONE
+            }
+            else -> {
+                loading_location_bar.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun observeErrorMessages() {

@@ -5,16 +5,17 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.weather.DayForecast
-import com.benji.domain.domainmodel.weather.Weather
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
 import com.benji.weatherswe.utils.*
 import kotlinx.android.synthetic.main.fragment_day_weather.*
+import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
 class DayWeatherFragment : Fragment() {
-    private lateinit var viewModelDay: DayWeatherViewModel
+    private lateinit var viewModel: DayWeatherViewModel
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
     private val TAG = "DayWeatherFragment"
 
@@ -66,6 +67,29 @@ class DayWeatherFragment : Fragment() {
         }
     }
 
+    private fun handleState(state: State?) {
+        when (state) {
+            State.InFlight -> {
+                loading_day_bar.visibility = View.VISIBLE
+            }
+            State.Complete, State.Idle, State.Gone -> {
+                loading_day_bar.visibility = View.GONE
+            }
+            else -> {
+                loading_day_bar.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun observeState() {
+        viewModel.state.observe(
+            this,
+            Observer { state ->
+                handleState(state)
+            }
+        )
+    }
+
     private val listClickObserver = Observer<RowData> { rowData ->
         Log.d(TAG, "sharedViewModel().toString() = " + sharedViewModel().toString())
         sharedViewModel().currentDayForecast = rowData.dayForecast
@@ -97,15 +121,17 @@ class DayWeatherFragment : Fragment() {
         recyclerview_day_weather.adapter = dayWeatherAdapter
 
 
-        viewModelDay =
+        viewModel =
             DayWeatherServiceLocator.provideWeatherViewModel(
                 this,
                 mainActivity().applicationContext
             )
 
-        viewModelDay.listOfTenDayForecast.observe(this, weatherObserver)
+        observeState()
 
-        viewModelDay.getWeatherForecast(sharedViewModel().candidate)
+        viewModel.listOfTenDayForecast.observe(this, weatherObserver)
+
+        viewModel.getWeatherForecast(sharedViewModel().candidate)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

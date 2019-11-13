@@ -1,12 +1,12 @@
 package com.benji.weatherswe.locationweather
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.CompareScore
 import com.benji.domain.domainmodel.geocoding.Suggestion
 import com.benji.domain.repository.IGeocodingRepository
+import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.utils.returnCities
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 class LocationWeatherViewModel(
     private val dispatcher: DispatcherProvider,
     private val geocodingRepository: IGeocodingRepository
-) : ViewModel(), CoroutineScope {
+) : BaseViewModel(), CoroutineScope {
 
     // Used to retrieve the name of the city when the user clicks on a suggestion from the list
     private var suggestions: List<Suggestion> = mutableListOf()
@@ -35,7 +35,6 @@ class LocationWeatherViewModel(
 
     override val coroutineContext: CoroutineContext
         get() = dispatcher.provideUIContext() + jobTracker
-
 
     /**
      * @param textSearch the text that the user inputs in the search field when searching for
@@ -69,6 +68,7 @@ class LocationWeatherViewModel(
      * in order to get the magicKey and city name from the list.
      */
     fun onSuggestionClicked(index: Int) = launch {
+        setInFlightState()
         val city = suggestions[index].text
         val magicKey = suggestions[index].magicKey
 
@@ -79,12 +79,14 @@ class LocationWeatherViewModel(
             }
             is ResultWrapper.Error -> errorMessage.value = data.error.message
         }
+        setCompletedState()
     }
 
     override fun onCleared() {
         super.onCleared()
         jobTracker.cancel()
     }
+
 }
 
 

@@ -9,6 +9,7 @@ import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.TimeSeries
 import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
+import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.utils.DateUtils
 import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.utils.WeatherUtils
@@ -22,7 +23,7 @@ import kotlin.coroutines.CoroutineContext
 class DayWeatherViewModel(
     private val dispatcher: DispatcherProvider,
     private val weatherRepository: IWeatherRepository
-) : ViewModel(), CoroutineScope {
+) : BaseViewModel(), CoroutineScope {
     private val TAG = "DayWeatherViewModel"
 
     val weather = MutableLiveData<Weather>()
@@ -35,6 +36,7 @@ class DayWeatherViewModel(
         get() = dispatcher.provideUIContext() + jobTracker
 
     fun getWeatherForecast(candidate: Candidate) = launch {
+        setInFlightState()
         val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
         when (data) {
             is ResultWrapper.Success -> {
@@ -43,6 +45,7 @@ class DayWeatherViewModel(
             }
             is ResultWrapper.Error -> weatherForecastError.value = data.error.toString()
         }
+        setCompletedState()
     }
 
     fun processWeatherData(candidate: Candidate, weather: Weather) {
