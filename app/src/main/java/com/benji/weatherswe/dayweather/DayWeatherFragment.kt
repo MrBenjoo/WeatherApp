@@ -7,11 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.weather.DayForecast
+import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
 import com.benji.weatherswe.utils.*
 import kotlinx.android.synthetic.main.fragment_day_weather.*
-import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
 class DayWeatherFragment : Fragment() {
@@ -23,48 +23,45 @@ class DayWeatherFragment : Fragment() {
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
         dayWeatherAdapter.setList(weekdayForecast)
         tv_day_weather_temp.text = weekdayForecast[0].temperature
-        tv_day_weather_description.text = WeatherUtils().getWeatherSymbolText(weekdayForecast[0].weatherSymbol)
+        tv_day_weather_description.text =
+            WeatherUtils().getWeatherSymbolText(weekdayForecast[0].weatherSymbol)
         img_day_weather_symbol.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].weatherSymbol))
         img_day_weather_symbol.playAnimation()
+    }
 
-        for(i in 0..4) {
-            when(i) {
-                0 -> {
-                    lottie_day_weather_1.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].listOfHourlyData[i].weatherSymbol))
-                    lottie_day_weather_1.playAnimation()
-                    tv_day_weather_lottie_temp_1.text = weekdayForecast[0].listOfHourlyData[i].temp
-                    tv_day_weather_lottie_time_1.text = weekdayForecast[0].listOfHourlyData[i].validTime
-                }
-                1 -> {
-                    lottie_day_weather_2.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].listOfHourlyData[i].weatherSymbol))
-                    lottie_day_weather_2.playAnimation()
-                    tv_day_weather_lottie_temp_2.text = weekdayForecast[0].listOfHourlyData[i].temp
-                    tv_day_weather_lottie_time_2.text = weekdayForecast[0].listOfHourlyData[i].validTime
-                }
+    private val setWeatherFirstHour = Observer<HourlyOverview> { hourlyOverview ->
+        lottie_day_weather_1.setAnimation(hourlyOverview.weatherSymbol)
+        lottie_day_weather_1.playAnimation()
+        tv_day_weather_lottie_temp_1.text = hourlyOverview.temp
+        tv_day_weather_lottie_time_1.text = hourlyOverview.validTime
+    }
 
-                2 -> {
-                    lottie_day_weather_3.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].listOfHourlyData[i].weatherSymbol))
-                    lottie_day_weather_3.playAnimation()
-                    tv_day_weather_lottie_temp_3.text = weekdayForecast[0].listOfHourlyData[i].temp
-                    tv_day_weather_lottie_time_3.text = weekdayForecast[0].listOfHourlyData[i].validTime
-                }
+    private val setWeatherSecondHour = Observer<HourlyOverview> { hourlyOverview ->
+        lottie_day_weather_2.setAnimation(hourlyOverview.weatherSymbol)
+        lottie_day_weather_2.playAnimation()
+        tv_day_weather_lottie_temp_2.text = hourlyOverview.temp
+        tv_day_weather_lottie_time_2.text = hourlyOverview.validTime
+    }
 
-                3 -> {
-                    lottie_day_weather_4.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].listOfHourlyData[i].weatherSymbol))
-                    lottie_day_weather_4.playAnimation()
-                    tv_day_weather_lottie_temp_4.text = weekdayForecast[0].listOfHourlyData[i].temp
-                    tv_day_weather_lottie_time_4.text = weekdayForecast[0].listOfHourlyData[i].validTime
-                }
+    private val setWeatherThirdHour = Observer<HourlyOverview> { hourlyOverview ->
+        lottie_day_weather_3.setAnimation(hourlyOverview.weatherSymbol)
+        lottie_day_weather_3.playAnimation()
+        tv_day_weather_lottie_temp_3.text = hourlyOverview.temp
+        tv_day_weather_lottie_time_3.text = hourlyOverview.validTime
+    }
 
-                4 -> {
-                    lottie_day_weather_5.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].listOfHourlyData[i].weatherSymbol))
-                    lottie_day_weather_5.playAnimation()
-                    tv_day_weather_lottie_temp_5.text = weekdayForecast[0].listOfHourlyData[i].temp
-                    tv_day_weather_lottie_time_5.text = weekdayForecast[0].listOfHourlyData[i].validTime
-                }
-            }
+    private val setWeatherFourthHour = Observer<HourlyOverview> { hourlyOverview ->
+        lottie_day_weather_4.setAnimation(hourlyOverview.weatherSymbol)
+        lottie_day_weather_4.playAnimation()
+        tv_day_weather_lottie_temp_4.text = hourlyOverview.temp
+        tv_day_weather_lottie_time_4.text = hourlyOverview.validTime
+    }
 
-        }
+    private val setWeatherFifthHour = Observer<HourlyOverview> { hourlyOverview ->
+        lottie_day_weather_5.setAnimation(hourlyOverview.weatherSymbol)
+        lottie_day_weather_5.playAnimation()
+        tv_day_weather_lottie_temp_5.text = hourlyOverview.temp
+        tv_day_weather_lottie_time_5.text = hourlyOverview.validTime
     }
 
     private fun handleState(state: State?) {
@@ -108,7 +105,7 @@ class DayWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tv_weather_day_clock.text = DateUtils().getDayAndClock()
-        tv_day_weather_city.text  = sharedViewModel().candidate.address
+        tv_day_weather_city.text = sharedViewModel().candidate.address
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -130,6 +127,12 @@ class DayWeatherFragment : Fragment() {
         observeState()
 
         viewModel.listOfTenDayForecast.observe(this, weatherObserver)
+
+        viewModel.forecastFirstHour.observe(this, setWeatherFirstHour)
+        viewModel.forecastSecondHour.observe(this, setWeatherSecondHour)
+        viewModel.forecastThirdHour.observe(this, setWeatherThirdHour)
+        viewModel.forecastFourthHour.observe(this, setWeatherFourthHour)
+        viewModel.forecastFifthHour.observe(this, setWeatherFifthHour)
 
         viewModel.getWeatherForecast(sharedViewModel().candidate)
     }

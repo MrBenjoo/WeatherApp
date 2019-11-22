@@ -1,13 +1,10 @@
 package com.benji.weatherswe.dayweather
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
-import com.benji.domain.domainmodel.weather.DayForecast
-import com.benji.domain.domainmodel.weather.Hourly
-import com.benji.domain.domainmodel.weather.TimeSeries
-import com.benji.domain.domainmodel.weather.Weather
+import com.benji.domain.domainmodel.weather.*
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.utils.DateUtils
@@ -31,6 +28,28 @@ class DayWeatherViewModel(
     val weatherForecastError = MutableLiveData<String>()
 
     private var jobTracker = Job()
+
+
+    private val _forecastFirstHour = MutableLiveData<HourlyOverview>()
+    val forecastFirstHour: LiveData<HourlyOverview>
+        get() = _forecastFirstHour
+
+    private val _forecastSecondHour = MutableLiveData<HourlyOverview>()
+    val forecastSecondHour: LiveData<HourlyOverview>
+        get() = _forecastSecondHour
+
+    private val _forecastThirdHour = MutableLiveData<HourlyOverview>()
+    val forecastThirdHour: LiveData<HourlyOverview>
+        get() = _forecastThirdHour
+
+    private val _forecastFourthHour = MutableLiveData<HourlyOverview>()
+    val forecastFourthHour: LiveData<HourlyOverview>
+        get() = _forecastFourthHour
+
+    private val _forecastFifthHour = MutableLiveData<HourlyOverview>()
+    val forecastFifthHour: LiveData<HourlyOverview>
+        get() = _forecastFifthHour
+
 
     override val coroutineContext: CoroutineContext
         get() = dispatcher.provideUIContext() + jobTracker
@@ -79,6 +98,42 @@ class DayWeatherViewModel(
         }
 
         this.listOfTenDayForecast.value = listOfTenDayForecast
+
+        setFiveHourForecastData(listOfTenDayForecast)
+    }
+
+    private fun setFiveHourForecastData(listOfTenDayForecast: MutableList<DayForecast>) {
+        val tempList = WeatherUtils().getFiveHourForecastData(listOfTenDayForecast)
+        for (i in 0..4) {
+            when (i) {
+                0 -> _forecastFirstHour.value = HourlyOverview(
+                    tempList[i].validTime,
+                    tempList[i].temp,
+                    tempList[i].weatherSymbol
+                )
+                1 -> _forecastSecondHour.value = HourlyOverview(
+                    tempList[i].validTime,
+                    tempList[i].temp,
+                    tempList[i].weatherSymbol
+                )
+                2 -> _forecastThirdHour.value = HourlyOverview(
+                    tempList[i].validTime,
+                    tempList[i].temp,
+                    tempList[i].weatherSymbol
+                )
+
+                3 -> _forecastFourthHour.value = HourlyOverview(
+                    tempList[i].validTime,
+                    tempList[i].temp,
+                    tempList[i].weatherSymbol
+                )
+                4 -> _forecastFifthHour.value = HourlyOverview(
+                    tempList[i].validTime,
+                    tempList[i].temp,
+                    tempList[i].weatherSymbol
+                )
+            }
+        }
     }
 
     fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {

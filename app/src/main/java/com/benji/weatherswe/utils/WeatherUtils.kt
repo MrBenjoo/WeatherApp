@@ -1,7 +1,8 @@
 package com.benji.weatherswe.utils
 
-import android.util.Log
+import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Hourly
+import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.domain.domainmodel.weather.Parameter
 import com.benji.weatherswe.R
 import kotlin.math.roundToInt
@@ -109,7 +110,7 @@ class WeatherUtils {
         else -> R.raw.lottie_weather_sunny
     }
 
-    fun getWeatherSymbolText(weatherSymbol: Int): String = when(weatherSymbol) {
+    fun getWeatherSymbolText(weatherSymbol: Int): String = when (weatherSymbol) {
         1 -> WeatherConstants.WEATHER_SYMBOL_CLEAR_SKY
         2 -> WeatherConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
         3 -> WeatherConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
@@ -138,6 +139,50 @@ class WeatherUtils {
         26 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
         27 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
         else -> "N/A"
+    }
+
+    fun getFiveHourForecastData(listOfTenDayForecast: MutableList<DayForecast>): List<HourlyOverview> {
+        val hoursLeftUntilMidnight = listOfTenDayForecast[0].listOfHourlyData.size
+        var tempList = mutableListOf<HourlyOverview>()
+
+        if (hoursLeftUntilMidnight < 5) {
+            tempList =
+                getHourlyOverviewData(hoursLeftUntilMidnight - 1, listOfTenDayForecast[0], tempList)
+
+            val hoursToAdd = 5 - hoursLeftUntilMidnight
+            tempList = getHourlyOverviewData(hoursToAdd - 1, listOfTenDayForecast[1], tempList)
+        } else {
+            for (i in 0..4) {
+                tempList.add(
+                    HourlyOverview(
+                        listOfTenDayForecast[0].listOfHourlyData[i].validTime,
+                        listOfTenDayForecast[0].listOfHourlyData[i].temp,
+                        getWeatherSymbolImage(listOfTenDayForecast[0].listOfHourlyData[i].weatherSymbol)
+                    )
+                )
+            }
+        }
+
+        return tempList
+    }
+
+    private fun getHourlyOverviewData(
+        hours: Int,
+        forecast: DayForecast,
+        tempList: MutableList<HourlyOverview>
+    ): MutableList<HourlyOverview> {
+        with(forecast) {
+            for (i in 0..hours) {
+                tempList.add(
+                    HourlyOverview(
+                        listOfHourlyData[i].validTime,
+                        listOfHourlyData[i].temp,
+                        getWeatherSymbolImage(listOfHourlyData[i].weatherSymbol)
+                    )
+                )
+            }
+        }
+        return tempList
     }
 
 
