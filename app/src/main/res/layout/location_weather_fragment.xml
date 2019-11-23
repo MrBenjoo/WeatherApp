@@ -6,9 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.benji.weatherswe.locationweather.LocationWeatherFragment">
 
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/auto_complete_tv_location_weather_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/location_weather_search_hint"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/loading_location_bar"
-        style="?android:attr/progressBarStyle"
+        style="@style/MyProgressBarCircular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_location_weather_place"
@@ -35,21 +45,10 @@
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
         android:text="@string/location_weather_info"
-        android:textColor="@color/colorPrimaryTextWhite"
-        android:textSize="@dimen/subtitle_one_text_size"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-        android:id="@+id/auto_complete_tv_location_weather_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/location_weather_search_hint"
-        android:textColor="@color/colorPrimaryTextWhite"
-        android:textColorHint="@color/colorPrimaryTextWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

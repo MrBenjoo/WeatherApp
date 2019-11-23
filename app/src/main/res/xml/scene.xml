@@ -2,13 +2,14 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ConstraintSet android:id="@+id/start"/>
+    <ConstraintSet android:id="@+id/start" />
 
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
             android:id="@+id/img_hour_weather_place"
             android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/v1_guideline"
             app:layout_constraintTop_toTopOf="parent" />
@@ -22,31 +23,35 @@
             app:layout_constraintTop_toTopOf="@id/img_hour_weather_place" />
 
         <Constraint
-            android:id="@+id/tv_hour_weather_today"
+            android:id="@+id/tv_hour_weather_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            app:layout_constraintBottom_toTopOf="@id/card_view_current_day"
             app:layout_constraintStart_toStartOf="@+id/v1_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/img_hour_weather_place" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_city" />
 
         <Constraint
             android:id="@+id/tv_hour_weather_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_hour_weather_today"
-            app:layout_constraintStart_toEndOf="@id/tv_hour_weather_today"
-            app:layout_constraintTop_toTopOf="@id/tv_hour_weather_today" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_hour_weather_day"
+            app:layout_constraintStart_toEndOf="@id/tv_hour_weather_day"
+            app:layout_constraintTop_toTopOf="@id/tv_hour_weather_day" />
 
 
         <Constraint android:id="@+id/tv_hour_weather_temp">
             <PropertySet android:visibility="gone" />
         </Constraint>
 
-        <Constraint android:id="@+id/img_hour_weather_symbol">
+        <Constraint android:id="@+id/lottie_hour_weather_symbol">
             <PropertySet android:visibility="gone" />
         </Constraint>
 
-        <Constraint android:id="@+id/tv_hour_weather_symbol">
+        <Constraint android:id="@+id/tv_hour_weather_description">
             <PropertySet android:visibility="gone" />
         </Constraint>
 
@@ -57,7 +62,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_hour_weather_symbol" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_day" />
 
     </ConstraintSet>
 

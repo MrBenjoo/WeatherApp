@@ -14,4 +14,36 @@
     </style>
 
 
+    <style name="CustomTextAppearance.MaterialComponents.Headline6" parent="TextAppearance.AppCompat.Title">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/city_text_size</item>
+        <item name="android:letterSpacing">0.0125</item>
+    </style>
+
+    <style name="CustomTextAppearance.SecondaryText.Body2" parent="TextAppearance.AppCompat.Body2">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/secondary_text_size</item>
+        <item name="android:letterSpacing">0.03125</item>
+    </style>
+
+    <style name="CustomTextAppearance.PrimaryText.Body1" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:letterSpacing">0.03125</item>
+    </style>
+
+    <style name="MyProgressBarCircular" parent="@style/Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
+    </style>
+
+
 </resources>

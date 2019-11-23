@@ -1,6 +1,9 @@
 <resources>
-	<dimen name="headline_5">18sp</dimen>
 
-	<dimen name="subtitle_one_text_size">12sp</dimen>
-	<dimen name="subtitle_two_text_size">8sp</dimen>
+	<dimen name="primary_text_size">16sp</dimen>
+
+	<dimen name="secondary_text_size">14sp</dimen>
+
+	<dimen name="city_text_size">27sp</dimen>
+
 </resources>
