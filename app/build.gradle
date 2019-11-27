@@ -50,6 +50,11 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            resources.srcDirs = ['src/main/resources', 'src/test/java/com/benji/weatherswe/resources/']
+        }
+    }
 }
 
 dependencies {

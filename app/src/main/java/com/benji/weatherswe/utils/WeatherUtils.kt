@@ -141,7 +141,7 @@ class WeatherUtils {
         else -> "N/A"
     }
 
-    fun getFiveHourForecastData(listOfTenDayForecast: MutableList<DayForecast>): List<HourlyOverview> {
+    fun getFiveHourForecastData(listOfTenDayForecast: List<DayForecast>): List<HourlyOverview> {
         val hoursLeftUntilMidnight = listOfTenDayForecast[0].listOfHourlyData.size
         var tempList = mutableListOf<HourlyOverview>()
 
