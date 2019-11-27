@@ -16,19 +16,16 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-
 class DayWeatherViewModel(
     private val dispatcher: DispatcherProvider,
     private val weatherRepository: IWeatherRepository
 ) : BaseViewModel(), CoroutineScope {
     private val TAG = "DayWeatherViewModel"
 
-    val weather = MutableLiveData<Weather>()
     val listOfTenDayForecast = MutableLiveData<List<DayForecast>>()
     val weatherForecastError = MutableLiveData<String>()
 
     private var jobTracker = Job()
-
 
     private val _forecastFirstHour = MutableLiveData<HourlyOverview>()
     val forecastFirstHour: LiveData<HourlyOverview>
@@ -60,7 +57,7 @@ class DayWeatherViewModel(
         when (data) {
             is ResultWrapper.Success -> {
                 processWeatherData(candidate, data.value)
-                weather.value = data.value
+                setFiveHourForecastData(listOfTenDayForecast.value!!)
             }
             is ResultWrapper.Error -> weatherForecastError.value = data.error.toString()
         }
@@ -75,11 +72,8 @@ class DayWeatherViewModel(
         var listOfHourlyData = mutableListOf<Hourly>()
         val listOfTenDayForecast = mutableListOf<DayForecast>()
 
-
         weather.timeSeries.forEach { timeSeries ->
             val apiDate = dateUtils.getFormattedTime(timeSeries.validTime)
-
-            listOfHourlyData.add(getHourlyForecastData(timeSeries))
 
             if (apiDate != currentDate) {
                 val day = DayForecast(
@@ -95,14 +89,15 @@ class DayWeatherViewModel(
                 listOfHourlyData = mutableListOf()
                 currentDate = apiDate
             }
+
+            listOfHourlyData.add(getHourlyForecastData(timeSeries))
+
         }
 
         this.listOfTenDayForecast.value = listOfTenDayForecast
-
-        setFiveHourForecastData(listOfTenDayForecast)
     }
 
-    private fun setFiveHourForecastData(listOfTenDayForecast: MutableList<DayForecast>) {
+    private fun setFiveHourForecastData(listOfTenDayForecast: List<DayForecast>) {
         val tempList = WeatherUtils().getFiveHourForecastData(listOfTenDayForecast)
         for (i in 0..4) {
             when (i) {
