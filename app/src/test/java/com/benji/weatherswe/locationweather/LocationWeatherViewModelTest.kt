@@ -24,22 +24,22 @@ internal class LocationWeatherViewModelTest {
 
     private val locationWeatherViewModel = LocationWeatherViewModel(dispatcher, geocodingRepository)
 
-
-    private val city = "Stockholm"
+    private val cityStockholm = "Stockholm"
     private val magicKey = "154asda5wd15as1x5awdas1xa"
 
     private val suggestions = Suggestions(
         listOf(
             Suggestion(
                 magicKey,
-                city
+                cityStockholm
             )
         )
     )
 
+    private val candidateStockholm = Candidate(cityStockholm, Location(59.33, 18.06), 100)
+    private val candidateMalmo = Candidate("Malmö", Location(55.60, 13.00), 100)
+    private val listOfCandidates = Candidates(listOf(candidateStockholm, candidateMalmo))
 
-    private val candidates = Candidates(listOf(Candidate("Malmö", Location(56.0, 13.0), 0),
-        Candidate(city, Location(59.33, 18.06), 100)))
 
     @Test
     fun `getCitySuggestions(Stockholm) should set value to citySuggestions`() = runBlocking {
@@ -49,10 +49,10 @@ internal class LocationWeatherViewModelTest {
         } returns Dispatchers.Unconfined
 
         coEvery {
-            geocodingRepository.getSuggestions(city)
+            geocodingRepository.getSuggestions(cityStockholm)
         } returns ResultWrapper.build { suggestions }
 
-        locationWeatherViewModel.getCitySuggestions(city)
+        locationWeatherViewModel.getCitySuggestions(cityStockholm)
 
         assertEquals(
             locationWeatherViewModel.citySuggestions.value,
@@ -68,32 +68,19 @@ internal class LocationWeatherViewModelTest {
         } returns Dispatchers.Unconfined
 
         coEvery {
-            geocodingRepository.getSuggestions(city)
+            geocodingRepository.getSuggestions(cityStockholm)
         } returns ResultWrapper.build { suggestions }
 
-        locationWeatherViewModel.getCitySuggestions(city)
+        locationWeatherViewModel.getCitySuggestions(cityStockholm)
+
+        coEvery {
+            geocodingRepository.getCandidateLocation(cityStockholm, magicKey)
+        } returns ResultWrapper.build { listOfCandidates }
 
         locationWeatherViewModel.onSuggestionClicked(0)
 
-        coEvery {
-            geocodingRepository.getCandidateLocation(city, magicKey)
-        } returns ResultWrapper.build { candidates }
+        assertEquals(cityStockholm, locationWeatherViewModel.candidate.value!!.address)
 
-
-        assertEquals(
-            locationWeatherViewModel.candidate.value!!.address,
-            "Stockholm"
-        )
-
-        assertEquals(
-            locationWeatherViewModel.candidate.value!!.location,
-            Location(59.33, 18.06)
-        )
-
-        assertEquals(
-            locationWeatherViewModel.candidate.value!!.score,
-            100
-        )
     }
 
 
