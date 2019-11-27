@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_4"
             android:layout_marginStart="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_4"
             app:layout_constraintBottom_toTopOf="@id/card_view_current_day"
             app:layout_constraintStart_toStartOf="@+id/v1_guideline"
             app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_city" />
@@ -58,10 +58,10 @@
         <Constraint
             android:id="@+id/card_view_current_day"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_day" />
 
     </ConstraintSet>
