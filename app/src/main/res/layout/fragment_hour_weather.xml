@@ -76,24 +76,11 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:textSize="56sp"
-        app:layout_constraintBottom_toBottomOf="@+id/lottie_hour_weather_symbol"
-        app:layout_constraintStart_toStartOf="@+id/v1_guideline"
-        app:layout_constraintTop_toTopOf="@+id/lottie_hour_weather_symbol"
-        tools:text="28" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_hour_weather_symbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/card_view_current_day"
         app:layout_constraintEnd_toStartOf="@+id/v2_guideline"
-        app:layout_constraintStart_toEndOf="@+id/tv_hour_weather_temp"
+        app:layout_constraintStart_toStartOf="@+id/v1_guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_hour_weather_description"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_scale="0.6"
-        app:lottie_speed="1" />
+        tools:text="28" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v1_guideline"
@@ -126,18 +113,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.35" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

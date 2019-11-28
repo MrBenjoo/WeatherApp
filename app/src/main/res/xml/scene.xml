@@ -47,10 +47,6 @@
             <PropertySet android:visibility="gone" />
         </Constraint>
 
-        <Constraint android:id="@+id/lottie_hour_weather_symbol">
-            <PropertySet android:visibility="gone" />
-        </Constraint>
-
         <Constraint android:id="@+id/tv_hour_weather_description">
             <PropertySet android:visibility="gone" />
         </Constraint>

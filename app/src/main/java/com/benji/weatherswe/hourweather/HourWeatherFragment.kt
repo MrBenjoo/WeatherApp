@@ -53,7 +53,6 @@ class HourWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        lottie_hour_weather_symbol.setAnimation(WeatherUtils().getWeatherSymbolImage(sharedViewModel().currentDayForecast.weatherSymbol))
         tv_hour_weather_day.text = sharedViewModel().currentDayForecast.day
         tv_hour_weather_date.text = sharedViewModel().currentDayForecast.date
         tv_hour_weather_city.text = sharedViewModel().candidate.address
