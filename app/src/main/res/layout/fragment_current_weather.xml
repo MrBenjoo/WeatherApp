@@ -5,41 +5,40 @@
     android:layout_height="match_parent"
     tools:context="com.benji.weatherswe.currentweather.CurrentWeatherFragment">
 
-
     <TextView
         android:id="@+id/tv_current_weather_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:text="Idag"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Torsdag" />
 
     <TextView
         android:id="@+id/tv_current_weather_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:text="29/8"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/tv_current_weather_today"
         app:layout_constraintStart_toStartOf="@+id/tv_current_weather_today"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_today" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_today"
+        tools:text="29/8" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_current_weather_symbol"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_current_weather_symbol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_current_weather_temperature"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/lottie_weather_cloudy"
         app:lottie_speed="1"
-        app:layout_constraintBottom_toBottomOf="@+id/img_current_weather_place"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_current_weather_city"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_time" />
+        tools:background="@drawable/ic_sunny" />
 
     <TextView
         android:id="@+id/tv_current_weather_time"
@@ -47,21 +46,22 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:text="13:00"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/tv_current_weather_date"
         app:layout_constraintStart_toStartOf="@+id/tv_current_weather_date"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_date" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_date"
+        tools:text="13:00" />
 
     <TextView
         android:id="@+id/tv_current_weather_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="56dp"
-        android:text="56"
+        android:textSize="56sp"
         android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_time" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        tools:text="28" />
 
     <TextView
         android:id="@+id/tv_current_weather_symbol"
@@ -69,16 +69,17 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:text="Soligt"
-        app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
-        app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_temperature" />
+        app:layout_constraintEnd_toEndOf="@+id/lottie_current_weather_symbol"
+        app:layout_constraintStart_toStartOf="@+id/lottie_current_weather_symbol"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        tools:text="Lätt regn" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_current_weather_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_place"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_10"
         app:layout_constraintTop_toBottomOf="@+id/tv_current_weather_symbol" />
 
@@ -87,19 +88,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:text="malmö"
-        android:textStyle="bold"
+        android:textSize="@dimen/city_text_size"
         android:textColor="@color/colorPrimary"
-        android:layout_marginStart="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/img_current_weather_place"
         app:layout_constraintStart_toEndOf="@+id/img_current_weather_place"
-        app:layout_constraintTop_toTopOf="@+id/img_current_weather_place" />
+        app:layout_constraintTop_toTopOf="@+id/img_current_weather_place"
+        tools:text="Malmö" />
 
     <TextView
         android:id="@+id/tv_current_weather_wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vind"
+        android:text="@string/wind_text"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toTopOf="@+id/tv_current_weather_precipitation"
@@ -119,19 +119,20 @@
         android:id="@+id/tv_current_weather_wind_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
-        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_current_weather_wind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.30"
         app:layout_constraintStart_toStartOf="@+id/guideline_v_70"
-        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_wind" />
+        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_wind"
+        tools:text="2.2 m/s" />
 
     <TextView
         android:id="@+id/tv_current_weather_precipitation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nederbörd"
+        android:text="@string/precipitation_text"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toTopOf="@+id/tv_current_weather_thunder"
@@ -151,18 +152,18 @@
         android:id="@+id/tv_current_weather_precipitation_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toBottomOf="@+id/tv_current_weather_precipitation"
         app:layout_constraintStart_toStartOf="@+id/tv_current_weather_wind_value"
-        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_precipitation" />
+        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_precipitation"
+        tools:text="1.1 mm/h" />
 
     <TextView
         android:id="@+id/tv_current_weather_thunder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Åska"
+        android:text="@string/thunder_text"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toTopOf="@+id/tv_current_weather_air_pressure"
@@ -183,18 +184,18 @@
         android:id="@+id/tv_current_weather_thunder_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toBottomOf="@+id/tv_current_weather_thunder"
-        app:layout_constraintStart_toStartOf="@+id/tv_current_weather_precipitation_value"
-        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_thunder" />
+        app:layout_constraintStart_toStartOf="@+id/tv_current_weather_wind_value"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_thunder"
+        tools:text="6 %" />
 
     <TextView
         android:id="@+id/tv_current_weather_air_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lufttryck"
+        android:text="@string/air_pressure_text"
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -214,19 +215,19 @@
         android:id="@+id/tv_current_weather_air_pressure_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:textColor="@color/colorPrimary"
         android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
         app:layout_constraintBottom_toBottomOf="@+id/tv_current_weather_air_pressure"
-        app:layout_constraintStart_toStartOf="@+id/tv_current_weather_thunder_value"
-        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_air_pressure" />
+        app:layout_constraintStart_toStartOf="@+id/tv_current_weather_wind_value"
+        app:layout_constraintTop_toTopOf="@+id/tv_current_weather_air_pressure"
+        tools:text="1001.2 hPa" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_70"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.70" />
+        app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_v_10"
@@ -234,6 +235,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

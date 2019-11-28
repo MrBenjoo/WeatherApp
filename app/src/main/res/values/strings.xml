@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">WeatherSwe</string>
-
     <string name="location_weather_info">Sök manuellt efter orten du vill se eller slå på positionering i inställningar</string>
     <string name="location_weather_search_hint">Sök</string>
-
+    <string name="wind_text">Vind</string>
+    <string name="precipitation_text">Nederbörd</string>
+    <string name="thunder_text">Åska</string>
+    <string name="air_pressure_text">Lufttryck</string>
 </resources>
