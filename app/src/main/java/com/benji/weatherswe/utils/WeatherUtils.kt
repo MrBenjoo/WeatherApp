@@ -62,22 +62,11 @@ class WeatherUtils {
         return weatherSymbol
     }
 
-    fun getWeatherSymbol(listOfHourlyData: MutableList<Hourly>): Int {
-        var weatherSymbol = 1
-        var numberOfValues = 0
+    fun getWeatherSymbolDay(listOfHourlyData: MutableList<Hourly>): Int {
+        val frequenciesByWeatherSymbol = listOfHourlyData.groupingBy { it.weatherSymbol }.eachCount()
 
-        listOfHourlyData.forEach { hourly ->
-            numberOfValues++
-            hourly.parameters.forEach { parameter ->
-                if (parameter.name == WeatherConstants.PARAMETER_WEATHER_SYMBOL) {
-                    weatherSymbol += parameter.values[0].toInt()
-                }
-            }
-        }
-
-        return (weatherSymbol / numberOfValues).toDouble().roundToInt()
+        return frequenciesByWeatherSymbol.maxBy { it.value }?.key!!
     }
-
 
     fun getWeatherSymbolImage(weatherSymbol: Int): Int = when (weatherSymbol) {
         1 -> R.raw.lottie_weather_sunny
@@ -184,6 +173,7 @@ class WeatherUtils {
         }
         return tempList
     }
+
 
 
 }

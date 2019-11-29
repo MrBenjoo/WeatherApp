@@ -82,7 +82,7 @@ class DayWeatherViewModel(
                     candidate.address,
                     WeatherUtils().getHighestTemperature(listOfHourlyData),
                     listOfHourlyData,
-                    WeatherUtils().getWeatherSymbol(listOfHourlyData)
+                    WeatherUtils().getWeatherSymbolDay(listOfHourlyData)
                 )
 
                 listOfTenDayForecast.add(day)
