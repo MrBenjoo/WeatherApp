@@ -1,6 +1,7 @@
 package com.benji.weatherswe.utils
 
 import com.benji.domain.domainmodel.weather.DayForecast
+import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.no_test_only_helper_functions.TestUtils
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.*
@@ -76,6 +77,34 @@ internal class WeatherUtilsTest {
         assertEquals("2019-11-20T14:00:00Z", returnedHourlyOverviewList[2].validTime)
         assertEquals("2019-11-20T15:00:00Z", returnedHourlyOverviewList[3].validTime)
         assertEquals("2019-11-20T16:00:00Z", returnedHourlyOverviewList[4].validTime)
+    }
+
+    @Test
+    fun `getWeatherSymbolDay() with 1 as the highest symbol occurrence in the list should return 1 as the weather symbol` () {
+        val hourly = mutableListOf<Hourly>()
+        hourly.add(Hourly("", emptyList(), "", 1))
+        hourly.add(Hourly("", emptyList(), "", 2))
+        hourly.add(Hourly("", emptyList(), "", 55))
+        hourly.add(Hourly("", emptyList(), "", 1))
+        hourly.add(Hourly("", emptyList(), "", 1000))
+
+        val symbol = weatherUtils.getWeatherSymbolDay(hourly)
+
+        assertEquals(1, symbol)
+    }
+
+    @Test
+    fun `getWeatherSymbolDay() with 1 and 2 as the same amount of symbol occurrence in the list should return 2 as the weather symbol` () {
+        val hourly = mutableListOf<Hourly>()
+        hourly.add(Hourly("", emptyList(), "", 2))
+        hourly.add(Hourly("", emptyList(), "", 1))
+        hourly.add(Hourly("", emptyList(), "", 1))
+        hourly.add(Hourly("", emptyList(), "", 2))
+        hourly.add(Hourly("", emptyList(), "", 22))
+
+        val symbol = weatherUtils.getWeatherSymbolDay(hourly)
+
+        assertEquals(2, symbol)
     }
 
 }
