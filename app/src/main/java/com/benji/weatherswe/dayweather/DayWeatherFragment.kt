@@ -24,45 +24,45 @@ class DayWeatherFragment : Fragment() {
 
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
         dayWeatherAdapter.setList(weekdayForecast)
-        tv_day_weather_temp.text = weekdayForecast[0].temperature
+        tv_day_weather_temp.text = weekdayForecast[0].temperature + "\u00B0"
         tv_day_weather_description.text =
-            WeatherUtils().getWeatherSymbolText(weekdayForecast[0].weatherSymbol)
-        img_day_weather_symbol.setAnimation(WeatherUtils().getWeatherSymbolImage(weekdayForecast[0].weatherSymbol))
+            WeatherSymbolUtils.getWeatherSymbolDescription(weekdayForecast[0].weatherSymbol)
+        img_day_weather_symbol.setAnimation(WeatherSymbolUtils.getWeatherSymbolLottie(weekdayForecast[0].weatherSymbol))
         img_day_weather_symbol.playAnimation()
     }
 
     private val setWeatherFirstHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_1.setAnimation(hourlyOverview.weatherSymbol)
         lottie_day_weather_1.playAnimation()
-        tv_day_weather_lottie_temp_1.text = hourlyOverview.temp
+        tv_day_weather_lottie_temp_1.text = hourlyOverview.temp + "\u00B0"
         tv_day_weather_lottie_time_1.text = hourlyOverview.validTime
     }
 
     private val setWeatherSecondHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_2.setAnimation(hourlyOverview.weatherSymbol)
         lottie_day_weather_2.playAnimation()
-        tv_day_weather_lottie_temp_2.text = hourlyOverview.temp
+        tv_day_weather_lottie_temp_2.text = hourlyOverview.temp + "\u00B0"
         tv_day_weather_lottie_time_2.text = hourlyOverview.validTime
     }
 
     private val setWeatherThirdHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_3.setAnimation(hourlyOverview.weatherSymbol)
         lottie_day_weather_3.playAnimation()
-        tv_day_weather_lottie_temp_3.text = hourlyOverview.temp
+        tv_day_weather_lottie_temp_3.text = hourlyOverview.temp + "\u00B0"
         tv_day_weather_lottie_time_3.text = hourlyOverview.validTime
     }
 
     private val setWeatherFourthHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_4.setAnimation(hourlyOverview.weatherSymbol)
         lottie_day_weather_4.playAnimation()
-        tv_day_weather_lottie_temp_4.text = hourlyOverview.temp
+        tv_day_weather_lottie_temp_4.text = hourlyOverview.temp + "\u00B0"
         tv_day_weather_lottie_time_4.text = hourlyOverview.validTime
     }
 
     private val setWeatherFifthHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_5.setAnimation(hourlyOverview.weatherSymbol)
         lottie_day_weather_5.playAnimation()
-        tv_day_weather_lottie_temp_5.text = hourlyOverview.temp
+        tv_day_weather_lottie_temp_5.text = hourlyOverview.temp + "\u00B0"
         tv_day_weather_lottie_time_5.text = hourlyOverview.validTime
     }
 

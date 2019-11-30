@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.benji.weatherswe.R
 import com.benji.weatherswe.utils.WeatherConstants
-import com.benji.weatherswe.utils.WeatherUtils
+import com.benji.weatherswe.utils.WeatherSymbolUtils
 import com.benji.weatherswe.utils.sharedViewModel
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 
@@ -41,7 +40,7 @@ class CurrentWeatherFragment : Fragment() {
 
     fun setLottieWeatherSymbol() {
         lottie_current_weather_symbol.setAnimation(
-            WeatherUtils().getWeatherSymbolImage(
+            WeatherSymbolUtils.getWeatherSymbolLottie(
                 sharedViewModel().hourly.weatherSymbol
             )
         )
@@ -49,7 +48,7 @@ class CurrentWeatherFragment : Fragment() {
 
     fun setTVWeatherSymbol() {
         tv_current_weather_symbol.text =
-            WeatherUtils().getWeatherSymbolText(sharedViewModel().hourly.weatherSymbol)
+            WeatherSymbolUtils.getWeatherSymbolDescription(sharedViewModel().hourly.weatherSymbol)
     }
 
     fun setTime() {
@@ -64,7 +63,7 @@ class CurrentWeatherFragment : Fragment() {
         tv_current_weather_today.text = sharedViewModel().currentDayForecast.day
     }
 
-    fun setDate(){
+    fun setDate() {
         tv_current_weather_date.text = sharedViewModel().currentDayForecast.date
     }
 
@@ -97,7 +96,7 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     fun setTemperature() {
-        tv_current_weather_temperature.text = sharedViewModel().hourly.temp
+        tv_current_weather_temperature.text = sharedViewModel().hourly.temp + "\u00B0"
     }
 
 }

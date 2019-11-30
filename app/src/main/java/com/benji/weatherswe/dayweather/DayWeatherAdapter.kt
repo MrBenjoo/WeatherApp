@@ -33,7 +33,7 @@ class DayWeatherAdapter(var data: List<DayForecast>?) :
                 val forecast = it[position]
                 day.text = forecast.day
                 image.setAnimation(getWeatherSymbolImage(forecast.weatherSymbol))
-                temperature.text = forecast.temperature
+                temperature.text = forecast.temperature + "\u00B0"
                 bind(forecast, this@DayWeatherAdapter.rowData)
             }
         }

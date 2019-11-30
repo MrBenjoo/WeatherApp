@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.WeatherUtils
+import com.benji.weatherswe.utils.WeatherSymbolUtils
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
@@ -28,11 +28,9 @@ class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         with(holder) {
             val hourly = listOfHourlyData[position]
-
             day.text = hourly.validTime
-            temperature.text = hourly.temp
-            image.setAnimation(WeatherUtils().getWeatherSymbolImage(hourly.weatherSymbol))
-
+            temperature.text = hourly.temp + "\u00B0"
+            image.setAnimation(WeatherSymbolUtils.getWeatherSymbolLottie(hourly.weatherSymbol))
             bind(hourly, this@HourWeatherAdapter.rowData)
         }
     }

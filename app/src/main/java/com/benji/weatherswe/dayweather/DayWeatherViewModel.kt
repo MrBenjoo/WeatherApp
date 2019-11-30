@@ -7,10 +7,7 @@ import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.weather.*
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
-import com.benji.weatherswe.utils.DateUtils
-import com.benji.weatherswe.utils.DispatcherProvider
-import com.benji.weatherswe.utils.WeatherUtils
-import com.benji.weatherswe.utils.sixDecimals
+import com.benji.weatherswe.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -56,7 +53,7 @@ class DayWeatherViewModel(
         val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
         when (data) {
             is ResultWrapper.Success -> {
-                processWeatherData(candidate, data.value)
+                processWeatherData(candidate, data.value, DateUtils().getCurrentTime())
                 setFiveHourForecastData(listOfTenDayForecast.value!!)
             }
             is ResultWrapper.Error -> weatherForecastError.value = data.error.toString()
@@ -64,41 +61,29 @@ class DayWeatherViewModel(
         setCompletedState()
     }
 
-    fun processWeatherData(candidate: Candidate, weather: Weather) {
-        val dateUtils = DateUtils()
-
-        var currentDate = dateUtils.getCurrentTime()
-
+    fun processWeatherData(candidate: Candidate, weather: Weather, date: String) {
+        var currentDate = date
         var listOfHourlyData = mutableListOf<Hourly>()
         val listOfTenDayForecast = mutableListOf<DayForecast>()
 
         weather.timeSeries.forEach { timeSeries ->
-            val apiDate = dateUtils.getFormattedTime(timeSeries.validTime)
+            val apiDate = DateUtils().getFormattedTime(timeSeries.validTime)
 
             if (apiDate != currentDate) {
-                val day = DayForecast(
-                    currentDate,
-                    dateUtils.getDay(currentDate),
-                    candidate.address,
-                    WeatherUtils().getHighestTemperature(listOfHourlyData),
-                    listOfHourlyData,
-                    WeatherUtils().getWeatherSymbolDay(listOfHourlyData)
-                )
-
+                val day = DayForecastUtils.getDayForecast(currentDate, candidate, listOfHourlyData)
                 listOfTenDayForecast.add(day)
                 listOfHourlyData = mutableListOf()
                 currentDate = apiDate
             }
 
-            listOfHourlyData.add(getHourlyForecastData(timeSeries))
-
+            listOfHourlyData.add(HourlyForecastUtils.getHourlyForecastData(timeSeries))
         }
 
         this.listOfTenDayForecast.value = listOfTenDayForecast
     }
 
-    private fun setFiveHourForecastData(listOfTenDayForecast: List<DayForecast>) {
-        val tempList = WeatherUtils().getFiveHourForecastData(listOfTenDayForecast)
+    fun setFiveHourForecastData(listOfTenDayForecast: List<DayForecast>) {
+        val tempList = HourlyForecastUtils.getFiveHourForecastData(listOfTenDayForecast)
         for (i in 0..4) {
             when (i) {
                 0 -> _forecastFirstHour.value = HourlyOverview(
@@ -130,19 +115,6 @@ class DayWeatherViewModel(
             }
         }
     }
-
-    fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {
-        val parameters = WeatherUtils().getParameters(timeSeries.parameters)
-        val validTime = DateUtils().getHourlyTime(timeSeries.validTime)
-        val hourly = Hourly(
-            validTime,
-            parameters,
-            WeatherUtils().getCurrentTemperature(parameters),
-            WeatherUtils().getWeatherSymbolParameter(parameters)
-        )
-        return hourly
-    }
-
 
     override fun onCleared() {
         super.onCleared()
