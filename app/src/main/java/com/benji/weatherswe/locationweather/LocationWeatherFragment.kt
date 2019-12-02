@@ -3,7 +3,6 @@ package com.benji.weatherswe.locationweather
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,25 +10,18 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.State
+import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideSearchCityViewModel
-import com.benji.weatherswe.utils.mainActivity
-import com.benji.weatherswe.utils.navigate
-import com.benji.weatherswe.utils.sharedViewModel
-import com.benji.weatherswe.utils.showText
+import com.benji.weatherswe.utils.*
+import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.fragment_day_weather.*
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
 class LocationWeatherFragment : Fragment(), TextWatcher {
-    private lateinit var viewModel: LocationWeatherViewModel
     private lateinit var arrayAdapter: ArrayAdapter<String>
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.location_weather_fragment, container, false)
-    }
+    private lateinit var viewModel: LocationWeatherViewModel
 
     override fun afterTextChanged(text: Editable?) {
         if (text.toString().trim() != "") {
@@ -37,34 +29,44 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private val candidateObserver = Observer<Candidate> { candidate ->
+        sharedViewModel().candidate = candidate
+        navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
+    }
+
+    private fun initAutoCompleteTextView() = with(auto_complete_tv_location_weather_search) {
+        setAdapter(arrayAdapter)
+        threshold = 1
+        addTextChangedListener(this@LocationWeatherFragment)
+        setOnItemClickListener { _, _, index, _ -> viewModel.onSuggestionClicked(index) }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = provideSearchCityViewModel(this)
         initArrayAdapter()
         initAutoCompleteTextView()
-        observeCitySuggestions()
-        observeErrorMessages()
-        observeCandidate()
-        observeState()
     }
 
-    private fun observeState() {
-        viewModel.state.observe(
-            this,
-            Observer { state ->
-                handleState(state)
-            }
-        )
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        // already searched on a city before, navigate to view: weather forecast
+        if (prefsGetFavCandidate() != Constants.PREF_DEFAULT_VALUE) {
+            val candidate = prefsGetFavCandidate()
+            sharedViewModel().candidate =
+                Moshi.Builder().build().adapter(Candidate::class.java).fromJson(candidate)!!
+            navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
+        } else {
+            viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
+            viewModel.state.observe(viewLifecycleOwner, stateObserver)
+            viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
+        }
     }
 
-    private fun observeCandidate() {
-        viewModel.candidate.observe(
-            this,
-            Observer { candidate ->
-                sharedViewModel().candidate = candidate
-                navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
-            }
-        )
+    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
+        arrayAdapter.clear()
+        arrayAdapter.addAll(suggestions)
+        arrayAdapter.notifyDataSetChanged()
     }
 
     private fun initArrayAdapter() {
@@ -75,45 +77,25 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         )
     }
 
-    private fun initAutoCompleteTextView() = with(auto_complete_tv_location_weather_search) {
-        setAdapter(arrayAdapter)
-        threshold = 1
-        addTextChangedListener(this@LocationWeatherFragment)
-        setOnItemClickListener { _, _, index, _ -> viewModel.onSuggestionClicked(index) }
-    }
-
-    private fun observeCitySuggestions() {
-        viewModel.citySuggestions.observe(
-            this,
-            Observer { suggestions ->
-                arrayAdapter.clear()
-                arrayAdapter.addAll(suggestions)
-                arrayAdapter.notifyDataSetChanged()
-            }
-        )
-    }
-
-    private fun handleState(state: State?) {
+    private val stateObserver = Observer<State> { state ->
         when (state) {
             State.InFlight -> {
-                loading_location_bar.visibility = View.VISIBLE
+                loading_day_bar.visibility = View.VISIBLE
             }
             State.Complete, State.Idle, State.Gone -> {
-                loading_location_bar.visibility = View.GONE
+                loading_day_bar.visibility = View.GONE
             }
             else -> {
-                loading_location_bar.visibility = View.VISIBLE
+                loading_day_bar.visibility = View.VISIBLE
             }
         }
     }
 
-    private fun observeErrorMessages() {
-        viewModel.errorMessage.observe(
-            this,
-            Observer { errorMessage ->
-                showText(errorMessage)
-            }
-        )
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.location_weather_fragment, container, false)
     }
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

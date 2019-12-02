@@ -16,7 +16,7 @@ object LocationWeatherServiceLocator {
     private var geocodingRepository: GeocodingRepository? = null
 
 
-    private fun provideGeocodingRepository(): GeocodingRepository {
+    fun provideGeocodingRepository(): GeocodingRepository {
         var geocodingRepositoryTemp = geocodingRepository
         if (geocodingRepository == null) {
             geocodingRepository = GeocodingRepository(provideGeocodingAPI())

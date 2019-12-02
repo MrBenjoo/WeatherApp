@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search_main_view"
+        android:id="@+id/action_item_search"
         android:icon="@drawable/ic_search_white"
-        android:title="Edit"
-        app:showAsAction="always" />
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/action_item_favorite"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favorite"
+        app:showAsAction="ifRoom" />
 
 </menu>

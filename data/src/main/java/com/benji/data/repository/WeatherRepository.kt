@@ -1,6 +1,5 @@
 package com.benji.data.repository
 
-import com.benji.data.datasource.local.WeatherDao
 import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Location
@@ -10,8 +9,7 @@ import com.benji.domain.repository.IWeatherRepository
 import retrofit2.HttpException
 
 class WeatherRepository(
-    private val weatherRemoteDataSource: WeatherRemoteDataSource,
-    private val weatherDao: WeatherDao
+    private val weatherRemoteDataSource: WeatherRemoteDataSource
 ) :
     IWeatherRepository {
 
@@ -31,7 +29,7 @@ class WeatherRepository(
     }
 
     override suspend fun deleteAll(): ResultWrapper<Exception, Unit> {
-        return ResultWrapper.build { weatherDao.deleteAll() }
+        return ResultWrapper.build { Unit } //TODO
     }
 
 

@@ -1,5 +1,6 @@
 package com.benji.weatherswe.locationweather
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
@@ -24,12 +25,13 @@ class LocationWeatherViewModel(
     private var suggestions: List<Suggestion> = mutableListOf()
 
     // The suggestions that are shown in the list
-    val citySuggestions = MutableLiveData<List<String>>()
+    private val _citySuggestions = MutableLiveData<List<String>>()
+    val citySuggestions: LiveData<List<String>>
+        get() = _citySuggestions
 
-    // The error message that is displayed in the fragment
-    val errorMessage = MutableLiveData<String>()
-
-    val candidate = MutableLiveData<Candidate>()
+    private val _candidate = MutableLiveData<Candidate>()
+    val candidate: LiveData<Candidate>
+        get() = _candidate
 
     private var jobTracker = Job()
 
@@ -44,7 +46,7 @@ class LocationWeatherViewModel(
         val data = geocodingRepository.getSuggestions(textSearch)
         when (data) {
             is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
-            is ResultWrapper.Error -> errorMessage.value = data.error.message
+            is ResultWrapper.Error -> TODO("Handle error values")
         }
     }
 
@@ -57,7 +59,7 @@ class LocationWeatherViewModel(
      */
     private fun onSuggestionsReceived(suggestions: List<Suggestion>) {
         this.suggestions = suggestions
-        citySuggestions.value = suggestions.returnCities()
+        _citySuggestions.value = suggestions.returnCities()
     }
 
 
@@ -75,9 +77,9 @@ class LocationWeatherViewModel(
         val data = geocodingRepository.getCandidateLocation(city, magicKey)
         when (data) {
             is ResultWrapper.Success -> {
-                candidate.value = Collections.max(data.value.candidates, CompareScore())
+                _candidate.value = Collections.max(data.value.candidates, CompareScore())
             }
-            is ResultWrapper.Error -> errorMessage.value = data.error.message
+            is ResultWrapper.Error -> TODO("Handle error values")
         }
         setCompletedState()
     }

@@ -1,26 +1,35 @@
 package com.benji.weatherswe.dayweather
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
+import com.benji.domain.domainmodel.geocoding.CompareScore
+import com.benji.domain.domainmodel.geocoding.Suggestion
 import com.benji.domain.domainmodel.weather.*
+import com.benji.domain.repository.IGeocodingRepository
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class DayWeatherViewModel(
     private val dispatcher: DispatcherProvider,
-    private val weatherRepository: IWeatherRepository
+    private val weatherRepository: IWeatherRepository,
+    private val geocodingRepository: IGeocodingRepository
 ) : BaseViewModel(), CoroutineScope {
+
     private val TAG = "DayWeatherViewModel"
 
     val listOfTenDayForecast = MutableLiveData<List<DayForecast>>()
     val weatherForecastError = MutableLiveData<String>()
+
+    private var suggestions: List<Suggestion> = mutableListOf()
 
     private var jobTracker = Job()
 
@@ -44,6 +53,13 @@ class DayWeatherViewModel(
     val forecastFifthHour: LiveData<HourlyOverview>
         get() = _forecastFifthHour
 
+    private val _citySuggestions = MutableLiveData<List<String>>()
+    val citySuggestions: LiveData<List<String>>
+        get() = _citySuggestions
+
+    private val _candidate = MutableLiveData<Candidate>()
+    val candidate: LiveData<Candidate>
+        get() = _candidate
 
     override val coroutineContext: CoroutineContext
         get() = dispatcher.provideUIContext() + jobTracker
@@ -119,6 +135,42 @@ class DayWeatherViewModel(
     override fun onCleared() {
         super.onCleared()
         jobTracker.cancel()
+    }
+
+    fun onMenuFavoriteClick() {
+        Log.d("DayWeatherViewModel", "onMenuFavoriteClick")
+    }
+
+    fun onSearchCity(query: String) = launch {
+        if (query.trim() != "") {
+            val data = geocodingRepository.getSuggestions(query)
+            when (data) {
+                is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
+                //is ResultWrapper.Error -> errorMessage.value = data.error.message
+            }
+        }
+    }
+
+    fun onSuggestionClicked(index: Int) = launch {
+        setInFlightState()
+        val city = suggestions[index].text
+        val magicKey = suggestions[index].magicKey
+
+        val data = geocodingRepository.getCandidateLocation(city, magicKey)
+        when (data) {
+            is ResultWrapper.Success -> {
+                _candidate.value = Collections.max(data.value.candidates, CompareScore())
+            }
+            is ResultWrapper.Error -> {
+                //errorMessage.value = data.error.message
+            }
+        }
+        setCompletedState()
+    }
+
+    private fun onSuggestionsReceived(suggestions: List<Suggestion>) {
+        this.suggestions = suggestions
+        _citySuggestions.value = suggestions.returnCities()
     }
 
 }

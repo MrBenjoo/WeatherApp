@@ -1,13 +1,13 @@
 package com.benji.weatherswe.dayweather
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.State
+import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
@@ -16,19 +16,70 @@ import com.benji.weatherswe.utils.*
 import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 
-class DayWeatherFragment : Fragment() {
+class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
+    private lateinit var arrayAdapter: ArrayAdapter<String>
     private lateinit var viewModel: DayWeatherViewModel
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
+    private lateinit var searchMenuItem: MenuItem
     private val TAG = "DayWeatherFragment"
 
+    override fun onQueryTextChange(newText: String): Boolean {
+        viewModel.onSearchCity(newText)
+        return true
+    }
+
+    private val candidateObserver = Observer<Candidate> { candidate ->
+        sharedViewModel().candidate = candidate
+        viewModel.getWeatherForecast(candidate)
+    }
+
+    private fun setupSearchView(searchView: SearchView) {
+        searchView.apply {
+            setOnQueryTextListener(this@DayWeatherFragment)
+            queryHint = string(R.string.search_hint)
+        }
+        val searchAutoComplete =
+            searchView.findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
+        searchAutoComplete.setHintTextColor(getColor(R.color.colorPrimary))
+
+        searchAutoComplete.setOnItemClickListener { _, _, index, _ ->
+            searchMenuItem.collapseActionView()
+            viewModel.onSuggestionClicked(index)
+        }
+
+        initArrayAdapter()
+        searchAutoComplete.setAdapter(arrayAdapter)
+    }
+
+    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
+        arrayAdapter.clear()
+        arrayAdapter.addAll(suggestions)
+        arrayAdapter.notifyDataSetChanged()
+    }
+
+    private fun initArrayAdapter() {
+        arrayAdapter = ArrayAdapter(
+            mainActivity().applicationContext,
+            android.R.layout.simple_dropdown_item_1line,
+            emptyList<String>()
+        )
+    }
 
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
-        dayWeatherAdapter.setList(weekdayForecast)
-        tv_day_weather_temp.text = weekdayForecast[0].temperature + "\u00B0"
-        tv_day_weather_description.text =
-            WeatherSymbolUtils.getWeatherSymbolDescription(weekdayForecast[0].weatherSymbol)
-        img_day_weather_symbol.setAnimation(WeatherSymbolUtils.getWeatherSymbolLottie(weekdayForecast[0].weatherSymbol))
+        val candidateJson = sharedViewModel().candidate.toJson()
+        prefsStoreCandidate(candidateJson)
+
+        val weatherSymbol = weekdayForecast[0].weatherSymbol
+        val weatherSymbolDescription = WeatherSymbolUtils.getWeatherSymbolDescription(weatherSymbol)
+        val weatherSymbolLottie = WeatherSymbolUtils.getWeatherSymbolLottie(weatherSymbol)
+
+        tv_day_weather_city.text = sharedViewModel().candidate.address
+        tv_day_weather_description.text = weatherSymbolDescription
+        img_day_weather_symbol.setAnimation(weatherSymbolLottie)
         img_day_weather_symbol.playAnimation()
+        tv_day_weather_temp.text = weekdayForecast[0].temperature + "\u00B0"
+
+        dayWeatherAdapter.setList(weekdayForecast)
     }
 
     private val setWeatherFirstHour = Observer<HourlyOverview> { hourlyOverview ->
@@ -66,31 +117,7 @@ class DayWeatherFragment : Fragment() {
         tv_day_weather_lottie_time_5.text = hourlyOverview.validTime
     }
 
-    private fun handleState(state: State?) {
-        when (state) {
-            State.InFlight -> {
-                loading_day_bar.visibility = View.VISIBLE
-            }
-            State.Complete, State.Idle, State.Gone -> {
-                loading_day_bar.visibility = View.GONE
-            }
-            else -> {
-                loading_day_bar.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun observeState() {
-        viewModel.state.observe(
-            this,
-            Observer { state ->
-                handleState(state)
-            }
-        )
-    }
-
     private val listClickObserver = Observer<RowData> { rowData ->
-        Log.d(TAG, "sharedViewModel().toString() = " + sharedViewModel().toString())
         sharedViewModel().currentDayForecast = rowData.dayForecast
         sharedViewModel().todayDate = DateUtils().getTodayDate()
         navigate(R.id.action_dayWeatherFragment_to_hourWeatherFragment)
@@ -106,48 +133,66 @@ class DayWeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerview_day_weather.setHasFixedSize(true)
+        dayWeatherAdapter = DayWeatherAdapter(emptyList())
+        setupToolbar(toolbar_day_weather)
         tv_weather_day_time.text = DateUtils().getDayAndClock()
         tv_day_weather_city.text = sharedViewModel().candidate.address
-        hideKeyboard(view)
-    }
-
-    private fun hideKeyboard(view : View) {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
+        hideKeyBoard(view)
+        viewModel = DayWeatherServiceLocator.provideWeatherViewModel(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        //setupToolbar(toolbar_weather, null)
-        recyclerview_day_weather.setHasFixedSize(true)
-        dayWeatherAdapter = DayWeatherAdapter(emptyList())
-        dayWeatherAdapter.rowData.observe(this, listClickObserver)
+        dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)
         recyclerview_day_weather.adapter = dayWeatherAdapter
 
-
-        viewModel =
-            DayWeatherServiceLocator.provideWeatherViewModel(
-                this,
-                mainActivity().applicationContext
-            )
-
-        observeState()
-
-        viewModel.listOfTenDayForecast.observe(this, weatherObserver)
-
-        viewModel.forecastFirstHour.observe(this, setWeatherFirstHour)
-        viewModel.forecastSecondHour.observe(this, setWeatherSecondHour)
-        viewModel.forecastThirdHour.observe(this, setWeatherThirdHour)
-        viewModel.forecastFourthHour.observe(this, setWeatherFourthHour)
-        viewModel.forecastFifthHour.observe(this, setWeatherFifthHour)
+        viewModel.listOfTenDayForecast.observe(viewLifecycleOwner, weatherObserver)
+        viewModel.state.observe(viewLifecycleOwner, stateObserver)
+        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
+        viewModel.forecastFirstHour.observe(viewLifecycleOwner, setWeatherFirstHour)
+        viewModel.forecastSecondHour.observe(viewLifecycleOwner, setWeatherSecondHour)
+        viewModel.forecastThirdHour.observe(viewLifecycleOwner, setWeatherThirdHour)
+        viewModel.forecastFourthHour.observe(viewLifecycleOwner, setWeatherFourthHour)
+        viewModel.forecastFifthHour.observe(viewLifecycleOwner, setWeatherFifthHour)
+        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
 
         viewModel.getWeatherForecast(sharedViewModel().candidate)
+    }
+
+
+    private val stateObserver = Observer<State> { state ->
+        when (state) {
+            State.InFlight -> {
+                loading_day_bar.visibility = View.VISIBLE
+            }
+            State.Complete, State.Idle, State.Gone -> {
+                loading_day_bar.visibility = View.GONE
+            }
+            else -> {
+                loading_day_bar.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_weather_view, menu)
+
+        searchMenuItem = menu.findItem(R.id.action_item_search)
+        setupSearchView(searchMenuItem.actionView as SearchView)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_item_favorite) {
+            viewModel.onMenuFavoriteClick()
+            true
+
+        } else super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        return true
     }
 
 
