@@ -3,6 +3,7 @@ package com.benji.weatherswe.dayweather
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.domainmodel.weather.Weather
+import com.benji.domain.repository.IGeocodingRepository
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.InstantExecutorExtension
 import com.benji.weatherswe.no_test_only_helper_functions.TestUtils
@@ -23,13 +24,14 @@ internal class DayWeatherViewModelTest {
     private lateinit var mockedWeatherData: Weather
 
     private val weatherRepository: IWeatherRepository = mockk()
+    private val geocodingRepository: IGeocodingRepository = mockk()
     private val dispatcher: DispatcherProvider = mockk()
 
     private val candidateMalmo = Candidate("Malmö", Location(55.60, 13.00), 100)
 
     @BeforeEach
     fun setup() {
-        viewModel = DayWeatherViewModel(dispatcher, weatherRepository)
+        viewModel = DayWeatherViewModel(dispatcher, weatherRepository, geocodingRepository)
         val jsonWeatherString = TestUtils.loadJsonFromResources("JSON_WEATHER")
 
         val moshiBuild = Moshi.Builder().build()
