@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start" />
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/img_day_weather_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_day_weather_city"
+            app:layout_constraintEnd_toStartOf="@+id/tv_day_weather_city"
+            app:layout_constraintTop_toTopOf="@+id/tv_day_weather_city" />
+
+        <Constraint
+            android:id="@+id/tv_day_weather_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_day_weather" />
+
+        <Constraint android:id="@+id/loading_day_bar">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_weather_day_time"
+            android:visibility="gone">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_temp">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_description">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/img_day_weather_symbol">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/lottie_day_weather_1">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/lottie_day_weather_2">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/lottie_day_weather_3">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/lottie_day_weather_4">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/lottie_day_weather_5">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_temp_1">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_temp_2">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_temp_3">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_temp_4">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_temp_5">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_time_1">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_time_2">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_time_3">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_time_4">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_day_weather_lottie_time_5">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/card_view_day_weather"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_day_weather_place"
+            android:layout_marginTop="@dimen/margin_8"/>
+
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="1000">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/card_view_day_weather"
+            app:touchAnchorSide="top" />
+
+    </Transition>
+
+</MotionScene>

@@ -3,6 +3,7 @@ package com.benji.weatherswe.locationweather
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,13 +81,13 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     private val stateObserver = Observer<State> { state ->
         when (state) {
             State.InFlight -> {
-                loading_day_bar.visibility = View.VISIBLE
+                loading_location_bar.visibility = View.VISIBLE
             }
             State.Complete, State.Idle, State.Gone -> {
-                loading_day_bar.visibility = View.GONE
+                loading_location_bar.visibility = View.GONE
             }
             else -> {
-                loading_day_bar.visibility = View.VISIBLE
+                loading_location_bar.visibility = View.VISIBLE
             }
         }
     }

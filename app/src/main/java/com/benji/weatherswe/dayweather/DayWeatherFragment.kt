@@ -1,6 +1,7 @@
 package com.benji.weatherswe.dayweather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
@@ -81,6 +82,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
 
         dayWeatherAdapter.setList(weekdayForecast)
     }
+
 
     private val setWeatherFirstHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_1.setAnimation(hourlyOverview.weatherSymbol)
@@ -164,7 +166,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     private val stateObserver = Observer<State> { state ->
         when (state) {
             State.InFlight -> {
-                loading_day_bar.visibility = View.VISIBLE
+                loading_day_bar.visibility = View.GONE
             }
             State.Complete, State.Idle, State.Gone -> {
                 loading_day_bar.visibility = View.GONE
