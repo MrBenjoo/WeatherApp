@@ -7,7 +7,10 @@ import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.CompareScore
 import com.benji.domain.domainmodel.geocoding.Suggestion
-import com.benji.domain.domainmodel.weather.*
+import com.benji.domain.domainmodel.weather.DayForecast
+import com.benji.domain.domainmodel.weather.Hourly
+import com.benji.domain.domainmodel.weather.HourlyOverview
+import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
@@ -66,6 +69,7 @@ class DayWeatherViewModel(
 
     fun getWeatherForecast(candidate: Candidate) = launch {
         setInFlightState()
+
         val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
         when (data) {
             is ResultWrapper.Success -> {
