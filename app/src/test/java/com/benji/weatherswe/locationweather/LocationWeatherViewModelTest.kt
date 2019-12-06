@@ -6,7 +6,6 @@ import com.benji.domain.domainmodel.geocoding.*
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.InstantExecutorExtension
 import com.benji.weatherswe.utils.DispatcherProvider
-import com.benji.weatherswe.utils.returnCities
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk

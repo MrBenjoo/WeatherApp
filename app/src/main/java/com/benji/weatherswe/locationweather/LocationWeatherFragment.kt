@@ -3,7 +3,6 @@ package com.benji.weatherswe.locationweather
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideSearchCityViewModel
 import com.benji.weatherswe.utils.*
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.fragment_day_weather.*
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
@@ -51,17 +49,22 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // already searched on a city before, navigate to view: weather forecast
-        if (prefsGetFavCandidate() != Constants.PREF_DEFAULT_VALUE) {
-            val candidate = prefsGetFavCandidate()
-            sharedViewModel().candidate =
-                Moshi.Builder().build().adapter(Candidate::class.java).fromJson(candidate)!!
-            navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
-        } else {
-            viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
-            viewModel.state.observe(viewLifecycleOwner, stateObserver)
-            viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
+        when (val candidate = prefsLoadLatestCandidate()) {
+            Constants.PREF_DEFAULT_VALUE -> noCitySearched()
+            else -> loadLatestSearchedCity(candidate)
         }
+    }
+
+    private fun loadLatestSearchedCity(candidate: String) {
+        val moshi = Moshi.Builder().build()
+        sharedViewModel().candidate = moshi.adapter(Candidate::class.java).fromJson(candidate)!!
+        navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
+    }
+
+    private fun noCitySearched() {
+        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
+        viewModel.state.observe(viewLifecycleOwner, stateObserver)
+        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
     }
 
     private val citySuggestionsObserver = Observer<List<String>> { suggestions ->

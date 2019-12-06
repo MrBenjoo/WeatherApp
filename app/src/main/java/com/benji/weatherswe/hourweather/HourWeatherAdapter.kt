@@ -3,17 +3,20 @@ package com.benji.weatherswe.hourweather
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.WeatherSymbolUtils
+import com.benji.weatherswe.utils.SymbolUtils
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
     RecyclerView.Adapter<HourWeatherAdapter.MainViewHolder>() {
-    val rowData = MutableLiveData<Hourly>()
-    private val TAG = "HourWeatherAdapter"
+
+
+    private val _rowData = MutableLiveData<Hourly>()
+    val rowData: LiveData<Hourly> = _rowData
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -30,8 +33,8 @@ class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
             val hourly = listOfHourlyData[position]
             day.text = hourly.validTime
             temperature.text = hourly.temp + "\u00B0"
-            image.setAnimation(WeatherSymbolUtils.getWeatherSymbolLottie(hourly.weatherSymbol))
-            bind(hourly, this@HourWeatherAdapter.rowData)
+            image.setAnimation(SymbolUtils.getWeatherSymbolLottie(hourly.weatherSymbol))
+            bind(hourly, this@HourWeatherAdapter._rowData)
         }
     }
 
@@ -41,9 +44,7 @@ class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
         val temperature = itemView.tv_row_list_temperature
 
         fun bind(hourlyData: Hourly, hourly: MutableLiveData<Hourly>) {
-            itemView.setOnClickListener {
-                    hourly.value = hourlyData
-            }
+            itemView.setOnClickListener { hourly.value = hourlyData }
         }
     }
 }

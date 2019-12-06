@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.WeatherConstants
-import com.benji.weatherswe.utils.WeatherSymbolUtils
+import com.benji.weatherswe.utils.ParameterConstants
+import com.benji.weatherswe.utils.SymbolUtils
 import com.benji.weatherswe.utils.sharedViewModel
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 
 
 class CurrentWeatherFragment : Fragment() {
-    private val TAG = "CurrentWeatherFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,64 +37,64 @@ class CurrentWeatherFragment : Fragment() {
         setTemperature()
     }
 
-    fun setLottieWeatherSymbol() {
+    private fun setLottieWeatherSymbol() {
         lottie_current_weather_symbol.setAnimation(
-            WeatherSymbolUtils.getWeatherSymbolLottie(
+            SymbolUtils.getWeatherSymbolLottie(
                 sharedViewModel().hourly.weatherSymbol
             )
         )
     }
 
-    fun setTVWeatherSymbol() {
+    private fun setTVWeatherSymbol() {
         tv_current_weather_symbol.text =
-            WeatherSymbolUtils.getWeatherSymbolDescription(sharedViewModel().hourly.weatherSymbol)
+            SymbolUtils.getWeatherSymbolDescription(sharedViewModel().hourly.weatherSymbol)
     }
 
-    fun setTime() {
+    private fun setTime() {
         tv_current_weather_time.text = sharedViewModel().hourly.validTime
     }
 
-    fun setWeatherCity() {
+    private fun setWeatherCity() {
         tv_current_weather_city.text = sharedViewModel().candidate.address
     }
 
-    fun setDay() {
+    private fun setDay() {
         tv_current_weather_today.text = sharedViewModel().currentDayForecast.day
     }
 
-    fun setDate() {
+    private fun setDate() {
         tv_current_weather_date.text = sharedViewModel().currentDayForecast.date
     }
 
-    fun setAirPressure() {
+    private fun setAirPressure() {
         val hourly = sharedViewModel().hourlyMap
-        val airPressure = (hourly[WeatherConstants.PARAMETER_AIR_PRESSURE]
+        val airPressure = (hourly[ParameterConstants.PARAMETER_AIR_PRESSURE]
             ?: error("N/A")).values[0] + " hPa"
         tv_current_weather_air_pressure_value.text = airPressure
     }
 
-    fun setThunderProbability() {
+    private fun setThunderProbability() {
         val hourly = sharedViewModel().hourlyMap
-        val thunderProbability = (hourly[WeatherConstants.PARAMETER_THUNDER_PROBABILITY]
+        val thunderProbability = (hourly[ParameterConstants.PARAMETER_THUNDER_PROBABILITY]
             ?: error("N/A")).values[0] + " %"
         tv_current_weather_thunder_value.text = thunderProbability
     }
 
-    fun setPrecipitation() {
+    private fun setPrecipitation() {
         val hourly = sharedViewModel().hourlyMap
-        val precipitation = (hourly[WeatherConstants.PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY]
+        val precipitation = (hourly[ParameterConstants.PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY]
             ?: error("N/A")).values[0] + " mm/h"
         tv_current_weather_precipitation_value.text = precipitation
     }
 
-    fun setWind() {
+    private fun setWind() {
         val hourly = sharedViewModel().hourlyMap
         val wind =
-            (hourly[WeatherConstants.PARAMETER_WIND_SPEED] ?: error("N/A")).values[0] + " m/s"
+            (hourly[ParameterConstants.PARAMETER_WIND_SPEED] ?: error("N/A")).values[0] + " m/s"
         tv_current_weather_wind_value.text = wind
     }
 
-    fun setTemperature() {
+    private fun setTemperature() {
         tv_current_weather_temperature.text = sharedViewModel().hourly.temp + "\u00B0"
     }
 

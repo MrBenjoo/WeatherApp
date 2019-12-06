@@ -13,19 +13,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object LocationWeatherServiceLocator {
-    private var geocodingRepository: GeocodingRepository? = null
+    private var geoCodingRepository: GeocodingRepository? = null
 
 
-    fun provideGeocodingRepository(): GeocodingRepository {
-        var geocodingRepositoryTemp = geocodingRepository
-        if (geocodingRepository == null) {
-            geocodingRepository = GeocodingRepository(provideGeocodingAPI())
-            geocodingRepositoryTemp = geocodingRepository
+    fun provideGeoCodingRepository(): GeocodingRepository {
+        var geoCodingRepositoryTemp = geoCodingRepository
+        if (geoCodingRepository == null) {
+            geoCodingRepository = GeocodingRepository(provideGeoCodingAPI())
+            geoCodingRepositoryTemp = geoCodingRepository
         }
-        return geocodingRepositoryTemp!!
+        return geoCodingRepositoryTemp!!
     }
 
-    private fun provideGeocodingAPI(): GeocodingRemoteDataSource =
+    private fun provideGeoCodingAPI(): GeocodingRemoteDataSource =
         GeocodingRemoteDataSource(provideRetrofit().create(GeocodingAPI::class.java))
 
     private fun provideRetrofit(): Retrofit =
@@ -40,7 +40,7 @@ object LocationWeatherServiceLocator {
             BaseViewModelFactory {
                 LocationWeatherViewModel(
                     DispatcherProvider,
-                    provideGeocodingRepository()
+                    provideGeoCodingRepository()
                 )
             })
             .get(LocationWeatherViewModel::class.java)

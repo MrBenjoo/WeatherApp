@@ -1,7 +1,6 @@
 package com.benji.weatherswe.dayweather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.SearchView
@@ -31,7 +30,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val candidateObserver = Observer<Candidate> { candidate ->
         sharedViewModel().candidate = candidate
-        viewModel.getWeatherForecast(candidate)
+        viewModel.getForecast(candidate)
     }
 
     private fun setupSearchView(searchView: SearchView) {
@@ -39,16 +38,14 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
             setOnQueryTextListener(this@DayWeatherFragment)
             queryHint = string(R.string.search_hint)
         }
-        val searchAutoComplete =
-            searchView.findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
-        searchAutoComplete.setHintTextColor(getColor(R.color.colorPrimary))
 
-        searchAutoComplete.setOnItemClickListener { _, _, index, _ ->
-            searchMenuItem.collapseActionView()
-            viewModel.onSuggestionClicked(index)
+        val searchAutoComplete = setupSearchAutoComplete(searchView).also {
+            it.setOnItemClickListener { _, _, index, _ ->
+                searchMenuItem.collapseActionView()
+                viewModel.onSuggestionClicked(index)
+            }
         }
 
-        initArrayAdapter()
         searchAutoComplete.setAdapter(arrayAdapter)
     }
 
@@ -71,8 +68,8 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         prefsStoreCandidate(candidateJson)
 
         val weatherSymbol = weekdayForecast[0].weatherSymbol
-        val weatherSymbolDescription = WeatherSymbolUtils.getWeatherSymbolDescription(weatherSymbol)
-        val weatherSymbolLottie = WeatherSymbolUtils.getWeatherSymbolLottie(weatherSymbol)
+        val weatherSymbolDescription = SymbolUtils.getWeatherSymbolDescription(weatherSymbol)
+        val weatherSymbolLottie = SymbolUtils.getWeatherSymbolLottie(weatherSymbol)
 
         tv_day_weather_city.text = sharedViewModel().candidate.address
         tv_day_weather_description.text = weatherSymbolDescription
@@ -135,9 +132,10 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initArrayAdapter()
         recyclerview_day_weather.setHasFixedSize(true)
-        dayWeatherAdapter = DayWeatherAdapter(emptyList())
         setupToolbar(toolbar_day_weather)
+        dayWeatherAdapter = DayWeatherAdapter(emptyList())
         tv_weather_day_time.text = DateUtils().getDayAndClock()
         tv_day_weather_city.text = sharedViewModel().candidate.address
         hideKeyBoard(view)
@@ -149,7 +147,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)
         recyclerview_day_weather.adapter = dayWeatherAdapter
 
-        viewModel.listOfTenDayForecast.observe(viewLifecycleOwner, weatherObserver)
+        viewModel.listOfDayForecast.observe(viewLifecycleOwner, weatherObserver)
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
         viewModel.forecastFirstHour.observe(viewLifecycleOwner, setWeatherFirstHour)
@@ -159,7 +157,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel.forecastFifthHour.observe(viewLifecycleOwner, setWeatherFifthHour)
         viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
 
-        viewModel.getWeatherForecast(sharedViewModel().candidate)
+        viewModel.getForecast(sharedViewModel().candidate)
     }
 
 
@@ -193,9 +191,6 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         } else super.onOptionsItemSelected(item)
     }
 
-    override fun onQueryTextSubmit(query: String): Boolean {
-        return true
-    }
-
+    override fun onQueryTextSubmit(query: String): Boolean = true
 
 }

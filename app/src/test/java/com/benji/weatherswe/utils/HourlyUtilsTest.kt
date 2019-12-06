@@ -2,13 +2,14 @@ package com.benji.weatherswe.utils
 
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Weather
+import com.benji.weatherswe.hourweather.HourlyUtils
 import com.benji.weatherswe.no_test_only_helper_functions.TestUtils
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-internal class HourlyForecastUtilsTest {
+internal class HourlyUtilsTest {
 
     private val moshiBuild = Moshi.Builder().build()
 
@@ -37,7 +38,7 @@ internal class HourlyForecastUtilsTest {
         fakeListOfTenDayForecast.add(dayForecast0000To0300)
 
         val returnedHourlyOverviewList =
-            HourlyForecastUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
+            HourlyUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
 
         assertEquals("2019-11-20T23:00:00Z", returnedHourlyOverviewList[0].validTime)
         assertEquals("2019-11-21T00:00:00Z", returnedHourlyOverviewList[1].validTime)
@@ -61,7 +62,7 @@ internal class HourlyForecastUtilsTest {
         fakeListOfTenDayForecast.add(dayForecastMidnightClock)
 
         val returnedHourlyOverviewList =
-            HourlyForecastUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
+            HourlyUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
 
         assertEquals("2019-11-20T20:00:00Z", returnedHourlyOverviewList[0].validTime)
         assertEquals("2019-11-20T21:00:00Z", returnedHourlyOverviewList[1].validTime)
@@ -83,7 +84,7 @@ internal class HourlyForecastUtilsTest {
         fakeListOfTenDayForecast.add(dayForecastFrom1200To1600)
 
         val returnedHourlyOverviewList =
-            HourlyForecastUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
+            HourlyUtils.getFiveHourForecastData(fakeListOfTenDayForecast)
 
         assertEquals("2019-11-20T12:00:00Z", returnedHourlyOverviewList[0].validTime)
         assertEquals("2019-11-20T13:00:00Z", returnedHourlyOverviewList[1].validTime)
@@ -95,19 +96,19 @@ internal class HourlyForecastUtilsTest {
 
     @Test
     fun `getHourlyForecastData() 2300 should return 2300 as valid time`() {
-        val hourly = HourlyForecastUtils.getHourlyForecastData(mockedWeatherData.timeSeries[9])
+        val hourly = HourlyUtils.getHourlyForecastData(mockedWeatherData.timeSeries[9])
         assertEquals("23:00", hourly.validTime)
     }
 
     @Test
     fun `getHourlyForecastData() 0000 should return 0000 as valid time`() {
-        val hourly = HourlyForecastUtils.getHourlyForecastData(mockedWeatherData.timeSeries[10])
+        val hourly = HourlyUtils.getHourlyForecastData(mockedWeatherData.timeSeries[10])
         assertEquals("00:00", hourly.validTime)
     }
 
     @Test
     fun `getHourlyForecastData() 0100 should return 0100 as valid time`() {
-        val hourly = HourlyForecastUtils.getHourlyForecastData(mockedWeatherData.timeSeries[11])
+        val hourly = HourlyUtils.getHourlyForecastData(mockedWeatherData.timeSeries[11])
         assertEquals("01:00", hourly.validTime)
     }
 

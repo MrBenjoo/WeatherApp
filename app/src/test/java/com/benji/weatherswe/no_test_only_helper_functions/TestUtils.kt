@@ -19,7 +19,7 @@ object TestUtils {
         return sb.toString()
     }
 
-    fun loadJsonFromResources(jsonFileName : String): String {
+    fun loadJsonFromResources(jsonFileName: String): String {
         val stream = this.javaClass.classLoader!!.getResourceAsStream(jsonFileName)
         return convertStreamToString(stream)
     }

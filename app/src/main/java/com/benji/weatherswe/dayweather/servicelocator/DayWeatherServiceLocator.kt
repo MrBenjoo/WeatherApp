@@ -54,7 +54,7 @@ object DayWeatherServiceLocator {
                 DayWeatherViewModel(
                     DispatcherProvider,
                     provideWeatherRepository(fragment),
-                    LocationWeatherServiceLocator.provideGeocodingRepository()
+                    LocationWeatherServiceLocator.provideGeoCodingRepository()
                 )
             })
             .get(DayWeatherViewModel::class.java)

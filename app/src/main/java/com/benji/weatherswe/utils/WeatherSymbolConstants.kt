@@ -1,52 +1,7 @@
 package com.benji.weatherswe.utils
 
-object WeatherConstants {
+object WeatherSymbolConstants {
 
-    val PARAMETER_AIR_PRESSURE = "msl"
-
-    val PARAMETER_AIR_TEMPERATURE = "t"
-
-    val PARAMETER_HORIZONTAL_VISIBILITY = "vis"
-
-    val PARAMETER_WIND_DIRECTION = "wd"
-
-    val PARAMETER_WIND_SPEED = "ws"
-
-    val PARAMETER_RELATIVE_HUMIDITY = "r"
-
-    val PARAMETER_THUNDER_PROBABILITY = "tstm"
-
-    val PARAMETER_MEAN_VALUE_OF_TOTAL_CLOUD_COVER = "tcc_mean"
-
-    val PARAMETER_MEAN_VALUE_OF_LOW_LEVEL_CLOUD_COVER = "lcc_mean"
-
-    val PARAMETER_MEAN_VALUE_OF_MEDIUM_LEVEL_CLOUD_COVER = "mcc_mean"
-
-    val PARAMETER_MEAN_VALUE_OF_HIGH_LEVEL_CLOUD_COVER = "hcc_mean"
-
-    val PARAMETER_WIND_GUST_SPEED = "gust"
-
-    val PARAMETER_MINIMUM_PRECIPITATION_INTENSITY = "pmin"
-
-    val PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY = "pmax"
-
-    val PARAMETER_PERCENT_OF_PRECIPITATION_IN_FROZEN_FORM = "spp"
-
-    val PARAMETER_PRECIPITATION_CATEGORY = "pcat"
-
-    val PARAMETER_MEAN_PRECIPITATION_INTENSITY = "pmean"
-
-    val PARAMETER_MEDIAN_PRECIPITATION_INTENSITY = "pmedian"
-
-    val PARAMETER_WEATHER_SYMBOL = "Wsymb2"
-
-
-
-
-
-    /**
-     * ----------------- WEATHER SYMBOLS -----------------
-     */
     val WEATHER_SYMBOL_CLEAR_SKY = "Klart"
 
     val WEATHER_SYMBOL_NEARLY_CLEAR_SKY = "Lätt molnighet"
@@ -100,6 +55,5 @@ object WeatherConstants {
     val WEATHER_SYMBOL_MODERATE_SNOWFALL = "Snöfall"
 
     val WEATHER_SYMBOL_HEAVY_SNOWFALL = "Ymnigt snöfall"
-
 
 }

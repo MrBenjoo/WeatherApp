@@ -42,7 +42,7 @@ internal class DayWeatherViewModelTest {
     fun `processWeatherData() With Valid Candidate And Mocked Weather Data Should Set A List Of Ten Day Forecast`() {
         viewModel.processWeatherData(candidateMalmo, mockedWeatherData, "2019-11-27")
 
-        with(viewModel.listOfTenDayForecast) {
+        with(viewModel.listOfDayForecast) {
             assertEquals("14:00", value!![0].listOfHourlyData[0].validTime)
             assertEquals("15:00", value!![0].listOfHourlyData[1].validTime)
             assertEquals("16:00", value!![0].listOfHourlyData[2].validTime)
@@ -55,7 +55,7 @@ internal class DayWeatherViewModelTest {
     fun `processWeatherData() with valid candidate and mocked weather data should set last valid time to 2300 on first day`() {
         viewModel.processWeatherData(candidateMalmo, mockedWeatherData, "2019-11-27")
 
-        with(viewModel.listOfTenDayForecast) {
+        with(viewModel.listOfDayForecast) {
             assertEquals("23:00", value!![0].listOfHourlyData[9].validTime)
             assertThrows(IndexOutOfBoundsException::class.java) { value!![0].listOfHourlyData[10].validTime }
         }
@@ -65,7 +65,7 @@ internal class DayWeatherViewModelTest {
     fun `processWeatherData() with valid candidate and mocked weather data should set first valid time to 0000 on second day`() {
         viewModel.processWeatherData(candidateMalmo, mockedWeatherData, "2019-11-27")
 
-        with(viewModel.listOfTenDayForecast) {
+        with(viewModel.listOfDayForecast) {
             assertEquals("00:00", value!![1].listOfHourlyData[0].validTime)
         }
     }
@@ -74,13 +74,13 @@ internal class DayWeatherViewModelTest {
     @Test
     fun `processWeatherData() with valid candidate and mocked weather data should set 10 hours of weather data on first day`() {
         viewModel.processWeatherData(candidateMalmo, mockedWeatherData, "2019-11-27")
-        assertEquals(10, viewModel.listOfTenDayForecast.value!![0].listOfHourlyData.size)
+        assertEquals(10, viewModel.listOfDayForecast.value!![0].listOfHourlyData.size)
     }
 
     @Test
     fun `processWeatherData() with valid candidate and mocked weather data should set 24 hours of weather data on second day`() {
         viewModel.processWeatherData(candidateMalmo, mockedWeatherData, "2019-11-27")
-        assertEquals(24, viewModel.listOfTenDayForecast.value!![1].listOfHourlyData.size)
+        assertEquals(24, viewModel.listOfDayForecast.value!![1].listOfHourlyData.size)
     }
 
 

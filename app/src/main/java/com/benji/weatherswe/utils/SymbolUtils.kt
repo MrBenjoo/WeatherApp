@@ -4,15 +4,12 @@ import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.Parameter
 import com.benji.weatherswe.R
 
-object WeatherSymbolUtils {
+object SymbolUtils {
 
     fun getWeatherSymbolHour(parameters: List<Parameter>): Int {
         var weatherSymbol = 1
-        parameters.forEach { parameter ->
-            if (parameter.name == WeatherConstants.PARAMETER_WEATHER_SYMBOL) {
-                weatherSymbol = parameter.values[0].toInt()
-            }
-        }
+        val parameter = parameters.find { it.name == ParameterConstants.PARAMETER_WEATHER_SYMBOL }
+        parameter?.let { weatherSymbol = it.values[0].toInt() }
         return weatherSymbol
     }
 
@@ -54,33 +51,33 @@ object WeatherSymbolUtils {
     }
 
     fun getWeatherSymbolDescription(weatherSymbol: Int): String = when (weatherSymbol) {
-        1 -> WeatherConstants.WEATHER_SYMBOL_CLEAR_SKY
-        2 -> WeatherConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
-        3 -> WeatherConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
-        4 -> WeatherConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
-        5 -> WeatherConstants.WEATHER_SYMBOL_CLOUDY_SKY
-        6 -> WeatherConstants.WEATHER_SYMBOL_OVERCAST
-        7 -> WeatherConstants.WEATHER_SYMBOL_FOG
-        8 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
-        9 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
-        10 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
-        11 -> WeatherConstants.WEATHER_SYMBOL_THUNDERSTORM
-        12 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
-        13 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
-        14 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
-        15 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
-        16 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
-        17 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
-        18 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_RAIN
-        19 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_RAIN
-        20 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_RAIN
-        21 -> WeatherConstants.WEATHER_SYMBOL_THUNDER
-        22 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_SLEET
-        23 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_SLEET
-        24 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_SLEET
-        25 -> WeatherConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
-        26 -> WeatherConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
-        27 -> WeatherConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
+        1 -> WeatherSymbolConstants.WEATHER_SYMBOL_CLEAR_SKY
+        2 -> WeatherSymbolConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
+        3 -> WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+        4 -> WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+        5 -> WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+        6 -> WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+        7 -> WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+        8 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+        9 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+        10 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+        11 -> WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+        12 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+        13 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+        14 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+        15 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+        16 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+        17 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+        18 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+        19 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+        20 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+        21 -> WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+        22 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+        23 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+        24 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+        25 -> WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+        26 -> WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+        27 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
         else -> "N/A"
     }
 

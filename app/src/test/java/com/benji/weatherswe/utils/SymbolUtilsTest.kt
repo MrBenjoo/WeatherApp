@@ -1,11 +1,10 @@
 package com.benji.weatherswe.utils
 
 import com.benji.domain.domainmodel.weather.Hourly
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class WeatherSymbolUtilsTest {
+internal class SymbolUtilsTest {
 
     @Test
     fun `getWeatherSymbolDay() with 1 as the highest symbol occurrence in the list should return 1 as the weather symbol`() {
@@ -16,7 +15,7 @@ internal class WeatherSymbolUtilsTest {
         hourly.add(Hourly("", emptyList(), "", 1))
         hourly.add(Hourly("", emptyList(), "", 1000))
 
-        val symbol = WeatherSymbolUtils.getWeatherSymbolDay(hourly)
+        val symbol = SymbolUtils.getWeatherSymbolDay(hourly)
 
         assertEquals(1, symbol)
     }
@@ -30,7 +29,7 @@ internal class WeatherSymbolUtilsTest {
         hourly.add(Hourly("", emptyList(), "", 2))
         hourly.add(Hourly("", emptyList(), "", 22))
 
-        val symbol = WeatherSymbolUtils.getWeatherSymbolDay(hourly)
+        val symbol = SymbolUtils.getWeatherSymbolDay(hourly)
 
         assertEquals(2, symbol)
     }
@@ -44,7 +43,7 @@ internal class WeatherSymbolUtilsTest {
         hourly.add(Hourly("", emptyList(), "", 1))
         hourly.add(Hourly("", emptyList(), "", 1))
 
-        val symbol = WeatherSymbolUtils.getWeatherSymbolDay(hourly)
+        val symbol = SymbolUtils.getWeatherSymbolDay(hourly)
 
         assertEquals(1, symbol)
     }
