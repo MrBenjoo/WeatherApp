@@ -3,6 +3,7 @@ package com.benji.weatherswe.dayweather
 import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -160,6 +161,12 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel.getForecast(sharedViewModel().candidate)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            activity?.finish()
+        }
+    }
 
     private val stateObserver = Observer<State> { state ->
         when (state) {
