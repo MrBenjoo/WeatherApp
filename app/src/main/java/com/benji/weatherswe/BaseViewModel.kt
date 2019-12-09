@@ -18,6 +18,13 @@ abstract class BaseViewModel : ViewModel() {
     val state: LiveData<State>
         get() = _state
 
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    protected fun setError(error : String) {
+        _error.value = error
+    }
 
     protected fun setInFlightState() {
         _state.value = State.InFlight

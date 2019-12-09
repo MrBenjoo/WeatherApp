@@ -3,6 +3,8 @@ package com.benji.weatherswe.dayweather
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.benji.data.ErrorHandlerImpl
+import com.benji.domain.ErrorEntity
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
 import com.benji.domain.domainmodel.weather.DayForecast
@@ -124,10 +126,21 @@ class DayWeatherViewModel(
             val data = geoCodingRepository.getSuggestions(query)
             when (data) {
                 is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
-                is ResultWrapper.Error -> TODO("implement logic for ResultWrapper.Error")
+                is ResultWrapper.Error -> {
+                    handleErrors(ErrorHandlerImpl().getError(data.error))
+                }
             }
         }
     }
+
+    private fun handleErrors(error: ErrorEntity) = when (error) {
+        is ErrorEntity.Network -> setError("Nätverksfel")
+        is ErrorEntity.NotFound -> setError("Ingen data tillgänglig för tillfället.")
+        is ErrorEntity.AccessDenied -> setError("Förbjuden åtkomst.")
+        is ErrorEntity.ServiceUnavailable -> setError("Servern är inte redo att hantera begäran")
+        is ErrorEntity.Unknown -> setError("Ett fel uppstod.")
+    }
+
 
     fun onSuggestionClicked(index: Int) = launch {
         setInFlightState()
@@ -141,12 +154,16 @@ class DayWeatherViewModel(
         setCompletedState()
     }
 
-    private fun handleGeoCodingData(data: ResultWrapper<Exception, Candidates>) = when (data) {
-        is ResultWrapper.Success -> {
-            val candidates = data.value
-            _candidate.value = candidates.returnCandidateWithHighestScore()
+    private fun handleGeoCodingData(data: ResultWrapper<Exception, Candidates>) {
+        when (data) {
+            is ResultWrapper.Success -> {
+                val candidates = data.value
+                _candidate.value = candidates.returnCandidateWithHighestScore()
+            }
+            is ResultWrapper.Error -> {
+                handleErrors(ErrorHandlerImpl().getError(data.error))
+            }
         }
-        is ResultWrapper.Error -> TODO("implement logic for ResultWrapper.Error")
     }
 
 

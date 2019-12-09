@@ -12,6 +12,7 @@ import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.MainActivity
 import com.benji.weatherswe.R
 import com.benji.weatherswe.SharedViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.Moshi
 
 fun androidx.fragment.app.Fragment.mainActivity(): MainActivity = (activity as MainActivity)
@@ -58,6 +59,15 @@ fun androidx.fragment.app.Fragment.setupSearchAutoComplete(searchView: SearchVie
             findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
     searchAutoComplete.setHintTextColor(getColor(R.color.colorPrimary))
     return searchAutoComplete
+}
+
+fun androidx.fragment.app.Fragment.showText(text: String) {
+    Snackbar.make(
+        mainActivity().findViewById(android.R.id.content),
+        text,
+        Snackbar.LENGTH_LONG
+    )
+        .show()
 }
 
 

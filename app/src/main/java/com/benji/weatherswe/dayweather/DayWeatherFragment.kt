@@ -56,6 +56,12 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         arrayAdapter.notifyDataSetChanged()
     }
 
+    private val errorObserver = Observer<String> { errorMessage ->
+        showText(errorMessage)
+    }
+
+
+
     private fun initArrayAdapter() {
         arrayAdapter = ArrayAdapter(
             mainActivity().applicationContext,
@@ -157,6 +163,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel.forecastFourthHour.observe(viewLifecycleOwner, setWeatherFourthHour)
         viewModel.forecastFifthHour.observe(viewLifecycleOwner, setWeatherFifthHour)
         viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
+        viewModel.error.observe(viewLifecycleOwner, errorObserver)
 
         viewModel.getForecast(sharedViewModel().candidate)
     }
