@@ -57,10 +57,8 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        showText(errorMessage)
+        showTopText(errorMessage)
     }
-
-
 
     private fun initArrayAdapter() {
         arrayAdapter = ArrayAdapter(

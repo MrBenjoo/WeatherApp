@@ -1,6 +1,7 @@
 package com.benji.weatherswe.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.androidadvance.topsnackbar.TSnackbar
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.MainActivity
 import com.benji.weatherswe.R
@@ -53,10 +55,9 @@ fun androidx.fragment.app.Fragment.getColor(color: Int): Int {
     return ContextCompat.getColor(this.context!!, color)
 }
 
-fun androidx.fragment.app.Fragment.setupSearchAutoComplete(searchView: SearchView) : SearchView.SearchAutoComplete {
+fun androidx.fragment.app.Fragment.setupSearchAutoComplete(searchView: SearchView): SearchView.SearchAutoComplete {
     val searchAutoComplete =
-        searchView.
-            findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
+        searchView.findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
     searchAutoComplete.setHintTextColor(getColor(R.color.colorPrimary))
     return searchAutoComplete
 }
@@ -68,6 +69,18 @@ fun androidx.fragment.app.Fragment.showText(text: String) {
         Snackbar.LENGTH_LONG
     )
         .show()
+}
+
+fun androidx.fragment.app.Fragment.showTopText(text: String) {
+    val snackbar = TSnackbar.make(
+        mainActivity().findViewById(android.R.id.content),
+        text,
+        TSnackbar.LENGTH_LONG
+    )
+        .setActionTextColor(Color.WHITE)
+
+    snackbar.view.setBackgroundColor(Color.RED)
+    snackbar.show()
 }
 
 
