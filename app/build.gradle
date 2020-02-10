@@ -96,6 +96,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'
 
+    implementation "com.google.android.gms:play-services-location:$rootProject.servicesLocationGMS"
+
 }
 
 // this enforces everything to compile in java 1.8 and avoid crashes

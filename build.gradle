@@ -31,6 +31,8 @@ buildscript {
         retrofitVersion = '2.6.1'
         topSnackBarversion ='1.1.1'
 
+        servicesLocationGMS = '17.0.0'
+
         lottieVersion = '3.1.0'
     }
 
