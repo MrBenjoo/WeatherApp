@@ -147,6 +147,14 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel = DayWeatherServiceLocator.provideWeatherViewModel(this)
     }
 
+    /**
+     * remove reference (activity --> toolbar) to no longer visible toolbar to avoid memory leak
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainActivity().setSupportActionBar(null)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)

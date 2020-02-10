@@ -32,10 +32,10 @@
         app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toEndOf="@+id/tv_row_list_day"
         app:layout_constraintTop_toTopOf="@+id/tv_row_list_day"
-        app:lottie_autoPlay="true"
+        app:lottie_autoPlay="false"
 
-        app:lottie_loop="true"
-        app:lottie_speed="1" />
+        
+         />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_row_list_temperature"

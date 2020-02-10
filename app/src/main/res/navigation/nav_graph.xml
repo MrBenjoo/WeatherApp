@@ -12,10 +12,12 @@
         <action
             android:id="@+id/action_locationWeatherFragment_to_dayWeatherFragment"
             app:destination="@id/dayWeatherFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+
+            app:enterAnim="@anim/fade_in"
+
+            app:popExitAnim="@anim/fade_out"
+
+            />
     </fragment>
     <fragment
         android:id="@+id/dayWeatherFragment"
@@ -25,10 +27,9 @@
         <action
             android:id="@+id/action_dayWeatherFragment_to_hourWeatherFragment"
             app:destination="@id/hourWeatherFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/hourWeatherFragment"
@@ -38,10 +39,9 @@
         <action
             android:id="@+id/action_hourWeatherFragment_to_currentWeatherFragment"
             app:destination="@id/currentWeatherFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/currentWeatherFragment"

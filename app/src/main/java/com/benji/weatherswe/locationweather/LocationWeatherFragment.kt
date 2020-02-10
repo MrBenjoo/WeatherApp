@@ -1,5 +1,6 @@
 package com.benji.weatherswe.locationweather
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -47,6 +48,30 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         initAutoCompleteTextView()
     }
 
+    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
+        arrayAdapter.clear()
+        arrayAdapter.addAll(suggestions)
+        arrayAdapter.notifyDataSetChanged()
+    }
+
+    /**
+     * set adapter for autoCompleteTextView to null in order
+     * to remove reference to context and avoid memory leak
+     * https://medium.com/@yfujiki/tracing-simple-memory-leak-around-recyclerview-using-leakcanary-927460532d53
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        auto_complete_tv_location_weather_search.setAdapter(null)
+    }
+
+    private fun initArrayAdapter() {
+        arrayAdapter = ArrayAdapter(
+            mainActivity().applicationContext,
+            android.R.layout.simple_dropdown_item_1line,
+            emptyList<String>()
+        )
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         when (val candidate = prefsLoadLatestCandidate()) {
@@ -67,19 +92,6 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
     }
 
-    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
-        arrayAdapter.clear()
-        arrayAdapter.addAll(suggestions)
-        arrayAdapter.notifyDataSetChanged()
-    }
-
-    private fun initArrayAdapter() {
-        arrayAdapter = ArrayAdapter(
-            mainActivity().applicationContext,
-            android.R.layout.simple_dropdown_item_1line,
-            emptyList<String>()
-        )
-    }
 
     private val stateObserver = Observer<State> { state ->
         when (state) {
@@ -101,6 +113,7 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     ): View? {
         return inflater.inflate(R.layout.location_weather_fragment, container, false)
     }
+
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
