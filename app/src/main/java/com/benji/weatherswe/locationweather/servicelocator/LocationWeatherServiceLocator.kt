@@ -8,22 +8,24 @@ import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
 import com.benji.weatherswe.locationweather.LocationWeatherViewModel
+import com.benji.weatherswe.locationweather.ReveresedGeocoding
 import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.locationweather.LocationHandler
+import com.benji.weatherswe.locationweather.PermissionManager
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object LocationWeatherServiceLocator {
-    private var geoCodingRepository: GeocodingRepository? = null
 
-
-    fun provideGeoCodingRepository(): GeocodingRepository {
-        var geoCodingRepositoryTemp = geoCodingRepository
-        if (geoCodingRepository == null) {
-            geoCodingRepository = GeocodingRepository(provideGeoCodingAPI())
-            geoCodingRepositoryTemp = geoCodingRepository
-        }
-        return geoCodingRepositoryTemp!!
+    val geoCodingRepository: GeocodingRepository by lazy {
+        GeocodingRepository(provideGeoCodingAPI())
     }
+
+    fun provideViewModel(fragment: Fragment): LocationWeatherViewModel =
+        ViewModelProviders.of(
+            fragment,
+            BaseViewModelFactory { initLocationWeatherViewModel(fragment) }
+        ).get(LocationWeatherViewModel::class.java)
 
     private fun provideGeoCodingAPI(): GeocodingRemoteDataSource =
         GeocodingRemoteDataSource(provideRetrofit().create(GeocodingAPI::class.java))
@@ -34,17 +36,15 @@ object LocationWeatherServiceLocator {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-    fun provideSearchCityViewModel(fragment: Fragment): LocationWeatherViewModel {
-        return ViewModelProviders.of(
-            fragment,
-            BaseViewModelFactory {
-                LocationWeatherViewModel(
-                    DispatcherProvider,
-                    provideGeoCodingRepository()
-                )
-            })
-            .get(LocationWeatherViewModel::class.java)
-    }
-
+    private fun initLocationWeatherViewModel(fragment: Fragment): LocationWeatherViewModel =
+        LocationWeatherViewModel(
+            DispatcherProvider,
+            geoCodingRepository,
+            LocationHandler(fragment),
+            PermissionManager(fragment),
+            ReveresedGeocoding(fragment.context!!)
+        )
 
 }
+
+

@@ -1,6 +1,5 @@
 package com.benji.weatherswe.locationweather
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,10 +9,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.R
-import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideSearchCityViewModel
+import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.*
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
@@ -43,9 +43,14 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = provideSearchCityViewModel(this)
+        viewModel = provideViewModel(this)
         initArrayAdapter()
         initAutoCompleteTextView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.tryToGetCityWithGPS()
     }
 
     private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
@@ -92,6 +97,13 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        viewModel.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 
     private val stateObserver = Observer<State> { state ->
         when (state) {

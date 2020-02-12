@@ -1,4 +1,4 @@
-package com.benji.domain
+package com.benji.domain.domainmodel
 
 
 sealed class ErrorEntity {

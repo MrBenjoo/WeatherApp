@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benji.data.ErrorHandlerImpl
-import com.benji.domain.ErrorEntity
+import com.benji.domain.domainmodel.ErrorEntity
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
 import com.benji.domain.domainmodel.weather.DayForecast

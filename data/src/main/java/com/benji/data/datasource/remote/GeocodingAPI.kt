@@ -10,7 +10,7 @@ interface GeocodingAPI {
     @GET("suggest?")
     suspend fun getSuggestions(@Query("text") text: String,
                                @Query("countryCode") countryCode : String = "SE",
-                               @Query("category") category : String = "Populated Place",
+                               @Query("category") category : String = "City",
                                @Query("f") f : String = "pjson"): Suggestions
 
     @GET("findAddressCandidates?")

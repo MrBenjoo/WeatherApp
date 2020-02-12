@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.androidadvance.topsnackbar.TSnackbar
+import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.MainActivity
 import com.benji.weatherswe.R

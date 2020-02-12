@@ -1,6 +1,6 @@
 package com.benji.data
 
-import com.benji.domain.ErrorEntity
+import com.benji.domain.domainmodel.ErrorEntity
 import com.benji.domain.ErrorHandler
 import retrofit2.HttpException
 import java.io.IOException

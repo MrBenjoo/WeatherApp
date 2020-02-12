@@ -17,66 +17,60 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 
 object DayWeatherServiceLocator {
-    private var weatherRepository: WeatherRepository? = null
+    private lateinit var cacheDir: File
 
+    fun provideViewModel(fragment: Fragment): DayWeatherViewModel {
+        this.cacheDir = fragment.context!!.cacheDir
 
-    private fun provideWeatherRepository(fragment: Fragment): WeatherRepository {
-        var weatherRepositoryTemp =
-            weatherRepository
-        if (weatherRepository == null) {
-            weatherRepository = WeatherRepository(
-                provideWeatherAPI(fragment.context!!.cacheDir)
-            )
-            weatherRepositoryTemp =
-                weatherRepository
-        }
-        return weatherRepositoryTemp!!
+        return ViewModelProviders.of(
+            fragment,
+            BaseViewModelFactory { initDayWeatherViewModel() }
+        ).get(DayWeatherViewModel::class.java)
     }
 
-    private fun provideWeatherAPI(cache: File): WeatherRemoteDataSource =
-        WeatherRemoteDataSource(
-            provideRetrofit(cache).create(
-                WeatherAPI::class.java
-            )
+    private fun initDayWeatherViewModel(): DayWeatherViewModel =
+        DayWeatherViewModel(
+            DispatcherProvider,
+            weatherRepository,
+            LocationWeatherServiceLocator.geoCodingRepository
         )
 
-    private fun provideRetrofit(cache: File): Retrofit =
+    private val weatherRepository: WeatherRepository by lazy {
+        WeatherRepository(provideWeatherAPI())
+    }
+
+    private fun provideWeatherAPI(): WeatherRemoteDataSource =
+        WeatherRemoteDataSource(
+            provideRetrofit()
+                .create(WeatherAPI::class.java)
+        )
+
+    private fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(UrlManager.API_SMHI_FORECAST_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
-            .client(provideOkHttpClient(cache))
+            .client(provideOkHttpClient())
             .build()
 
-    fun provideWeatherViewModel(fragment: Fragment): DayWeatherViewModel {
-        return ViewModelProviders.of(
-            fragment,
-            BaseViewModelFactory {
-                DayWeatherViewModel(
-                    DispatcherProvider,
-                    provideWeatherRepository(fragment),
-                    LocationWeatherServiceLocator.provideGeoCodingRepository()
-                )
-            })
-            .get(DayWeatherViewModel::class.java)
-    }
+    private fun provideOkHttpClient(): OkHttpClient =
+        OkHttpClient.Builder()
+            .cache(provideCache())
+            .build()
 
-    private fun provideCache(cachePath: File): Cache? {
+    private fun provideCache(): Cache? {
         var cache: Cache? = null
 
         try {
             val cacheSize = 10 * 1024 * 1024 // 10 MB
-            cache = Cache(cachePath, cacheSize.toLong())
+            cache = Cache(cacheDir, cacheSize.toLong())
         } catch (exception: Exception) {
 
         }
         return cache
     }
 
-    private fun provideOkHttpClient(cache: File): OkHttpClient {
-        return OkHttpClient.Builder()
-            .cache(provideCache(cache))
-            .build()
-    }
-
 
 }
+
+
+

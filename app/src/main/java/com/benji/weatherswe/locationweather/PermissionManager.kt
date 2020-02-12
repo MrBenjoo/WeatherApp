@@ -1,15 +1,22 @@
-package com.benji.weatherswe.utils
+package com.benji.weatherswe.locationweather
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.benji.domain.location.IPermissionManager
+import com.benji.weatherswe.utils.showText
 
-class PermissionManager(private val attachedFragment: Fragment) {
+class PermissionManager(private val attachedFragment: Fragment) :
+    IPermissionManager {
     private val PERMISSION_CODE_LOCATION = 99
 
-    fun checkPermissions(): Boolean {
+    init {
+        requestPermissions()
+    }
+
+    override fun checkPermissions(): Boolean {
         if (ContextCompat.checkSelfPermission(
                 attachedFragment.context!!,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -20,7 +27,7 @@ class PermissionManager(private val attachedFragment: Fragment) {
         return false
     }
 
-    fun onRequestPermissionsResult(
+    override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
@@ -39,7 +46,7 @@ class PermissionManager(private val attachedFragment: Fragment) {
         }
     }
 
-    fun requestPermissions() {
+    private fun requestPermissions() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             val permission = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
             attachedFragment.requestPermissions(permission, PERMISSION_CODE_LOCATION)

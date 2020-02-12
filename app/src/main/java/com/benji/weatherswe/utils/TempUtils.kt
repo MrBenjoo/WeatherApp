@@ -1,5 +1,6 @@
 package com.benji.weatherswe.utils
 
+import com.benji.domain.constants.ParameterConstants
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.Parameter
 import kotlin.math.roundToInt

@@ -28,7 +28,7 @@ buildscript {
         supportLibraryVersion = '1.1.0'
         supportCompatVersion = '1.0.2'
         roomVersion = '2.2.0-rc01'
-        retrofitVersion = '2.6.1'
+        retrofitVersion = '2.7.1'
         topSnackBarversion ='1.1.1'
 
         servicesLocationGMS = '17.0.0'

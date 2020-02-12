@@ -9,9 +9,9 @@ import kotlinx.coroutines.withContext
 class WeatherRemoteDataSource(private val weatherAPI: WeatherAPI) {
 
     suspend fun getWeatherForecast(
-        latLng : Location
+        location : Location
     ): Weather = withContext(Dispatchers.IO) {
-            weatherAPI.getWeatherForecast(latLng.x, latLng.y)
+            weatherAPI.getWeatherForecast(location.y, location.x)
         }
 
 

@@ -144,7 +144,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         tv_weather_day_time.text = DateUtils().getDayAndClock()
         tv_day_weather_city.text = sharedViewModel().candidate.address
         hideKeyBoard(view)
-        viewModel = DayWeatherServiceLocator.provideWeatherViewModel(this)
+        viewModel = DayWeatherServiceLocator.provideViewModel(this)
     }
 
     /**

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.ParameterConstants
+import com.benji.domain.constants.ParameterConstants
 import com.benji.weatherswe.utils.SymbolUtils
 import com.benji.weatherswe.utils.sharedViewModel
 import kotlinx.android.synthetic.main.fragment_current_weather.*

@@ -1,12 +1,16 @@
 package com.benji.weatherswe.locationweather
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.benji.domain.location.ILocationHandler
+import com.benji.domain.location.IPermissionManager
+import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.BaseViewModel
-import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -14,7 +18,10 @@ import kotlin.coroutines.CoroutineContext
 
 class LocationWeatherViewModel(
     private val dispatcher: DispatcherProvider,
-    private val geocodingRepository: IGeocodingRepository
+    private val geocodingRepository: IGeocodingRepository,
+    private val locationHandler: ILocationHandler,
+    private val permissionManager: IPermissionManager,
+    private val reveresedGeocoding: IReversedGeocoding
 ) : BaseViewModel(), CoroutineScope {
 
     // Used to retrieve the name of the city when the user clicks on a suggestion from the list
@@ -41,7 +48,7 @@ class LocationWeatherViewModel(
         val data = geocodingRepository.getSuggestions(textSearch)
         when (data) {
             is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
-            is ResultWrapper.Error -> TODO("implement logic for ResultWrapper.Error")
+            is ResultWrapper.Error -> Log.d("LocationVM", "error: " + data.error.message)
         }
     }
 
@@ -86,6 +93,24 @@ class LocationWeatherViewModel(
     override fun onCleared() {
         super.onCleared()
         jobTracker.cancel()
+    }
+
+    fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    fun tryToGetCityWithGPS() = launch {
+        if (permissionManager.checkPermissions()) {
+            val deviceLocation = locationHandler.getDeviceLocation()
+            if (deviceLocation != null) {
+                val city = reveresedGeocoding.getFromLocation(deviceLocation)
+                _candidate.value = Candidate(city, deviceLocation, 100)
+            }
+        }
     }
 
 }

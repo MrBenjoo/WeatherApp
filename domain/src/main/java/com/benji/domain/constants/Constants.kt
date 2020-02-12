@@ -1,4 +1,4 @@
-package com.benji.weatherswe.utils
+package com.benji.domain.constants
 
 object Constants {
 
