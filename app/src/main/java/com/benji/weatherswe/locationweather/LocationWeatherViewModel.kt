@@ -3,14 +3,15 @@ package com.benji.weatherswe.locationweather
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.benji.domain.location.ILocationHandler
-import com.benji.domain.location.IPermissionManager
-import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
+import com.benji.domain.location.ILocationHandler
+import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.BaseViewModel
-import com.benji.weatherswe.utils.*
+import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.utils.GpsStatus
+import com.google.android.gms.location.LocationSettingsResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -20,7 +21,6 @@ class LocationWeatherViewModel(
     private val dispatcher: DispatcherProvider,
     private val geocodingRepository: IGeocodingRepository,
     private val locationHandler: ILocationHandler,
-    private val permissionManager: IPermissionManager,
     private val reveresedGeocoding: IReversedGeocoding
 ) : BaseViewModel(), CoroutineScope {
 
@@ -95,23 +95,30 @@ class LocationWeatherViewModel(
         jobTracker.cancel()
     }
 
-    fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
 
-    fun tryToGetCityWithGPS() = launch {
-        if (permissionManager.checkPermissions()) {
-            val deviceLocation = locationHandler.getDeviceLocation()
-            if (deviceLocation != null) {
-                val city = reveresedGeocoding.getFromLocation(deviceLocation)
-                _candidate.value = Candidate(city, deviceLocation, 100)
-            }
+    fun autonomousGPSFind(response : LocationSettingsResponse) = launch {
+        if(response.locationSettingsStates.isNetworkLocationUsable) {
+            autonomousSearch()
+        } else {
+            Log.d("LocationWVM", "network not usable")
         }
     }
+
+    fun autonomousSearch()= launch  {
+        val deviceLocation = locationHandler.getDeviceLocation()
+        if (deviceLocation != null) {
+            val city = reveresedGeocoding.getFromLocation(deviceLocation)
+            _candidate.value = Candidate(city, deviceLocation, 100)
+        }
+    }
+
+    fun onGpsStatusChange(gpsStatus: GpsStatus) {
+        when(gpsStatus) {
+            is GpsStatus.Enabled -> autonomousSearch()
+            is GpsStatus.Disabled -> Log.d("LocationWVM", "GpsStatus.Disabled")
+        }
+    }
+
 
 }
 

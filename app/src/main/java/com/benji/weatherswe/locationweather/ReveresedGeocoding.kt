@@ -3,8 +3,8 @@ package com.benji.weatherswe.locationweather
 import android.content.Context
 import android.location.Geocoder
 import android.util.Log
-import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.domainmodel.geocoding.Location
+import com.benji.domain.location.IReversedGeocoding
 
 class ReveresedGeocoding(context: Context) : IReversedGeocoding {
 

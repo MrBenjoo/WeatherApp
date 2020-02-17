@@ -1,14 +1,13 @@
 package com.benji.weatherswe.locationweather
 
 
-import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
+import com.benji.domain.location.ILocationHandler
+import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.InstantExecutorExtension
 import com.benji.weatherswe.utils.DispatcherProvider
-import com.benji.domain.location.ILocationHandler
-import com.benji.domain.location.IPermissionManager
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -24,7 +23,6 @@ internal class LocationWeatherViewModelTest {
     private val dispatcher: DispatcherProvider = mockk()
     private val geocodingRepository: IGeocodingRepository = mockk()
     private val locationHandler: ILocationHandler = mockk()
-    private val permissionManager: IPermissionManager = mockk()
     private val reverseGeocoding: IReversedGeocoding = mockk()
 
     private val locationWeatherViewModel =
@@ -32,7 +30,6 @@ internal class LocationWeatherViewModelTest {
             dispatcher,
             geocodingRepository,
             locationHandler,
-            permissionManager,
             reverseGeocoding
         )
 

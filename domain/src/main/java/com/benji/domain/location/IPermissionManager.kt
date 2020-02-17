@@ -2,12 +2,10 @@ package com.benji.domain.location
 
 interface IPermissionManager {
 
-    fun checkPermissions(): Boolean
+    fun requestPermission()
 
-    fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    )
+    fun checkGrantResults(grantResults: IntArray): Boolean
+
+    fun permissionGranted() : Boolean
 
 }

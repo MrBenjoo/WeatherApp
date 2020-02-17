@@ -7,11 +7,10 @@ import com.benji.data.datasource.remote.GeocodingAPI
 import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
+import com.benji.weatherswe.locationweather.LocationHandler
 import com.benji.weatherswe.locationweather.LocationWeatherViewModel
 import com.benji.weatherswe.locationweather.ReveresedGeocoding
 import com.benji.weatherswe.utils.DispatcherProvider
-import com.benji.weatherswe.locationweather.LocationHandler
-import com.benji.weatherswe.locationweather.PermissionManager
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -41,7 +40,6 @@ object LocationWeatherServiceLocator {
             DispatcherProvider,
             geoCodingRepository,
             LocationHandler(fragment),
-            PermissionManager(fragment),
             ReveresedGeocoding(fragment.context!!)
         )
 

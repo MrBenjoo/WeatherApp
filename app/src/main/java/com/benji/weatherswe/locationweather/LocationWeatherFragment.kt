@@ -15,6 +15,7 @@ import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.*
+import com.google.android.gms.location.LocationSettingsResponse
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
@@ -48,25 +49,11 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         initAutoCompleteTextView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.tryToGetCityWithGPS()
-    }
 
     private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
         arrayAdapter.clear()
         arrayAdapter.addAll(suggestions)
         arrayAdapter.notifyDataSetChanged()
-    }
-
-    /**
-     * set adapter for autoCompleteTextView to null in order
-     * to remove reference to context and avoid memory leak
-     * https://medium.com/@yfujiki/tracing-simple-memory-leak-around-recyclerview-using-leakcanary-927460532d53
-     */
-    override fun onDestroyView() {
-        super.onDestroyView()
-        auto_complete_tv_location_weather_search.setAdapter(null)
     }
 
     private fun initArrayAdapter() {
@@ -95,14 +82,17 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
+
+        sharedViewModel().locationSettingsResponse.observe(viewLifecycleOwner, locationSettingsResponseObserver)
+        sharedViewModel().gpsStatus.observe(viewLifecycleOwner, gpsStatusObserver)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        viewModel.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    private val gpsStatusObserver = Observer<GpsStatus> { gpsStatus ->
+        viewModel.onGpsStatusChange(gpsStatus)
+    }
+
+    private val locationSettingsResponseObserver = Observer<LocationSettingsResponse> { response ->
+        viewModel.autonomousGPSFind(response)
     }
 
     private val stateObserver = Observer<State> { state ->
@@ -130,5 +120,15 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    /**
+     * set adapter for autoCompleteTextView to null in order
+     * to remove reference to context and avoid memory leak
+     * https://medium.com/@yfujiki/tracing-simple-memory-leak-around-recyclerview-using-leakcanary-927460532d53
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        auto_complete_tv_location_weather_search.setAdapter(null)
+    }
 
 }

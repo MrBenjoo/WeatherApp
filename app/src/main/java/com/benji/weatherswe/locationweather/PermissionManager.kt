@@ -2,55 +2,59 @@ package com.benji.weatherswe.locationweather
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
+import android.util.Log
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.benji.domain.location.IPermissionManager
-import com.benji.weatherswe.utils.showText
+import com.benji.weatherswe.MainActivity
 
-class PermissionManager(private val attachedFragment: Fragment) :
-    IPermissionManager {
-    private val PERMISSION_CODE_LOCATION = 99
+class PermissionManager(private val activity: MainActivity): IPermissionManager {
 
-    init {
-        requestPermissions()
+    override fun checkGrantResults(grantResults: IntArray): Boolean =
+        grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+
+    companion object {
+        const val PERMISSION_CODE_LOCATION = 99
     }
 
-    override fun checkPermissions(): Boolean {
-        if (ContextCompat.checkSelfPermission(
-                attachedFragment.context!!,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            PERMISSION_CODE_LOCATION -> {
-                for (index in grantResults.indices) {
-                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
-                        if (attachedFragment.shouldShowRequestPermissionRationale(permissions[index])) {
-                            attachedFragment.showText("GPS data kommer inte användas.")
-                        }
-                        return
+    override fun requestPermission() {
+        when (permissionGranted().not()) {
+            true -> {
+                when (showRequestPermissionRationale()) {
+                    true -> {
+                        // Show an explanation to the user *asynchronously* -- don't block
+                        // this thread waiting for the user's response! After the user
+                        // sees the explanation, try again to request the permission.
+                    }
+                    false -> {
+                        // No explanation needed, we can request the permission.
+                        requestPermissions()
                     }
                 }
             }
+            false -> Log.d("PermissionManager", "Permission has already been granted")
         }
     }
 
+    override fun permissionGranted(): Boolean =
+        (ContextCompat.checkSelfPermission(
+            activity.applicationContext,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED)
+
+    private fun showRequestPermissionRationale(): Boolean =
+        ActivityCompat.shouldShowRequestPermissionRationale(
+            activity,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+
     private fun requestPermissions() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            val permission = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-            attachedFragment.requestPermissions(permission, PERMISSION_CODE_LOCATION)
-        }
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_CODE_LOCATION
+        )
     }
 
 

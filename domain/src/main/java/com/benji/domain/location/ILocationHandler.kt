@@ -6,4 +6,5 @@ interface ILocationHandler {
 
     suspend fun getDeviceLocation(): Location?
 
+
 }
