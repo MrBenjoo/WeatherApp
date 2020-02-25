@@ -14,6 +14,7 @@ import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
 import com.benji.weatherswe.utils.*
+import com.benji.weatherswe.utils.extensions.*
 import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 
@@ -30,7 +31,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private val candidateObserver = Observer<Candidate> { candidate ->
-        sharedViewModel().candidate = candidate
+        activitySharedViewModel().candidate = candidate
         viewModel.getForecast(candidate)
     }
 
@@ -69,14 +70,14 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
-        val candidateJson = sharedViewModel().candidate.toJson()
+        val candidateJson = activitySharedViewModel().candidate.toJson()
         prefsStoreCandidate(candidateJson)
 
         val weatherSymbol = weekdayForecast[0].weatherSymbol
         val weatherSymbolDescription = SymbolUtils.getWeatherSymbolDescription(weatherSymbol)
         val weatherSymbolLottie = SymbolUtils.getWeatherSymbolLottie(weatherSymbol)
 
-        tv_day_weather_city.text = sharedViewModel().candidate.address
+        tv_day_weather_city.text = activitySharedViewModel().candidate.address
         tv_day_weather_description.text = weatherSymbolDescription
         img_day_weather_symbol.setAnimation(weatherSymbolLottie)
         img_day_weather_symbol.playAnimation()
@@ -122,8 +123,8 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private val listClickObserver = Observer<RowData> { rowData ->
-        sharedViewModel().currentDayForecast = rowData.dayForecast
-        sharedViewModel().todayDate = DateUtils().getTodayDate()
+        activitySharedViewModel().currentDayForecast = rowData.dayForecast
+        activitySharedViewModel().todayDate = DateUtils().getTodayDate()
         navigate(R.id.action_dayWeatherFragment_to_hourWeatherFragment)
     }
 
@@ -142,7 +143,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         setupToolbar(toolbar_day_weather)
         dayWeatherAdapter = DayWeatherAdapter(emptyList())
         tv_weather_day_time.text = DateUtils().getDayAndClock()
-        tv_day_weather_city.text = sharedViewModel().candidate.address
+        tv_day_weather_city.text = activitySharedViewModel().candidate.address
         hideKeyBoard(view)
         viewModel = DayWeatherServiceLocator.provideViewModel(this)
     }
@@ -171,7 +172,7 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
         viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
 
-        viewModel.getForecast(sharedViewModel().candidate)
+        viewModel.getForecast(activitySharedViewModel().candidate)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

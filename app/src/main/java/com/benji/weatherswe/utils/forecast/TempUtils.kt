@@ -1,4 +1,4 @@
-package com.benji.weatherswe.utils
+package com.benji.weatherswe.utils.forecast
 
 import com.benji.domain.constants.ParameterConstants
 import com.benji.domain.domainmodel.weather.Hourly

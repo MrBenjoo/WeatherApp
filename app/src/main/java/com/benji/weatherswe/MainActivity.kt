@@ -10,6 +10,8 @@ import com.benji.weatherswe.locationweather.LocationHandler
 import com.benji.weatherswe.locationweather.PermissionManager
 import com.benji.weatherswe.locationweather.PermissionManager.Companion.PERMISSION_CODE_LOCATION
 import com.benji.weatherswe.utils.*
+import com.benji.weatherswe.utils.extensions.sharedViewModel
+import com.benji.weatherswe.utils.extensions.showActivityText
 
 class MainActivity : AppCompatActivity() {
     private lateinit var permissionManager: PermissionManager
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             PERMISSION_CODE_LOCATION -> {
                 when (permissionManager.approvedGrantResults(grantResults)) {
                     true -> locationHandler.checkGpsStatus()
-                    false -> showText(getString(R.string.activity_permission_denied))
+                    false -> showActivityText(getString(R.string.activity_permission_denied))
                 }
             }
         }
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleResultCode(resultCode: Int) {
         when (resultCode) {
             Activity.RESULT_OK -> locationHandler.getDeviceLocation()
-            Activity.RESULT_CANCELED -> showText(getString(R.string.activity_location_denied))
+            Activity.RESULT_CANCELED -> showActivityText(getString(R.string.activity_location_denied))
         }
     }
 

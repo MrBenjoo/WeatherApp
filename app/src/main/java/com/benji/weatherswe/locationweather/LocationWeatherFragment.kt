@@ -15,10 +15,10 @@ import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
-import com.benji.weatherswe.utils.mainActivity
-import com.benji.weatherswe.utils.navigate
-import com.benji.weatherswe.utils.prefsLoadLatestCandidate
-import com.benji.weatherswe.utils.sharedViewModel
+import com.benji.weatherswe.utils.extensions.mainActivity
+import com.benji.weatherswe.utils.extensions.navigate
+import com.benji.weatherswe.utils.extensions.prefsLoadLatestCandidate
+import com.benji.weatherswe.utils.extensions.activitySharedViewModel
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
@@ -34,7 +34,7 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     }
 
     private val candidateObserver = Observer<Candidate> { candidate ->
-        sharedViewModel().candidate = candidate
+        activitySharedViewModel().candidate = candidate
         navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
     }
 
@@ -77,7 +77,7 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
 
     private fun loadLatestSearchedCity(candidate: String) {
         val moshi = Moshi.Builder().build()
-        sharedViewModel().candidate = moshi.adapter(Candidate::class.java).fromJson(candidate)!!
+        activitySharedViewModel().candidate = moshi.adapter(Candidate::class.java).fromJson(candidate)!!
         navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
     }
 
@@ -86,7 +86,7 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
 
-        sharedViewModel().lastLocationReceived.observe(viewLifecycleOwner, locationObserver)
+        activitySharedViewModel().lastLocationReceived.observe(viewLifecycleOwner, locationObserver)
     }
 
     private val locationObserver = Observer<Location> { location ->

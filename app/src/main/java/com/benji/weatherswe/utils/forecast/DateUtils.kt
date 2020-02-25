@@ -1,4 +1,4 @@
-package com.benji.weatherswe.utils
+package com.benji.weatherswe.utils.forecast
 
 import java.text.SimpleDateFormat
 import java.util.*

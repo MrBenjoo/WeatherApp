@@ -10,16 +10,16 @@ import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
 import com.benji.weatherswe.utils.SymbolUtils
-import com.benji.weatherswe.utils.navigate
-import com.benji.weatherswe.utils.sharedViewModel
+import com.benji.weatherswe.utils.extensions.navigate
+import com.benji.weatherswe.utils.extensions.activitySharedViewModel
 import kotlinx.android.synthetic.main.fragment_hour_weather.*
 
 
 class HourWeatherFragment : Fragment() {
 
     private val listClickObserver = Observer<Hourly> { rowData ->
-        sharedViewModel().hourly = rowData
-        sharedViewModel().hourlyMap = rowData.parameters.associateBy { it.name }
+        activitySharedViewModel().hourly = rowData
+        activitySharedViewModel().hourlyMap = rowData.parameters.associateBy { it.name }
         navigate(R.id.action_hourWeatherFragment_to_currentWeatherFragment)
     }
 
@@ -36,7 +36,7 @@ class HourWeatherFragment : Fragment() {
     }
 
     private fun populateRecyclerView() {
-        val forecast = sharedViewModel().currentDayForecast.listOfHourlyData
+        val forecast = activitySharedViewModel().currentDayForecast.listOfHourlyData
         recyclerview_current_day.setHasFixedSize(true)
         val adapter = HourWeatherAdapter(forecast)
         adapter.rowData.observe(this, listClickObserver)
@@ -45,11 +45,11 @@ class HourWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tv_hour_weather_day.text = sharedViewModel().currentDayForecast.day
-        tv_hour_weather_date.text = sharedViewModel().currentDayForecast.date
-        tv_hour_weather_city.text = sharedViewModel().candidate.address
-        tv_hour_weather_temp.text = sharedViewModel().currentDayForecast.temperature + "\u00B0"
+        tv_hour_weather_day.text = activitySharedViewModel().currentDayForecast.day
+        tv_hour_weather_date.text = activitySharedViewModel().currentDayForecast.date
+        tv_hour_weather_city.text = activitySharedViewModel().candidate.address
+        tv_hour_weather_temp.text = activitySharedViewModel().currentDayForecast.temperature + "\u00B0"
         tv_hour_weather_description.text =
-            SymbolUtils.getWeatherSymbolDescription(sharedViewModel().currentDayForecast.weatherSymbol)
+            SymbolUtils.getWeatherSymbolDescription(activitySharedViewModel().currentDayForecast.weatherSymbol)
     }
 }
