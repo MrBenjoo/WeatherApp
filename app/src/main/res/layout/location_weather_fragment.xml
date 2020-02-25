@@ -57,6 +57,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_location_connection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B00020"
+            android:textColor="#FFFF"
+            android:visibility="gone"
+            android:text="@string/connection_unsuccess"
+            android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

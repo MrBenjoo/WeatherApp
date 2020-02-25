@@ -15,10 +15,11 @@ import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
-import com.benji.weatherswe.utils.extensions.mainActivity
-import com.benji.weatherswe.utils.extensions.navigate
-import com.benji.weatherswe.utils.extensions.prefsLoadLatestCandidate
-import com.benji.weatherswe.utils.extensions.activitySharedViewModel
+import com.benji.weatherswe.utils.extensions.*
+import com.benji.weatherswe.utils.network.Event
+import com.benji.weatherswe.utils.network.NetworkEvents
+import com.benji.weatherswe.utils.network.NetworkStateHolder
+import com.benji.weatherswe.utils.network.NetworkStateImp
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
@@ -87,11 +88,25 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
 
         activitySharedViewModel().lastLocationReceived.observe(viewLifecycleOwner, locationObserver)
+
+        NetworkEvents.observe(viewLifecycleOwner, networkEventObserver)
+    }
+
+    private val networkEventObserver = Observer<Event> { event ->
+        when(event) {
+            is Event.ConnectivityLost -> showView(tv_location_connection)
+            is Event.ConnectivityAvailable -> {
+                hideView(tv_location_connection)
+                showText(getString(R.string.connection_success))
+            }
+        }
     }
 
     private val locationObserver = Observer<Location> { location ->
         viewModel.onLocationReceived(location)
     }
+
+
 
 
     private val stateObserver = Observer<State> { state ->

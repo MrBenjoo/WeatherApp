@@ -64,6 +64,14 @@ fun Fragment.setupSearchAutoComplete(searchView: SearchView): SearchView.SearchA
     return searchAutoComplete
 }
 
+fun Fragment.hideView(view: View) {
+    view.visibility = View.INVISIBLE
+}
+
+fun Fragment.showView(view: View) {
+    view.visibility = View.VISIBLE
+}
+
 fun Fragment.showText(text: String) {
     Snackbar.make(
         mainActivity().findViewById(android.R.id.content),

@@ -93,8 +93,10 @@ class LocationWeatherViewModel(
 
     fun onLocationReceived(location: Location?) {
         location?.let {
-            val city = reveresedGeocoding.getFromLocation(location)
-            _candidate.value = Candidate(city, location, 100)
+            when (val city = reveresedGeocoding.getFromLocation(location)) {
+                is ResultWrapper.Success -> _candidate.value = Candidate(city.value, location, 100)
+                is ResultWrapper.Error -> Log.d("LocWVM", "onLocationReceived error")
+            }
         }
     }
 

@@ -3,8 +3,10 @@ package com.benji.weatherswe.locationweather
 import android.content.Context
 import android.location.Geocoder
 import android.util.Log
+import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.location.IReversedGeocoding
+import java.io.IOException
 
 class ReveresedGeocoding(context: Context) : IReversedGeocoding {
 
@@ -13,11 +15,16 @@ class ReveresedGeocoding(context: Context) : IReversedGeocoding {
     private var geocoder: Geocoder = Geocoder(context)
     private val MAX_RESULTS = 1
 
-    override fun getFromLocation(location: Location): String {
-        val listOfAddress = geocoder.getFromLocation(location.y, location.x, MAX_RESULTS)
-        val address = listOfAddress.first().getAddressLine(0)
-        Log.d(TAG, "getFromLocation --> address:$address")
-        return getCityFromAddressLine(address)
+    override fun getFromLocation(location: Location): ResultWrapper<Exception, String> {
+        return try {
+            ResultWrapper.build {
+                val listOfAddress = geocoder.getFromLocation(location.y, location.x, MAX_RESULTS)
+                val address = listOfAddress.first().getAddressLine(0)
+                getCityFromAddressLine(address)
+            }
+        } catch (exception: IOException) {
+            ResultWrapper.build { throw exception }
+        }
     }
 
     /**
@@ -28,7 +35,6 @@ class ReveresedGeocoding(context: Context) : IReversedGeocoding {
         val stringBuilder = StringBuilder()
         val listOfText = address.split(",")
         listOfText[1].forEach { char -> if (Character.isLetter(char)) stringBuilder.append(char) }
-        Log.d(TAG, "getCityFromAddressLine --> city:" + stringBuilder.toString().trim())
         return stringBuilder.toString().trim()
     }
 

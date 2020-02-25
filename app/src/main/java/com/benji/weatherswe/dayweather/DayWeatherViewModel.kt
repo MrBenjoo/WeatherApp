@@ -15,8 +15,8 @@ import com.benji.domain.repository.IGeocodingRepository
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.hourweather.HourlyUtils
-import com.benji.weatherswe.utils.DateUtils
 import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.utils.forecast.DateUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

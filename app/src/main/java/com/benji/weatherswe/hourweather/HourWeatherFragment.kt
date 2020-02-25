@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.SymbolUtils
 import com.benji.weatherswe.utils.extensions.navigate
 import com.benji.weatherswe.utils.extensions.activitySharedViewModel
+import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_hour_weather.*
 
 

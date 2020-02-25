@@ -10,4 +10,7 @@
 
     <string name="activity_permission_denied">Positioneringsdata kommer inte att användas.</string>
     <string name="activity_location_denied">Slå på positionering för att hitta din stad automatiskt.</string>
+
+    <string name="connection_unsuccess">Ingen anslutning</string>
+    <string name="connection_success">Anslutning återupprättad</string>
 </resources>
