@@ -4,9 +4,9 @@ import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.domain.domainmodel.weather.TimeSeries
-import com.benji.weatherswe.utils.DateUtils
-import com.benji.weatherswe.utils.SymbolUtils
-import com.benji.weatherswe.utils.TempUtils
+import com.benji.weatherswe.utils.forecast.DateUtils
+import com.benji.weatherswe.utils.forecast.SymbolUtils
+import com.benji.weatherswe.utils.forecast.TempUtils
 
 object HourlyUtils {
 

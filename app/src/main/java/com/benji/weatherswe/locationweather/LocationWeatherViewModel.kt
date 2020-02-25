@@ -83,7 +83,7 @@ class LocationWeatherViewModel(
             val candidates = data.value
             _candidate.value = candidates.returnCandidateWithHighestScore()
         }
-        is ResultWrapper.Error -> TODO("implement logic for ResultWrapper.Error")
+        is ResultWrapper.Error -> Log.d("LocWVM", "handleGeoCodingData --> ResultWrapper.Error")
     }
 
     override fun onCleared() {

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.benji.domain.constants.ParameterConstants
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.SymbolUtils
 import com.benji.weatherswe.utils.extensions.activitySharedViewModel
+import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 
 

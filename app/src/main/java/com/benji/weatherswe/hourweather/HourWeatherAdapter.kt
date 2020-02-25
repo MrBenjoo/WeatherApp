@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.weatherswe.R
-import com.benji.weatherswe.utils.SymbolUtils
+import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
 class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :

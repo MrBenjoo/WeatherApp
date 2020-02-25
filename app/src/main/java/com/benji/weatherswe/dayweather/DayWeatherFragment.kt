@@ -13,8 +13,9 @@ import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
-import com.benji.weatherswe.utils.*
 import com.benji.weatherswe.utils.extensions.*
+import com.benji.weatherswe.utils.forecast.DateUtils
+import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 
