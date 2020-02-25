@@ -7,4 +7,7 @@
     <string name="thunder_text">Åska</string>
     <string name="air_pressure_text">Lufttryck</string>
     <string name="search_hint">Sök stad</string>
+
+    <string name="activity_permission_denied">Positioneringsdata kommer inte att användas.</string>
+    <string name="activity_location_denied">Slå på positionering för att hitta din stad automatiskt.</string>
 </resources>

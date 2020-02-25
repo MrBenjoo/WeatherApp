@@ -7,7 +7,6 @@ import com.benji.data.datasource.remote.GeocodingAPI
 import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
-import com.benji.weatherswe.locationweather.LocationHandler
 import com.benji.weatherswe.locationweather.LocationWeatherViewModel
 import com.benji.weatherswe.locationweather.ReveresedGeocoding
 import com.benji.weatherswe.utils.DispatcherProvider
@@ -39,7 +38,6 @@ object LocationWeatherServiceLocator {
         LocationWeatherViewModel(
             DispatcherProvider,
             geoCodingRepository,
-            LocationHandler(fragment),
             ReveresedGeocoding(fragment.context!!)
         )
 

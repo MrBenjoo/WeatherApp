@@ -12,10 +12,13 @@ import androidx.lifecycle.Observer
 import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.geocoding.Candidate
+import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
-import com.benji.weatherswe.utils.*
-import com.google.android.gms.location.LocationSettingsResponse
+import com.benji.weatherswe.utils.mainActivity
+import com.benji.weatherswe.utils.navigate
+import com.benji.weatherswe.utils.prefsLoadLatestCandidate
+import com.benji.weatherswe.utils.sharedViewModel
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
@@ -83,17 +86,13 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
 
-        sharedViewModel().locationSettingsResponse.observe(viewLifecycleOwner, locationSettingsResponseObserver)
-        sharedViewModel().gpsStatus.observe(viewLifecycleOwner, gpsStatusObserver)
+        sharedViewModel().lastLocationReceived.observe(viewLifecycleOwner, locationObserver)
     }
 
-    private val gpsStatusObserver = Observer<GpsStatus> { gpsStatus ->
-        viewModel.onGpsStatusChange(gpsStatus)
+    private val locationObserver = Observer<Location> { location ->
+        viewModel.onLocationReceived(location)
     }
 
-    private val locationSettingsResponseObserver = Observer<LocationSettingsResponse> { response ->
-        viewModel.autonomousGPSFind(response)
-    }
 
     private val stateObserver = Observer<State> { state ->
         when (state) {

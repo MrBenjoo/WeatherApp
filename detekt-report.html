@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+pre {
+  border: 1px solid #e0e0e0;
+  overflow: scroll;
+}
+.lineno {
+  color: #999999;
+  background-color: #f0f0f0;
+}
+.error {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AwCFR4T/3uLMgAAADxJREFUCNdNyLERQEAABMCjL4lQwIzcjErpguAL+C9AvgKJDbeD/PRpLdm35Hm+MU+cB+tCKaJW4L4YBy+CAiLJrFs9mgAAAABJRU5ErkJggg==) bottom repeat-x;
+}
+.exception {
+  color: #b60808;
+  display: inline-block;
+  background-color: #ecdada;
+  border-color: #b60808;
+  border-radius: 10px;
+  border: solid 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<div>
+  <ul></ul>
+</div>
+
+
+<h2>Complexity Report</h2>
+
+<div>
+  <ul></ul>
+</div>
+
+
+<h2>Findings</h2>
+<div>Total: 234
+  <h3>complexity: 8</h3>
+  <details id="ComplexMethod" open="open">
+    <summary class="rule-container"><span class="rule">ComplexMethod: 3 </span><span class="description">Prefer splitting up complex methods into smaller, easier to understand methods.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:42:17</span><br><span class="message">The function getWeatherSymbolImage appears to be too complex.</span>
+        <pre><code><span class="lineno">  39 </span>        }
+<span class="lineno">  40 </span>    }
+<span class="lineno">  41 </span>
+<span class="lineno">  42 </span>    private fun <span class="error">getWeatherSymbolImage</span>(weatherSymbol: Int): Int = when (weatherSymbol) {
+<span class="lineno">  43 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  44 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  45 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:24:9</span><br><span class="message">The function getWeatherSymbolLottie appears to be too complex.</span>
+        <pre><code><span class="lineno">  21 </span>        return frequenciesByWeatherSymbol.maxBy { it.value }?.key!!
+<span class="lineno">  22 </span>    }
+<span class="lineno">  23 </span>
+<span class="lineno">  24 </span>    fun <span class="error">getWeatherSymbolLottie</span>(weatherSymbol: Int): Int = when (weatherSymbol) {
+<span class="lineno">  25 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  26 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  27 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:55:9</span><br><span class="message">The function getWeatherSymbolDescription appears to be too complex.</span>
+        <pre><code><span class="lineno">  52 </span>        else -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  53 </span>    }
+<span class="lineno">  54 </span>
+<span class="lineno">  55 </span>    fun <span class="error">getWeatherSymbolDescription</span>(weatherSymbol: Int): String = when (weatherSymbol) {
+<span class="lineno">  56 </span>        1 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLEAR_SKY
+<span class="lineno">  57 </span>        2 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
+<span class="lineno">  58 </span>        3 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="TooManyFunctions" open="open">
+    <summary class="rule-container"><span class="rule">TooManyFunctions: 5 </span><span class="description">Too many functions inside a/an file/class/object/interface always indicate a violation of the single responsibility principle. Maybe the file/class/object/interface wants to manage too many things at once. Extract functionality which clearly belongs together.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\currentweather\CurrentWeatherFragment.kt:16:7</span><br><span class="message">Class 'CurrentWeatherFragment' with '13' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">  13 </span>import kotlinx.android.synthetic.main.fragment_current_weather.*
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span>class <span class="error">CurrentWeatherFragment</span> : Fragment() {
+<span class="lineno">  17 </span>
+<span class="lineno">  18 </span>    override fun onCreateView(
+<span class="lineno">  19 </span>        inflater: LayoutInflater, container: ViewGroup?,
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:20:7</span><br><span class="message">Class 'DayWeatherFragment' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">  17 </span>import kotlinx.android.synthetic.main.fragment_day_weather.*
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span>class <span class="error">DayWeatherFragment</span> : Fragment(), SearchView.OnQueryTextListener {
+<span class="lineno">  21 </span>    private lateinit var arrayAdapter: ArrayAdapter&lt;String&gt;
+<span class="lineno">  22 </span>    private lateinit var viewModel: DayWeatherViewModel
+<span class="lineno">  23 </span>    private lateinit var dayWeatherAdapter: DayWeatherAdapter
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:25:7</span><br><span class="message">Class 'DayWeatherViewModel' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">  22 </span>import kotlinx.coroutines.launch
+<span class="lineno">  23 </span>import kotlin.coroutines.CoroutineContext
+<span class="lineno">  24 </span>
+<span class="lineno">  25 </span>class <span class="error">DayWeatherViewModel</span>(
+<span class="lineno">  26 </span>    private val dispatcher: DispatcherProvider,
+<span class="lineno">  27 </span>    private val weatherRepository: IWeatherRepository,
+<span class="lineno">  28 </span>    private val geoCodingRepository: IGeocodingRepository
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherFragment.kt:24:7</span><br><span class="message">Class 'LocationWeatherFragment' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
+        <pre><code><span class="lineno">  21 </span>import kotlinx.android.synthetic.main.location_weather_fragment.*
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>
+<span class="lineno">  24 </span>class <span class="error">LocationWeatherFragment</span> : Fragment(), TextWatcher {
+<span class="lineno">  25 </span>    private lateinit var arrayAdapter: ArrayAdapter&lt;String&gt;
+<span class="lineno">  26 </span>    private lateinit var viewModel: LocationWeatherViewModel
+<span class="lineno">  27 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\FragmentExt.kt:1:1</span><br><span class="message">File 'FragmentExt.kt' with '13' functions detected. Defined threshold inside files is set to '11'</span>
+        <pre><code><span class="lineno">   1 </span><span class="error">package com.benji.weatherswe.utils</span>
+<span class="lineno">   2 </span><span class="error"></span>
+<span class="lineno">   3 </span><span class="error">import android.content.Context</span>
+<span class="lineno">   4 </span><span class="error">import android.graphics.Color</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>empty-blocks: 4</h3>
+  <details id="EmptyCatchBlock" open="open">
+    <summary class="rule-container"><span class="rule">EmptyCatchBlock: 2 </span><span class="description">Empty block of code detected. As they serve no purpose they should be removed.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:66:40</span><br><span class="message">This empty block of code can be removed.</span>
+        <pre><code><span class="lineno">  63 </span>        try {
+<span class="lineno">  64 </span>            val cacheSize = 10 * 1024 * 1024 // 10 MB
+<span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
+<span class="lineno">  66 </span>        } catch (exception: Exception) <span class="error">{</span>
+<span class="lineno">  67 </span><span class="error"></span>
+<span class="lineno">  68 </span><span class="error">        }</span>
+<span class="lineno">  69 </span>        return cache
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\GPSBroadcastReceiver.kt:24:33</span><br><span class="message">This empty block of code can be removed.</span>
+        <pre><code><span class="lineno">  21 </span>                    }
+<span class="lineno">  22 </span>                }
+<span class="lineno">  23 </span>            }
+<span class="lineno">  24 </span>        } catch (ex: Exception) <span class="error">{</span>
+<span class="lineno">  25 </span><span class="error">        }</span>
+<span class="lineno">  26 </span>    }
+<span class="lineno">  27 </span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="EmptyFunctionBlock" open="open">
+    <summary class="rule-container"><span class="rule">EmptyFunctionBlock: 2 </span><span class="description">Empty block of code detected. As they serve no purpose they should be removed.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherFragment.kt:122:82</span><br><span class="message">This empty block of code can be removed.</span>
+        <pre><code><span class="lineno"> 119 </span>    }
+<span class="lineno"> 120 </span>
+<span class="lineno"> 121 </span>
+<span class="lineno"> 122 </span>    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) <span class="error">{}</span>
+<span class="lineno"> 123 </span>
+<span class="lineno"> 124 </span>    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+<span class="lineno"> 125 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherFragment.kt:124:78</span><br><span class="message">This empty block of code can be removed.</span>
+        <pre><code><span class="lineno"> 121 </span>
+<span class="lineno"> 122 </span>    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+<span class="lineno"> 123 </span>
+<span class="lineno"> 124 </span>    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) <span class="error">{}</span>
+<span class="lineno"> 125 </span>
+<span class="lineno"> 126 </span>    /**
+<span class="lineno"> 127 </span>     * set adapter for autoCompleteTextView to null in order
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>exceptions: 4</h3>
+  <details id="TooGenericExceptionCaught" open="open">
+    <summary class="rule-container"><span class="rule">TooGenericExceptionCaught: 4 </span><span class="description">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:66:18</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  63 </span>        try {
+<span class="lineno">  64 </span>            val cacheSize = 10 * 1024 * 1024 // 10 MB
+<span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
+<span class="lineno">  66 </span>        } catch (<span class="error">exception: Exception</span>) {
+<span class="lineno">  67 </span>
+<span class="lineno">  68 </span>        }
+<span class="lineno">  69 </span>        return cache
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\DateUtils.kt:33:18</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  30 </span>        try {
+<span class="lineno">  31 </span>            val date = inputFormat.parse(time)
+<span class="lineno">  32 </span>            dayOfWeek = SimpleDateFormat(&quot;EEEE&quot;, Locale.getDefault()).format(date)
+<span class="lineno">  33 </span>        } catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  34 </span>            e.printStackTrace()
+<span class="lineno">  35 </span>        }
+<span class="lineno">  36 </span>        return dayOfWeek
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\GPSBroadcastReceiver.kt:24:18</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  21 </span>                    }
+<span class="lineno">  22 </span>                }
+<span class="lineno">  23 </span>            }
+<span class="lineno">  24 </span>        } catch (<span class="error">ex: Exception</span>) {
+<span class="lineno">  25 </span>        }
+<span class="lineno">  26 </span>    }
+<span class="lineno">  27 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\ResultWrapper.kt:15:22</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+        <pre><code><span class="lineno">  12 </span>        inline fun &lt;V&gt; build(function: () -&gt; V): ResultWrapper&lt;Exception, V&gt; =
+<span class="lineno">  13 </span>            try {
+<span class="lineno">  14 </span>                Success(function.invoke())
+<span class="lineno">  15 </span>            } catch (<span class="error">e: Exception</span>) {
+<span class="lineno">  16 </span>                Error(e)
+<span class="lineno">  17 </span>            }
+<span class="lineno">  18 </span>    }
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>naming: 4</h3>
+  <details id="VariableNaming" open="open">
+    <summary class="rule-container"><span class="rule">VariableNaming: 4 </span><span class="description">Variable names should follow the naming convention set in the projects configuration.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:17:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+        <pre><code><span class="lineno">  14 </span>class DayWeatherAdapter(var data: List&lt;DayForecast&gt;?) :
+<span class="lineno">  15 </span>    RecyclerView.Adapter&lt;DayWeatherAdapter.MainViewHolder&gt;() {
+<span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    <span class="error">private val TAG = &quot;DayWeatherAdapter&quot;</span>
+<span class="lineno">  18 </span>    val rowData = MutableLiveData&lt;RowData&gt;()
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:25:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+        <pre><code><span class="lineno">  22 </span>    private lateinit var viewModel: DayWeatherViewModel
+<span class="lineno">  23 </span>    private lateinit var dayWeatherAdapter: DayWeatherAdapter
+<span class="lineno">  24 </span>    private lateinit var searchMenuItem: MenuItem
+<span class="lineno">  25 </span>    <span class="error">private val TAG = &quot;DayWeatherFragment&quot;</span>
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    override fun onQueryTextChange(newText: String): Boolean {
+<span class="lineno">  28 </span>        viewModel.onSearchCity(newText)
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\ReveresedGeocoding.kt:11:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>class ReveresedGeocoding(context: Context) : IReversedGeocoding {
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    <span class="error">private val TAG = &quot;ReveresedGeocoding&quot;</span>
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    private var geocoder: Geocoder = Geocoder(context)
+<span class="lineno">  14 </span>    private val MAX_RESULTS = 1
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\ReveresedGeocoding.kt:14:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+        <pre><code><span class="lineno">  11 </span>    private val TAG = &quot;ReveresedGeocoding&quot;
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    private var geocoder: Geocoder = Geocoder(context)
+<span class="lineno">  14 </span>    <span class="error">private val MAX_RESULTS = 1</span>
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span>    override fun getFromLocation(location: Location): String {
+<span class="lineno">  17 </span>        val listOfAddress = geocoder.getFromLocation(location.y, location.x, MAX_RESULTS)
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <h3>style: 214</h3>
+  <details id="MagicNumber" open="open">
+    <summary class="rule-container"><span class="rule">MagicNumber: 95 </span><span class="description">Report magic numbers. Magic number is a numeric literal that is not defined as a constant and hence it's unclear what the purpose of this number is. It's better to declare such numbers as constants and give them a proper name. By default, -1, 0, 1, and 2 are not considered to be magic numbers.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:45:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  42 </span>    private fun getWeatherSymbolImage(weatherSymbol: Int): Int = when (weatherSymbol) {
+<span class="lineno">  43 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  44 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  45 </span>        <span class="error">3</span> -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  46 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  47 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:46:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  43 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  44 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  45 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  46 </span>        <span class="error">4</span> -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  47 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:47:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  44 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  45 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  46 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  47 </span>        <span class="error">5</span> -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:48:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  45 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  46 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  47 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        <span class="error">6</span> -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:49:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  46 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  47 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        <span class="error">7</span> -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:50:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  47 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        <span class="error">8</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:51:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  48 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        <span class="error">9</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:52:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  49 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        <span class="error">10</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:53:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  50 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        <span class="error">11</span> -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:54:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  51 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        <span class="error">12</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:55:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  52 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        <span class="error">13</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:56:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  53 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        <span class="error">14</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:57:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  54 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        <span class="error">15</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:58:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  55 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        <span class="error">16</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:59:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  56 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        <span class="error">17</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:60:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  57 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        <span class="error">18</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:61:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  58 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        <span class="error">19</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:62:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  59 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        <span class="error">20</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:63:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  60 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        <span class="error">21</span> -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:64:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  61 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        <span class="error">22</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        25 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:65:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  62 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        <span class="error">23</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  68 </span>        26 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:66:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  63 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        <span class="error">24</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  68 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  69 </span>        27 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:67:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  64 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        <span class="error">25</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  68 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  69 </span>        27 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  70 </span>        else -&gt; R.raw.lottie_weather_sunny
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:68:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  65 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  68 </span>        <span class="error">26</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  69 </span>        27 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  70 </span>        else -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  71 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:69:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  66 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  67 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  68 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  69 </span>        <span class="error">27</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  70 </span>        else -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  71 </span>    }
+<span class="lineno">  72 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:108:22</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno"> 105 </span>
+<span class="lineno"> 106 </span>    fun setHourlyOverview(forecastTenDays: List&lt;DayForecast&gt;) {
+<span class="lineno"> 107 </span>        val listOfHourlyOverview = HourlyUtils.getFiveHourForecastData(forecastTenDays)
+<span class="lineno"> 108 </span>        for (i in 0..<span class="error">4</span>) {
+<span class="lineno"> 109 </span>            val hourlyOverview = listOfHourlyOverview[i]
+<span class="lineno"> 110 </span>            when (i) {
+<span class="lineno"> 111 </span>                0 -&gt; _forecastFirstHour.value = hourlyOverview
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:114:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno"> 111 </span>                0 -&gt; _forecastFirstHour.value = hourlyOverview
+<span class="lineno"> 112 </span>                1 -&gt; _forecastSecondHour.value = hourlyOverview
+<span class="lineno"> 113 </span>                2 -&gt; _forecastThirdHour.value = hourlyOverview
+<span class="lineno"> 114 </span>                <span class="error">3</span> -&gt; _forecastFourthHour.value = hourlyOverview
+<span class="lineno"> 115 </span>                4 -&gt; _forecastFifthHour.value = hourlyOverview
+<span class="lineno"> 116 </span>            }
+<span class="lineno"> 117 </span>        }
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:115:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno"> 112 </span>                1 -&gt; _forecastSecondHour.value = hourlyOverview
+<span class="lineno"> 113 </span>                2 -&gt; _forecastThirdHour.value = hourlyOverview
+<span class="lineno"> 114 </span>                3 -&gt; _forecastFourthHour.value = hourlyOverview
+<span class="lineno"> 115 </span>                <span class="error">4</span> -&gt; _forecastFifthHour.value = hourlyOverview
+<span class="lineno"> 116 </span>            }
+<span class="lineno"> 117 </span>        }
+<span class="lineno"> 118 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:29</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
+<span class="lineno">  62 </span>
+<span class="lineno">  63 </span>        try {
+<span class="lineno">  64 </span>            val cacheSize = <span class="error">10</span> * 1024 * 1024 // 10 MB
+<span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
+<span class="lineno">  66 </span>        } catch (exception: Exception) {
+<span class="lineno">  67 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:34</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
+<span class="lineno">  62 </span>
+<span class="lineno">  63 </span>        try {
+<span class="lineno">  64 </span>            val cacheSize = 10 * <span class="error">1024</span> * 1024 // 10 MB
+<span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
+<span class="lineno">  66 </span>        } catch (exception: Exception) {
+<span class="lineno">  67 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:41</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
+<span class="lineno">  62 </span>
+<span class="lineno">  63 </span>        try {
+<span class="lineno">  64 </span>            val cacheSize = 10 * 1024 * <span class="error">1024</span> // 10 MB
+<span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
+<span class="lineno">  66 </span>        } catch (exception: Exception) {
+<span class="lineno">  67 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt:29:38</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  26 </span>        val hoursLeftUntilMidnight = listOfTenDayForecast[0].listOfHourlyData.size
+<span class="lineno">  27 </span>        var tempList = mutableListOf&lt;HourlyOverview&gt;()
+<span class="lineno">  28 </span>
+<span class="lineno">  29 </span>        if (hoursLeftUntilMidnight &lt; <span class="error">5</span>) {
+<span class="lineno">  30 </span>            tempList =
+<span class="lineno">  31 </span>                getHourlyOverviewData(
+<span class="lineno">  32 </span>                    hoursLeftUntilMidnight - 1,
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt:37:30</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  34 </span>                    tempList
+<span class="lineno">  35 </span>                )
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>            val hoursToAdd = <span class="error">5</span> - hoursLeftUntilMidnight
+<span class="lineno">  38 </span>            tempList = getHourlyOverviewData(
+<span class="lineno">  39 </span>                hoursToAdd - 1,
+<span class="lineno">  40 </span>                listOfTenDayForecast[1],
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt:44:26</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  41 </span>                tempList
+<span class="lineno">  42 </span>            )
+<span class="lineno">  43 </span>        } else {
+<span class="lineno">  44 </span>            for (i in 0..<span class="error">4</span>) {
+<span class="lineno">  45 </span>                tempList.add(
+<span class="lineno">  46 </span>                    HourlyOverview(
+<span class="lineno">  47 </span>                        listOfTenDayForecast[0].listOfHourlyData[i].validTime,
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherViewModel.kt:111:64</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno"> 108 </span>        val deviceLocation = locationHandler.getDeviceLocation()
+<span class="lineno"> 109 </span>        if (deviceLocation != null) {
+<span class="lineno"> 110 </span>            val city = reveresedGeocoding.getFromLocation(deviceLocation)
+<span class="lineno"> 111 </span>            _candidate.value = Candidate(city, deviceLocation, <span class="error">100</span>)
+<span class="lineno"> 112 </span>        }
+<span class="lineno"> 113 </span>    }
+<span class="lineno"> 114 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:88:26</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  85 </span>    private fun getLocationRequest(): LocationRequest =
+<span class="lineno">  86 </span>        LocationRequest.create()
+<span class="lineno">  87 </span>            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+<span class="lineno">  88 </span>            .setInterval(<span class="error">30</span> * 1000)
+<span class="lineno">  89 </span>            .setFastestInterval(5 * 1000)
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>    private fun getLocationSettingsRequestBuilder(): LocationSettingsRequest.Builder =
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:88:31</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  85 </span>    private fun getLocationRequest(): LocationRequest =
+<span class="lineno">  86 </span>        LocationRequest.create()
+<span class="lineno">  87 </span>            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+<span class="lineno">  88 </span>            .setInterval(30 * <span class="error">1000</span>)
+<span class="lineno">  89 </span>            .setFastestInterval(5 * 1000)
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>    private fun getLocationSettingsRequestBuilder(): LocationSettingsRequest.Builder =
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:89:33</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  86 </span>        LocationRequest.create()
+<span class="lineno">  87 </span>            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+<span class="lineno">  88 </span>            .setInterval(30 * 1000)
+<span class="lineno">  89 </span>            .setFastestInterval(<span class="error">5</span> * 1000)
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>    private fun getLocationSettingsRequestBuilder(): LocationSettingsRequest.Builder =
+<span class="lineno">  92 </span>        LocationSettingsRequest
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:89:37</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  86 </span>        LocationRequest.create()
+<span class="lineno">  87 </span>            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+<span class="lineno">  88 </span>            .setInterval(30 * 1000)
+<span class="lineno">  89 </span>            .setFastestInterval(5 * <span class="error">1000</span>)
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>    private fun getLocationSettingsRequestBuilder(): LocationSettingsRequest.Builder =
+<span class="lineno">  92 </span>        LocationSettingsRequest
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:27:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  24 </span>    fun getWeatherSymbolLottie(weatherSymbol: Int): Int = when (weatherSymbol) {
+<span class="lineno">  25 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  26 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  27 </span>        <span class="error">3</span> -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  28 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  29 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:28:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  25 </span>        1 -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  26 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  27 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  28 </span>        <span class="error">4</span> -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  29 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:29:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  26 </span>        2 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  27 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  28 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  29 </span>        <span class="error">5</span> -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:30:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  27 </span>        3 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  28 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  29 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        <span class="error">6</span> -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:31:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  28 </span>        4 -&gt; R.raw.lottie_weather_partly_cloudy
+<span class="lineno">  29 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        <span class="error">7</span> -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:32:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  29 </span>        5 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        <span class="error">8</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:33:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  30 </span>        6 -&gt; R.raw.lottie_weather_cloudy
+<span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        <span class="error">9</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:34:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  31 </span>        7 -&gt; R.raw.lottie_weather_foggy
+<span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        <span class="error">10</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:35:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  32 </span>        8 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        <span class="error">11</span> -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:36:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  33 </span>        9 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        <span class="error">12</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:37:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  34 </span>        10 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        <span class="error">13</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:38:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  35 </span>        11 -&gt; R.raw.lottie_weather_thunderstorm
+<span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        <span class="error">14</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:39:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  36 </span>        12 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        <span class="error">15</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:40:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  37 </span>        13 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        <span class="error">16</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:41:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  38 </span>        14 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        <span class="error">17</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:42:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  39 </span>        15 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        <span class="error">18</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:43:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  40 </span>        16 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        <span class="error">19</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:44:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  41 </span>        17 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        <span class="error">20</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:45:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  42 </span>        18 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        <span class="error">21</span> -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:46:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  43 </span>        19 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        <span class="error">22</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        25 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:47:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  44 </span>        20 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        <span class="error">23</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  50 </span>        26 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:48:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  45 </span>        21 -&gt; R.raw.lottie_weather_thunder
+<span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        <span class="error">24</span> -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  50 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  51 </span>        27 -&gt; R.raw.lottie_weather_snow
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:49:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  46 </span>        22 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        <span class="error">25</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  50 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  51 </span>        27 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  52 </span>        else -&gt; R.raw.lottie_weather_sunny
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:50:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  47 </span>        23 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  50 </span>        <span class="error">26</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  51 </span>        27 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  52 </span>        else -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  53 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:51:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  48 </span>        24 -&gt; R.raw.lottie_weather_partly_raining
+<span class="lineno">  49 </span>        25 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  50 </span>        26 -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  51 </span>        <span class="error">27</span> -&gt; R.raw.lottie_weather_snow
+<span class="lineno">  52 </span>        else -&gt; R.raw.lottie_weather_sunny
+<span class="lineno">  53 </span>    }
+<span class="lineno">  54 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:58:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  55 </span>    fun getWeatherSymbolDescription(weatherSymbol: Int): String = when (weatherSymbol) {
+<span class="lineno">  56 </span>        1 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLEAR_SKY
+<span class="lineno">  57 </span>        2 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
+<span class="lineno">  58 </span>        <span class="error">3</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+<span class="lineno">  59 </span>        4 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+<span class="lineno">  60 </span>        5 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:59:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  56 </span>        1 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLEAR_SKY
+<span class="lineno">  57 </span>        2 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
+<span class="lineno">  58 </span>        3 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+<span class="lineno">  59 </span>        <span class="error">4</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+<span class="lineno">  60 </span>        5 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:60:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  57 </span>        2 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_NEARLY_CLEAR_SKY
+<span class="lineno">  58 </span>        3 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+<span class="lineno">  59 </span>        4 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+<span class="lineno">  60 </span>        <span class="error">5</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:61:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  58 </span>        3 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_VARIABLE_CLOUDINESS
+<span class="lineno">  59 </span>        4 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+<span class="lineno">  60 </span>        5 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        <span class="error">6</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:62:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  59 </span>        4 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HALFCLEAR_SKY
+<span class="lineno">  60 </span>        5 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        <span class="error">7</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:63:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  60 </span>        5 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_CLOUDY_SKY
+<span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        <span class="error">8</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:64:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  61 </span>        6 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_OVERCAST
+<span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        <span class="error">9</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:65:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  62 </span>        7 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_FOG
+<span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        <span class="error">10</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:66:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  63 </span>        8 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS
+<span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        <span class="error">11</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:67:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  64 </span>        9 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS
+<span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        <span class="error">12</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:68:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  65 </span>        10 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS
+<span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        <span class="error">13</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:69:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  66 </span>        11 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDERSTORM
+<span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        <span class="error">14</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:70:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  67 </span>        12 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS
+<span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        <span class="error">15</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:71:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  68 </span>        13 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS
+<span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        <span class="error">16</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:72:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  69 </span>        14 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS
+<span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        <span class="error">17</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:73:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  70 </span>        15 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS
+<span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        <span class="error">18</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:74:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  71 </span>        16 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS
+<span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        <span class="error">19</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:75:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  72 </span>        17 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS
+<span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        <span class="error">20</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:76:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  73 </span>        18 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_RAIN
+<span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        <span class="error">21</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:77:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  74 </span>        19 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_RAIN
+<span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        <span class="error">22</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        25 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:78:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  75 </span>        20 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_RAIN
+<span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        <span class="error">23</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        25 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+<span class="lineno">  81 </span>        26 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:79:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  76 </span>        21 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_THUNDER
+<span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        <span class="error">24</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        25 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+<span class="lineno">  81 </span>        26 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+<span class="lineno">  82 </span>        27 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:80:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  77 </span>        22 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SLEET
+<span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        <span class="error">25</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+<span class="lineno">  81 </span>        26 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+<span class="lineno">  82 </span>        27 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
+<span class="lineno">  83 </span>        else -&gt; &quot;N/A&quot;
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:81:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  78 </span>        23 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SLEET
+<span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        25 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+<span class="lineno">  81 </span>        <span class="error">26</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+<span class="lineno">  82 </span>        27 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
+<span class="lineno">  83 </span>        else -&gt; &quot;N/A&quot;
+<span class="lineno">  84 </span>    }
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:82:9</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  79 </span>        24 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SLEET
+<span class="lineno">  80 </span>        25 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_LIGHT_SNOWFALL
+<span class="lineno">  81 </span>        26 -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_MODERATE_SNOWFALL
+<span class="lineno">  82 </span>        <span class="error">27</span> -&gt; WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
+<span class="lineno">  83 </span>        else -&gt; &quot;N/A&quot;
+<span class="lineno">  84 </span>    }
+<span class="lineno">  85 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:16:23</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  13 </span>         * - Latitude from 55.37514 to 67.85572
+<span class="lineno">  14 </span>         * - Longitude from 11.1712 to 23.15645
+<span class="lineno">  15 </span>         */
+<span class="lineno">  16 </span>        require(!(y &lt; <span class="error">55.0</span> || y &gt; 68.0)) { &quot;Latitude coordinate not in a valid range (55-68). Latitude is: $y&quot; }
+<span class="lineno">  17 </span>        require(!(x &lt; 10.0 || x &gt; 24.0)) { &quot;Longitude coordinate not in a valid range (10-24). Longitude is: $x&quot; }
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:16:35</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  13 </span>         * - Latitude from 55.37514 to 67.85572
+<span class="lineno">  14 </span>         * - Longitude from 11.1712 to 23.15645
+<span class="lineno">  15 </span>         */
+<span class="lineno">  16 </span>        require(!(y &lt; 55.0 || y &gt; <span class="error">68.0</span>)) { &quot;Latitude coordinate not in a valid range (55-68). Latitude is: $y&quot; }
+<span class="lineno">  17 </span>        require(!(x &lt; 10.0 || x &gt; 24.0)) { &quot;Longitude coordinate not in a valid range (10-24). Longitude is: $x&quot; }
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:17:23</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  14 </span>         * - Longitude from 11.1712 to 23.15645
+<span class="lineno">  15 </span>         */
+<span class="lineno">  16 </span>        require(!(y &lt; 55.0 || y &gt; 68.0)) { &quot;Latitude coordinate not in a valid range (55-68). Latitude is: $y&quot; }
+<span class="lineno">  17 </span>        require(!(x &lt; <span class="error">10.0</span> || x &gt; 24.0)) { &quot;Longitude coordinate not in a valid range (10-24). Longitude is: $x&quot; }
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:17:35</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  14 </span>         * - Longitude from 11.1712 to 23.15645
+<span class="lineno">  15 </span>         */
+<span class="lineno">  16 </span>        require(!(y &lt; 55.0 || y &gt; 68.0)) { &quot;Latitude coordinate not in a valid range (55-68). Latitude is: $y&quot; }
+<span class="lineno">  17 </span>        require(!(x &lt; 10.0 || x &gt; <span class="error">24.0</span>)) { &quot;Longitude coordinate not in a valid range (10-24). Longitude is: $x&quot; }
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:23:44</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  20 </span>}
+<span class="lineno">  21 </span>
+<span class="lineno">  22 </span>fun Location.sixDecimals(): Location {
+<span class="lineno">  23 </span>    val longitude = BigDecimal(x).setScale(<span class="error">5</span>, RoundingMode.CEILING)
+<span class="lineno">  24 </span>    val latitude = BigDecimal(y).setScale(5, RoundingMode.CEILING)
+<span class="lineno">  25 </span>    return Location(latitude.toDouble(), longitude.toDouble())
+<span class="lineno">  26 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:24:43</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+        <pre><code><span class="lineno">  21 </span>
+<span class="lineno">  22 </span>fun Location.sixDecimals(): Location {
+<span class="lineno">  23 </span>    val longitude = BigDecimal(x).setScale(5, RoundingMode.CEILING)
+<span class="lineno">  24 </span>    val latitude = BigDecimal(y).setScale(<span class="error">5</span>, RoundingMode.CEILING)
+<span class="lineno">  25 </span>    return Location(latitude.toDouble(), longitude.toDouble())
+<span class="lineno">  26 </span>}
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="MaxLineLength" open="open">
+    <summary class="rule-container"><span class="rule">MaxLineLength: 7 </span><span class="description">Line detected that is longer than the defined maximum line length in the code style.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\dayweather\DayWeatherViewModelTest.kt:54:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  51 </span>        }
+<span class="lineno">  52 </span>    }
+<span class="lineno">  53 </span>
+<span class="lineno">  54 </span>    <span class="error">@Test</span>
+<span class="lineno">  55 </span><span class="error">    fun `processWeatherData() with valid candidate and mocked weather data should set last valid time to 2300 on first day`() {</span>
+<span class="lineno">  56 </span><span class="error">        viewModel.processWeatherData(candidateMalmo, mockedWeatherData, &quot;2019-11-27&quot;)</span>
+<span class="lineno">  57 </span><span class="error"></span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\dayweather\DayWeatherViewModelTest.kt:64:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  61 </span>        }
+<span class="lineno">  62 </span>    }
+<span class="lineno">  63 </span>
+<span class="lineno">  64 </span>    <span class="error">@Test</span>
+<span class="lineno">  65 </span><span class="error">    fun `processWeatherData() with valid candidate and mocked weather data should set first valid time to 0000 on second day`() {</span>
+<span class="lineno">  66 </span><span class="error">        viewModel.processWeatherData(candidateMalmo, mockedWeatherData, &quot;2019-11-27&quot;)</span>
+<span class="lineno">  67 </span><span class="error"></span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\dayweather\DayWeatherViewModelTest.kt:74:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  71 </span>    }
+<span class="lineno">  72 </span>
+<span class="lineno">  73 </span>
+<span class="lineno">  74 </span>    <span class="error">@Test</span>
+<span class="lineno">  75 </span><span class="error">    fun `processWeatherData() with valid candidate and mocked weather data should set 10 hours of weather data on first day`() {</span>
+<span class="lineno">  76 </span><span class="error">        viewModel.processWeatherData(candidateMalmo, mockedWeatherData, &quot;2019-11-27&quot;)</span>
+<span class="lineno">  77 </span><span class="error">        assertEquals(10, viewModel.listOfDayForecast.value!![0].listOfHourlyData.size)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\dayweather\DayWeatherViewModelTest.kt:80:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  77 </span>        assertEquals(10, viewModel.listOfDayForecast.value!![0].listOfHourlyData.size)
+<span class="lineno">  78 </span>    }
+<span class="lineno">  79 </span>
+<span class="lineno">  80 </span>    <span class="error">@Test</span>
+<span class="lineno">  81 </span><span class="error">    fun `processWeatherData() with valid candidate and mocked weather data should set 24 hours of weather data on second day`() {</span>
+<span class="lineno">  82 </span><span class="error">        viewModel.processWeatherData(candidateMalmo, mockedWeatherData, &quot;2019-11-27&quot;)</span>
+<span class="lineno">  83 </span><span class="error">        assertEquals(24, viewModel.listOfDayForecast.value!![1].listOfHourlyData.size)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\SymbolUtilsTest.kt:9:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>internal class SymbolUtilsTest {
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    <span class="error">@Test</span>
+<span class="lineno">  10 </span><span class="error">    fun `getWeatherSymbolDay() with 1 as the highest symbol occurrence in the list should return 1 as the weather symbol`() {</span>
+<span class="lineno">  11 </span><span class="error">        val hourly = mutableListOf&lt;Hourly&gt;()</span>
+<span class="lineno">  12 </span><span class="error">        hourly.add(Hourly(&quot;&quot;, emptyList(), &quot;&quot;, 1))</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\SymbolUtilsTest.kt:23:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  20 </span>        assertEquals(1, symbol)
+<span class="lineno">  21 </span>    }
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    <span class="error">@Test</span>
+<span class="lineno">  24 </span><span class="error">    fun `getWeatherSymbolDay() with 1 and 2 as the same amount of symbol occurrence in the list should return 2 as the weather symbol`() {</span>
+<span class="lineno">  25 </span><span class="error">        val hourly = mutableListOf&lt;Hourly&gt;()</span>
+<span class="lineno">  26 </span><span class="error">        hourly.add(Hourly(&quot;&quot;, emptyList(), &quot;&quot;, 2))</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\SymbolUtilsTest.kt:37:5</span><br><span class="message">Line detected that is longer than the defined maximum line length in the code style.</span>
+        <pre><code><span class="lineno">  34 </span>        assertEquals(2, symbol)
+<span class="lineno">  35 </span>    }
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    <span class="error">@Test</span>
+<span class="lineno">  38 </span><span class="error">    fun `getWeatherSymbolDay() with as the same amount of symbol occurrence in the list should return 2 as the weather symbol`() {</span>
+<span class="lineno">  39 </span><span class="error">        val hourly = mutableListOf&lt;Hourly&gt;()</span>
+<span class="lineno">  40 </span><span class="error">        hourly.add(Hourly(&quot;&quot;, emptyList(), &quot;&quot;, 1))</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="MayBeConst" open="open">
+    <summary class="rule-container"><span class="rule">MayBeConst: 50 </span><span class="description">Reports vals that can be const val instead.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\androidTest\java\com\benji\data\datasource\local\Constants.kt:8:5</span><br><span class="message">HOURLY_JSON can be a `const val`.</span>
+        <pre><code><span class="lineno">   5 </span>
+<span class="lineno">   6 </span>object Constants {
+<span class="lineno">   7 </span>
+<span class="lineno">   8 </span>    <span class="error">val HOURLY_JSON = &quot;{\n&quot; +</span>
+<span class="lineno">   9 </span><span class="error">            &quot;  \&quot;validTime\&quot;: \&quot;2019-10-06T12:00:00Z\&quot;,\n&quot; +</span>
+<span class="lineno">  10 </span><span class="error">            &quot;  \&quot;parameters\&quot;: [\n&quot; +</span>
+<span class="lineno">  11 </span><span class="error">            &quot;    {\n&quot; +</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\Constants.kt:5:5</span><br><span class="message">PREF_NAME can be a `const val`.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>object Constants {
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    <span class="error">val PREF_NAME = &quot;utils.sharedpreferences.city&quot;</span>
+<span class="lineno">   6 </span>    val PREF_KEY_CITY = &quot;City&quot;
+<span class="lineno">   7 </span>    val PREF_DEFAULT_VALUE = &quot;&quot;
+<span class="lineno">   8 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\Constants.kt:6:5</span><br><span class="message">PREF_KEY_CITY can be a `const val`.</span>
+        <pre><code><span class="lineno">   3 </span>object Constants {
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    val PREF_NAME = &quot;utils.sharedpreferences.city&quot;
+<span class="lineno">   6 </span>    <span class="error">val PREF_KEY_CITY = &quot;City&quot;</span>
+<span class="lineno">   7 </span>    val PREF_DEFAULT_VALUE = &quot;&quot;
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\Constants.kt:7:5</span><br><span class="message">PREF_DEFAULT_VALUE can be a `const val`.</span>
+        <pre><code><span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    val PREF_NAME = &quot;utils.sharedpreferences.city&quot;
+<span class="lineno">   6 </span>    val PREF_KEY_CITY = &quot;City&quot;
+<span class="lineno">   7 </span>    <span class="error">val PREF_DEFAULT_VALUE = &quot;&quot;</span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:5:5</span><br><span class="message">PARAMETER_AIR_PRESSURE can be a `const val`.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>object ParameterConstants {
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    <span class="error">val PARAMETER_AIR_PRESSURE = &quot;msl&quot;</span>
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    val PARAMETER_AIR_TEMPERATURE = &quot;t&quot;
+<span class="lineno">   8 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:7:5</span><br><span class="message">PARAMETER_AIR_TEMPERATURE can be a `const val`.</span>
+        <pre><code><span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    val PARAMETER_AIR_PRESSURE = &quot;msl&quot;
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    <span class="error">val PARAMETER_AIR_TEMPERATURE = &quot;t&quot;</span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    val PARAMETER_HORIZONTAL_VISIBILITY = &quot;vis&quot;
+<span class="lineno">  10 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:9:5</span><br><span class="message">PARAMETER_HORIZONTAL_VISIBILITY can be a `const val`.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    val PARAMETER_AIR_TEMPERATURE = &quot;t&quot;
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    <span class="error">val PARAMETER_HORIZONTAL_VISIBILITY = &quot;vis&quot;</span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    val PARAMETER_WIND_DIRECTION = &quot;wd&quot;
+<span class="lineno">  12 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:11:5</span><br><span class="message">PARAMETER_WIND_DIRECTION can be a `const val`.</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    val PARAMETER_HORIZONTAL_VISIBILITY = &quot;vis&quot;
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    <span class="error">val PARAMETER_WIND_DIRECTION = &quot;wd&quot;</span>
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    val PARAMETER_WIND_SPEED = &quot;ws&quot;
+<span class="lineno">  14 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:13:5</span><br><span class="message">PARAMETER_WIND_SPEED can be a `const val`.</span>
+        <pre><code><span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    val PARAMETER_WIND_DIRECTION = &quot;wd&quot;
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    <span class="error">val PARAMETER_WIND_SPEED = &quot;ws&quot;</span>
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    val PARAMETER_RELATIVE_HUMIDITY = &quot;r&quot;
+<span class="lineno">  16 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:15:5</span><br><span class="message">PARAMETER_RELATIVE_HUMIDITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    val PARAMETER_WIND_SPEED = &quot;ws&quot;
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    <span class="error">val PARAMETER_RELATIVE_HUMIDITY = &quot;r&quot;</span>
+<span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    val PARAMETER_THUNDER_PROBABILITY = &quot;tstm&quot;
+<span class="lineno">  18 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:17:5</span><br><span class="message">PARAMETER_THUNDER_PROBABILITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    val PARAMETER_RELATIVE_HUMIDITY = &quot;r&quot;
+<span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    <span class="error">val PARAMETER_THUNDER_PROBABILITY = &quot;tstm&quot;</span>
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    val PARAMETER_MEAN_VALUE_OF_TOTAL_CLOUD_COVER = &quot;tcc_mean&quot;
+<span class="lineno">  20 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:19:5</span><br><span class="message">PARAMETER_MEAN_VALUE_OF_TOTAL_CLOUD_COVER can be a `const val`.</span>
+        <pre><code><span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    val PARAMETER_THUNDER_PROBABILITY = &quot;tstm&quot;
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    <span class="error">val PARAMETER_MEAN_VALUE_OF_TOTAL_CLOUD_COVER = &quot;tcc_mean&quot;</span>
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    val PARAMETER_MEAN_VALUE_OF_LOW_LEVEL_CLOUD_COVER = &quot;lcc_mean&quot;
+<span class="lineno">  22 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:21:5</span><br><span class="message">PARAMETER_MEAN_VALUE_OF_LOW_LEVEL_CLOUD_COVER can be a `const val`.</span>
+        <pre><code><span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    val PARAMETER_MEAN_VALUE_OF_TOTAL_CLOUD_COVER = &quot;tcc_mean&quot;
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    <span class="error">val PARAMETER_MEAN_VALUE_OF_LOW_LEVEL_CLOUD_COVER = &quot;lcc_mean&quot;</span>
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    val PARAMETER_MEAN_VALUE_OF_MEDIUM_LEVEL_CLOUD_COVER = &quot;mcc_mean&quot;
+<span class="lineno">  24 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:23:5</span><br><span class="message">PARAMETER_MEAN_VALUE_OF_MEDIUM_LEVEL_CLOUD_COVER can be a `const val`.</span>
+        <pre><code><span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    val PARAMETER_MEAN_VALUE_OF_LOW_LEVEL_CLOUD_COVER = &quot;lcc_mean&quot;
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    <span class="error">val PARAMETER_MEAN_VALUE_OF_MEDIUM_LEVEL_CLOUD_COVER = &quot;mcc_mean&quot;</span>
+<span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    val PARAMETER_MEAN_VALUE_OF_HIGH_LEVEL_CLOUD_COVER = &quot;hcc_mean&quot;
+<span class="lineno">  26 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:25:5</span><br><span class="message">PARAMETER_MEAN_VALUE_OF_HIGH_LEVEL_CLOUD_COVER can be a `const val`.</span>
+        <pre><code><span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    val PARAMETER_MEAN_VALUE_OF_MEDIUM_LEVEL_CLOUD_COVER = &quot;mcc_mean&quot;
+<span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    <span class="error">val PARAMETER_MEAN_VALUE_OF_HIGH_LEVEL_CLOUD_COVER = &quot;hcc_mean&quot;</span>
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    val PARAMETER_WIND_GUST_SPEED = &quot;gust&quot;
+<span class="lineno">  28 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:27:5</span><br><span class="message">PARAMETER_WIND_GUST_SPEED can be a `const val`.</span>
+        <pre><code><span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    val PARAMETER_MEAN_VALUE_OF_HIGH_LEVEL_CLOUD_COVER = &quot;hcc_mean&quot;
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    <span class="error">val PARAMETER_WIND_GUST_SPEED = &quot;gust&quot;</span>
+<span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    val PARAMETER_MINIMUM_PRECIPITATION_INTENSITY = &quot;pmin&quot;
+<span class="lineno">  30 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:29:5</span><br><span class="message">PARAMETER_MINIMUM_PRECIPITATION_INTENSITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    val PARAMETER_WIND_GUST_SPEED = &quot;gust&quot;
+<span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    <span class="error">val PARAMETER_MINIMUM_PRECIPITATION_INTENSITY = &quot;pmin&quot;</span>
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    val PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY = &quot;pmax&quot;
+<span class="lineno">  32 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:31:5</span><br><span class="message">PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    val PARAMETER_MINIMUM_PRECIPITATION_INTENSITY = &quot;pmin&quot;
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    <span class="error">val PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY = &quot;pmax&quot;</span>
+<span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    val PARAMETER_PERCENT_OF_PRECIPITATION_IN_FROZEN_FORM = &quot;spp&quot;
+<span class="lineno">  34 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:33:5</span><br><span class="message">PARAMETER_PERCENT_OF_PRECIPITATION_IN_FROZEN_FORM can be a `const val`.</span>
+        <pre><code><span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    val PARAMETER_MAXIMUM_PRECIPITATION_INTENSITY = &quot;pmax&quot;
+<span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    <span class="error">val PARAMETER_PERCENT_OF_PRECIPITATION_IN_FROZEN_FORM = &quot;spp&quot;</span>
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    val PARAMETER_PRECIPITATION_CATEGORY = &quot;pcat&quot;
+<span class="lineno">  36 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:35:5</span><br><span class="message">PARAMETER_PRECIPITATION_CATEGORY can be a `const val`.</span>
+        <pre><code><span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    val PARAMETER_PERCENT_OF_PRECIPITATION_IN_FROZEN_FORM = &quot;spp&quot;
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    <span class="error">val PARAMETER_PRECIPITATION_CATEGORY = &quot;pcat&quot;</span>
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    val PARAMETER_MEAN_PRECIPITATION_INTENSITY = &quot;pmean&quot;
+<span class="lineno">  38 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:37:5</span><br><span class="message">PARAMETER_MEAN_PRECIPITATION_INTENSITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    val PARAMETER_PRECIPITATION_CATEGORY = &quot;pcat&quot;
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    <span class="error">val PARAMETER_MEAN_PRECIPITATION_INTENSITY = &quot;pmean&quot;</span>
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    val PARAMETER_MEDIAN_PRECIPITATION_INTENSITY = &quot;pmedian&quot;
+<span class="lineno">  40 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:39:5</span><br><span class="message">PARAMETER_MEDIAN_PRECIPITATION_INTENSITY can be a `const val`.</span>
+        <pre><code><span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    val PARAMETER_MEAN_PRECIPITATION_INTENSITY = &quot;pmean&quot;
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    <span class="error">val PARAMETER_MEDIAN_PRECIPITATION_INTENSITY = &quot;pmedian&quot;</span>
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    val PARAMETER_WEATHER_SYMBOL = &quot;Wsymb2&quot;
+<span class="lineno">  42 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:41:5</span><br><span class="message">PARAMETER_WEATHER_SYMBOL can be a `const val`.</span>
+        <pre><code><span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    val PARAMETER_MEDIAN_PRECIPITATION_INTENSITY = &quot;pmedian&quot;
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    <span class="error">val PARAMETER_WEATHER_SYMBOL = &quot;Wsymb2&quot;</span>
+<span class="lineno">  42 </span>}
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:5:5</span><br><span class="message">WEATHER_SYMBOL_CLEAR_SKY can be a `const val`.</span>
+        <pre><code><span class="lineno">   2 </span>
+<span class="lineno">   3 </span>object WeatherSymbolConstants {
+<span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    <span class="error">val WEATHER_SYMBOL_CLEAR_SKY = &quot;Klart&quot;</span>
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    val WEATHER_SYMBOL_NEARLY_CLEAR_SKY = &quot;Lätt molnighet&quot;
+<span class="lineno">   8 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:7:5</span><br><span class="message">WEATHER_SYMBOL_NEARLY_CLEAR_SKY can be a `const val`.</span>
+        <pre><code><span class="lineno">   4 </span>
+<span class="lineno">   5 </span>    val WEATHER_SYMBOL_CLEAR_SKY = &quot;Klart&quot;
+<span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    <span class="error">val WEATHER_SYMBOL_NEARLY_CLEAR_SKY = &quot;Lätt molnighet&quot;</span>
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    val WEATHER_SYMBOL_VARIABLE_CLOUDINESS = &quot;Varierande andel moln&quot;
+<span class="lineno">  10 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:9:5</span><br><span class="message">WEATHER_SYMBOL_VARIABLE_CLOUDINESS can be a `const val`.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    val WEATHER_SYMBOL_NEARLY_CLEAR_SKY = &quot;Lätt molnighet&quot;
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    <span class="error">val WEATHER_SYMBOL_VARIABLE_CLOUDINESS = &quot;Varierande andel moln&quot;</span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    val WEATHER_SYMBOL_HALFCLEAR_SKY = &quot;Halvklart&quot;
+<span class="lineno">  12 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:11:5</span><br><span class="message">WEATHER_SYMBOL_HALFCLEAR_SKY can be a `const val`.</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    val WEATHER_SYMBOL_VARIABLE_CLOUDINESS = &quot;Varierande andel moln&quot;
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    <span class="error">val WEATHER_SYMBOL_HALFCLEAR_SKY = &quot;Halvklart&quot;</span>
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    val WEATHER_SYMBOL_CLOUDY_SKY = &quot;Molnigt&quot;
+<span class="lineno">  14 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:13:5</span><br><span class="message">WEATHER_SYMBOL_CLOUDY_SKY can be a `const val`.</span>
+        <pre><code><span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    val WEATHER_SYMBOL_HALFCLEAR_SKY = &quot;Halvklart&quot;
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    <span class="error">val WEATHER_SYMBOL_CLOUDY_SKY = &quot;Molnigt&quot;</span>
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    val WEATHER_SYMBOL_OVERCAST = &quot;Mulet&quot;
+<span class="lineno">  16 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:15:5</span><br><span class="message">WEATHER_SYMBOL_OVERCAST can be a `const val`.</span>
+        <pre><code><span class="lineno">  12 </span>
+<span class="lineno">  13 </span>    val WEATHER_SYMBOL_CLOUDY_SKY = &quot;Molnigt&quot;
+<span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    <span class="error">val WEATHER_SYMBOL_OVERCAST = &quot;Mulet&quot;</span>
+<span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    val WEATHER_SYMBOL_FOG = &quot;Dimma&quot;
+<span class="lineno">  18 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:17:5</span><br><span class="message">WEATHER_SYMBOL_FOG can be a `const val`.</span>
+        <pre><code><span class="lineno">  14 </span>
+<span class="lineno">  15 </span>    val WEATHER_SYMBOL_OVERCAST = &quot;Mulet&quot;
+<span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    <span class="error">val WEATHER_SYMBOL_FOG = &quot;Dimma&quot;</span>
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    val WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS = &quot;Lätt regnskur&quot;
+<span class="lineno">  20 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:19:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  16 </span>
+<span class="lineno">  17 </span>    val WEATHER_SYMBOL_FOG = &quot;Dimma&quot;
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS = &quot;Lätt regnskur&quot;</span>
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    val WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS = &quot;Regnskur&quot;
+<span class="lineno">  22 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:21:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  18 </span>
+<span class="lineno">  19 </span>    val WEATHER_SYMBOL_LIGHT_RAIN_SHOWERS = &quot;Lätt regnskur&quot;
+<span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS = &quot;Regnskur&quot;</span>
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    val WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS = &quot;Kraftig regnskur&quot;
+<span class="lineno">  24 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:23:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  20 </span>
+<span class="lineno">  21 </span>    val WEATHER_SYMBOL_MODERATE_RAIN_SHOWERS = &quot;Regnskur&quot;
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS = &quot;Kraftig regnskur&quot;</span>
+<span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    val WEATHER_SYMBOL_THUNDERSTORM = &quot;Åskväder&quot;
+<span class="lineno">  26 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:25:5</span><br><span class="message">WEATHER_SYMBOL_THUNDERSTORM can be a `const val`.</span>
+        <pre><code><span class="lineno">  22 </span>
+<span class="lineno">  23 </span>    val WEATHER_SYMBOL_HEAVY_RAIN_SHOWERS = &quot;Kraftig regnskur&quot;
+<span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    <span class="error">val WEATHER_SYMBOL_THUNDERSTORM = &quot;Åskväder&quot;</span>
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    val WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS = &quot;Lätt snöblandat regnskur&quot;
+<span class="lineno">  28 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:27:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  24 </span>
+<span class="lineno">  25 </span>    val WEATHER_SYMBOL_THUNDERSTORM = &quot;Åskväder&quot;
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS = &quot;Lätt snöblandat regnskur&quot;</span>
+<span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    val WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS = &quot;Snöblandat regnskur&quot;
+<span class="lineno">  30 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:29:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  26 </span>
+<span class="lineno">  27 </span>    val WEATHER_SYMBOL_LIGHT_SLEET_SHOWERS = &quot;Lätt snöblandat regnskur&quot;
+<span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS = &quot;Snöblandat regnskur&quot;</span>
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    val WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS = &quot;Kraftigt snöblandat regnskur&quot;
+<span class="lineno">  32 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:31:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  28 </span>
+<span class="lineno">  29 </span>    val WEATHER_SYMBOL_MODERATE_SLEET_SHOWERS = &quot;Snöblandat regnskur&quot;
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS = &quot;Kraftigt snöblandat regnskur&quot;</span>
+<span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    val WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS = &quot;Lätt snöby&quot;
+<span class="lineno">  34 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:33:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  30 </span>
+<span class="lineno">  31 </span>    val WEATHER_SYMBOL_HEAVY_SLEET_SHOWERS = &quot;Kraftigt snöblandat regnskur&quot;
+<span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS = &quot;Lätt snöby&quot;</span>
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    val WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS = &quot;Snöby&quot;
+<span class="lineno">  36 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:35:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  32 </span>
+<span class="lineno">  33 </span>    val WEATHER_SYMBOL_LIGHT_SNOW_SHOWERS = &quot;Lätt snöby&quot;
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS = &quot;Snöby&quot;</span>
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    val WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS = &quot;Kraftig snöby&quot;
+<span class="lineno">  38 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:37:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS can be a `const val`.</span>
+        <pre><code><span class="lineno">  34 </span>
+<span class="lineno">  35 </span>    val WEATHER_SYMBOL_MODERATE_SNOW_SHOWERS = &quot;Snöby&quot;
+<span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS = &quot;Kraftig snöby&quot;</span>
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    val WEATHER_SYMBOL_LIGHT_RAIN = &quot;Lätt regn&quot;
+<span class="lineno">  40 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:39:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_RAIN can be a `const val`.</span>
+        <pre><code><span class="lineno">  36 </span>
+<span class="lineno">  37 </span>    val WEATHER_SYMBOL_HEAVY_SNOW_SHOWERS = &quot;Kraftig snöby&quot;
+<span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_RAIN = &quot;Lätt regn&quot;</span>
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    val WEATHER_SYMBOL_MODERATE_RAIN = &quot;Regn&quot;
+<span class="lineno">  42 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:41:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_RAIN can be a `const val`.</span>
+        <pre><code><span class="lineno">  38 </span>
+<span class="lineno">  39 </span>    val WEATHER_SYMBOL_LIGHT_RAIN = &quot;Lätt regn&quot;
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_RAIN = &quot;Regn&quot;</span>
+<span class="lineno">  42 </span>
+<span class="lineno">  43 </span>    val WEATHER_SYMBOL_HEAVY_RAIN = &quot;Kraftigt regn&quot;
+<span class="lineno">  44 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:43:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_RAIN can be a `const val`.</span>
+        <pre><code><span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    val WEATHER_SYMBOL_MODERATE_RAIN = &quot;Regn&quot;
+<span class="lineno">  42 </span>
+<span class="lineno">  43 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_RAIN = &quot;Kraftigt regn&quot;</span>
+<span class="lineno">  44 </span>
+<span class="lineno">  45 </span>    val WEATHER_SYMBOL_THUNDER = &quot;Åska&quot;
+<span class="lineno">  46 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:45:5</span><br><span class="message">WEATHER_SYMBOL_THUNDER can be a `const val`.</span>
+        <pre><code><span class="lineno">  42 </span>
+<span class="lineno">  43 </span>    val WEATHER_SYMBOL_HEAVY_RAIN = &quot;Kraftigt regn&quot;
+<span class="lineno">  44 </span>
+<span class="lineno">  45 </span>    <span class="error">val WEATHER_SYMBOL_THUNDER = &quot;Åska&quot;</span>
+<span class="lineno">  46 </span>
+<span class="lineno">  47 </span>    val WEATHER_SYMBOL_LIGHT_SLEET = &quot;Lätt snöblandat regn&quot;
+<span class="lineno">  48 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:47:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_SLEET can be a `const val`.</span>
+        <pre><code><span class="lineno">  44 </span>
+<span class="lineno">  45 </span>    val WEATHER_SYMBOL_THUNDER = &quot;Åska&quot;
+<span class="lineno">  46 </span>
+<span class="lineno">  47 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_SLEET = &quot;Lätt snöblandat regn&quot;</span>
+<span class="lineno">  48 </span>
+<span class="lineno">  49 </span>    val WEATHER_SYMBOL_MODERATE_SLEET = &quot;Snöblandat regn&quot;
+<span class="lineno">  50 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:49:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_SLEET can be a `const val`.</span>
+        <pre><code><span class="lineno">  46 </span>
+<span class="lineno">  47 </span>    val WEATHER_SYMBOL_LIGHT_SLEET = &quot;Lätt snöblandat regn&quot;
+<span class="lineno">  48 </span>
+<span class="lineno">  49 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_SLEET = &quot;Snöblandat regn&quot;</span>
+<span class="lineno">  50 </span>
+<span class="lineno">  51 </span>    val WEATHER_SYMBOL_HEAVY_SLEET = &quot;Kraftigt snöblandat regn&quot;
+<span class="lineno">  52 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:51:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_SLEET can be a `const val`.</span>
+        <pre><code><span class="lineno">  48 </span>
+<span class="lineno">  49 </span>    val WEATHER_SYMBOL_MODERATE_SLEET = &quot;Snöblandat regn&quot;
+<span class="lineno">  50 </span>
+<span class="lineno">  51 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_SLEET = &quot;Kraftigt snöblandat regn&quot;</span>
+<span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    val WEATHER_SYMBOL_LIGHT_SNOWFALL = &quot;Lätt snöfall&quot;
+<span class="lineno">  54 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:53:5</span><br><span class="message">WEATHER_SYMBOL_LIGHT_SNOWFALL can be a `const val`.</span>
+        <pre><code><span class="lineno">  50 </span>
+<span class="lineno">  51 </span>    val WEATHER_SYMBOL_HEAVY_SLEET = &quot;Kraftigt snöblandat regn&quot;
+<span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    <span class="error">val WEATHER_SYMBOL_LIGHT_SNOWFALL = &quot;Lätt snöfall&quot;</span>
+<span class="lineno">  54 </span>
+<span class="lineno">  55 </span>    val WEATHER_SYMBOL_MODERATE_SNOWFALL = &quot;Snöfall&quot;
+<span class="lineno">  56 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:55:5</span><br><span class="message">WEATHER_SYMBOL_MODERATE_SNOWFALL can be a `const val`.</span>
+        <pre><code><span class="lineno">  52 </span>
+<span class="lineno">  53 </span>    val WEATHER_SYMBOL_LIGHT_SNOWFALL = &quot;Lätt snöfall&quot;
+<span class="lineno">  54 </span>
+<span class="lineno">  55 </span>    <span class="error">val WEATHER_SYMBOL_MODERATE_SNOWFALL = &quot;Snöfall&quot;</span>
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    val WEATHER_SYMBOL_HEAVY_SNOWFALL = &quot;Ymnigt snöfall&quot;
+<span class="lineno">  58 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:57:5</span><br><span class="message">WEATHER_SYMBOL_HEAVY_SNOWFALL can be a `const val`.</span>
+        <pre><code><span class="lineno">  54 </span>
+<span class="lineno">  55 </span>    val WEATHER_SYMBOL_MODERATE_SNOWFALL = &quot;Snöfall&quot;
+<span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    <span class="error">val WEATHER_SYMBOL_HEAVY_SNOWFALL = &quot;Ymnigt snöfall&quot;</span>
+<span class="lineno">  58 </span>
+<span class="lineno">  59 </span>}
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="NewLineAtEndOfFile" open="open">
+    <summary class="rule-container"><span class="rule">NewLineAtEndOfFile: 55 </span><span class="description">Checks whether files end with a line separator.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\androidTest\java\com\benji\weatherswe\MainActivityTest.kt:44:1</span><br><span class="message">The file MainActivityTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  41 </span>    }
+<span class="lineno">  42 </span>
+<span class="lineno">  43 </span>
+<span class="lineno">  44 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\BaseViewModel.kt:50:1</span><br><span class="message">The file BaseViewModel.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  47 </span>        super.onCleared()
+<span class="lineno">  48 </span>    }
+<span class="lineno">  49 </span>
+<span class="lineno">  50 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\BaseViewModelFactory.kt:10:1</span><br><span class="message">The file BaseViewModelFactory.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   7 </span>    override fun &lt;T : ViewModel?&gt; create(modelClass: Class&lt;T&gt;): T {
+<span class="lineno">   8 </span>        return creator() as T
+<span class="lineno">   9 </span>    }
+<span class="lineno">  10 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\SharedViewModel.kt:28:1</span><br><span class="message">The file SharedViewModel.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  25 </span>
+<span class="lineno">  26 </span>    val locationSettingsResponse = MutableLiveData&lt;LocationSettingsResponse&gt;()
+<span class="lineno">  27 </span>
+<span class="lineno">  28 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayUtils.kt:27:1</span><br><span class="message">The file DayUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  24 </span>
+<span class="lineno">  25 </span>        return DayForecast(date, day, city, highestTemp, listOfHourlyData, weatherSymbol)
+<span class="lineno">  26 </span>    }
+<span class="lineno">  27 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt:91:67</span><br><span class="message">The file DayWeatherAdapter.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  88 </span>
+<span class="lineno">  89 </span>}
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>data class RowData(val position: Int, val dayForecast: DayForecast<span class="error">)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt:82:1</span><br><span class="message">The file HourlyUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  79 </span>    }
+<span class="lineno">  80 </span>
+<span class="lineno">  81 </span>
+<span class="lineno">  82 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationHandler.kt:50:1</span><br><span class="message">The file LocationHandler.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  47 </span>            Manifest.permission.ACCESS_FINE_LOCATION
+<span class="lineno">  48 </span>        ) == PackageManager.PERMISSION_GRANTED)
+<span class="lineno">  49 </span>
+<span class="lineno">  50 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\PermissionManager.kt:61:1</span><br><span class="message">The file PermissionManager.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  58 </span>    }
+<span class="lineno">  59 </span>
+<span class="lineno">  60 </span>
+<span class="lineno">  61 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\ReveresedGeocoding.kt:35:1</span><br><span class="message">The file ReveresedGeocoding.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  32 </span>        return stringBuilder.toString().trim()
+<span class="lineno">  33 </span>    }
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\ActivityExt.kt:20:1</span><br><span class="message">The file ActivityExt.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  17 </span>
+<span class="lineno">  18 </span>fun MainActivity.sharedViewModel(): SharedViewModel {
+<span class="lineno">  19 </span>    return ViewModelProviders.of(this).get(SharedViewModel::class.java)
+<span class="lineno">  20 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\DateUtils.kt:52:1</span><br><span class="message">The file DateUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  49 </span>    }
+<span class="lineno">  50 </span>
+<span class="lineno">  51 </span>
+<span class="lineno">  52 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\DispatcherProvider.kt:16:1</span><br><span class="message">The file DispatcherProvider.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  13 </span>        return Dispatchers.IO
+<span class="lineno">  14 </span>    }
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\FragmentExt.kt:91:1</span><br><span class="message">The file FragmentExt.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  88 </span>fun Candidate.toJson(): String {
+<span class="lineno">  89 </span>    return Moshi.Builder().build().adapter(Candidate::class.java)
+<span class="lineno">  90 </span>        .toJson(this)
+<span class="lineno">  91 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\GPSBroadcastReceiver.kt:47:1</span><br><span class="message">The file GPSBroadcastReceiver.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  44 </span>sealed class GpsStatus {
+<span class="lineno">  45 </span>    object Enabled : GpsStatus()
+<span class="lineno">  46 </span>    object Disabled : GpsStatus()
+<span class="lineno">  47 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\ILocationSettings.kt:11:1</span><br><span class="message">The file ILocationSettings.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:133:1</span><br><span class="message">The file LocationSettings.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno"> 130 </span>        googleApiClient.unregisterConnectionFailedListener(this)
+<span class="lineno"> 131 </span>    }
+<span class="lineno"> 132 </span>
+<span class="lineno"> 133 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\SymbolUtils.kt:86:1</span><br><span class="message">The file SymbolUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  83 </span>        else -&gt; &quot;N/A&quot;
+<span class="lineno">  84 </span>    }
+<span class="lineno">  85 </span>
+<span class="lineno">  86 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\TempUtils.kt:20:1</span><br><span class="message">The file TempUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  17 </span>        return tempCurrent.roundToInt().toString()
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\InstantExecutorExtension.kt:27:1</span><br><span class="message">The file InstantExecutorExtension.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  24 </span>        ArchTaskExecutor.getInstance().setDelegate(null)
+<span class="lineno">  25 </span>    }
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\dayweather\DayWeatherViewModelTest.kt:89:1</span><br><span class="message">The file DayWeatherViewModelTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  86 </span>
+<span class="lineno">  87 </span>
+<span class="lineno">  88 </span>
+<span class="lineno">  89 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\locationweather\LocationWeatherViewModelTest.kt:96:1</span><br><span class="message">The file LocationWeatherViewModelTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  93 </span>    }
+<span class="lineno">  94 </span>
+<span class="lineno">  95 </span>
+<span class="lineno">  96 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\no_test_only_helper_functions\TestUtils.kt:27:1</span><br><span class="message">The file TestUtils.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  24 </span>        return convertStreamToString(stream)
+<span class="lineno">  25 </span>    }
+<span class="lineno">  26 </span>
+<span class="lineno">  27 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\DateUtilsTest.kt:70:1</span><br><span class="message">The file DateUtilsTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  67 </span>    }
+<span class="lineno">  68 </span>
+<span class="lineno">  69 </span>
+<span class="lineno">  70 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\HourlyUtilsTest.kt:115:1</span><br><span class="message">The file HourlyUtilsTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno"> 112 </span>        assertEquals(&quot;01:00&quot;, hourly.validTime)
+<span class="lineno"> 113 </span>    }
+<span class="lineno"> 114 </span>
+<span class="lineno"> 115 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\SymbolUtilsTest.kt:51:1</span><br><span class="message">The file SymbolUtilsTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  48 </span>        assertEquals(1, symbol)
+<span class="lineno">  49 </span>    }
+<span class="lineno">  50 </span>
+<span class="lineno">  51 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\TempUtilsTest.kt:31:1</span><br><span class="message">The file TempUtilsTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  28 </span>        assertEquals(&quot;5&quot;, maxTemp)
+<span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\androidTest\java\com\benji\data\datasource\local\Constants.kt:186:1</span><br><span class="message">The file Constants.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno"> 183 </span>            &quot;}&quot;
+<span class="lineno"> 184 </span>
+<span class="lineno"> 185 </span>
+<span class="lineno"> 186 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\androidTest\java\com\benji\data\datasource\local\WeatherRoomDatabaseTest.kt:94:1</span><br><span class="message">The file WeatherRoomDatabaseTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  91 </span>    }
+<span class="lineno">  92 </span>
+<span class="lineno">  93 </span>
+<span class="lineno">  94 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\ErrorHandlerImpl.kt:31:1</span><br><span class="message">The file ErrorHandlerImpl.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  28 </span>        else -&gt; ErrorEntity.Unknown(throwable)
+<span class="lineno">  29 </span>    }
+<span class="lineno">  30 </span>
+<span class="lineno">  31 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\datasource\UrlManager.kt:6:1</span><br><span class="message">The file UrlManager.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   3 </span>object UrlManager {
+<span class="lineno">   4 </span>    const val API_SMHI_FORECAST_BASE_URL = &quot;https://opendata-download-metfcst.smhi.se/&quot;
+<span class="lineno">   5 </span>    const val API_GEOCODING_BASE_URL = &quot;http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/&quot;
+<span class="lineno">   6 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\datasource\remote\GeocodingAPI.kt:23:1</span><br><span class="message">The file GeocodingAPI.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  20 </span>
+<span class="lineno">  21 </span>
+<span class="lineno">  22 </span>
+<span class="lineno">  23 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\datasource\remote\WeatherAPI.kt:16:1</span><br><span class="message">The file WeatherAPI.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  13 </span>    )
+<span class="lineno">  14 </span>            : Weather
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\repository\GeocodingRepository.kt:31:1</span><br><span class="message">The file GeocodingRepository.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  28 </span>            ResultWrapper.build { throw exception }
+<span class="lineno">  29 </span>        }
+<span class="lineno">  30 </span>    }
+<span class="lineno">  31 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\data\src\main\java\com\benji\data\repository\WeatherRepository.kt:36:1</span><br><span class="message">The file WeatherRepository.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  33 </span>    }
+<span class="lineno">  34 </span>
+<span class="lineno">  35 </span>
+<span class="lineno">  36 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\ErrorHandler.kt:9:1</span><br><span class="message">The file ErrorHandler.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    fun getError(throwable: Throwable): ErrorEntity
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\ResultWrapper.kt:19:1</span><br><span class="message">The file ResultWrapper.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  16 </span>                Error(e)
+<span class="lineno">  17 </span>            }
+<span class="lineno">  18 </span>    }
+<span class="lineno">  19 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\Constants.kt:9:1</span><br><span class="message">The file Constants.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   6 </span>    val PREF_KEY_CITY = &quot;City&quot;
+<span class="lineno">   7 </span>    val PREF_DEFAULT_VALUE = &quot;&quot;
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\ParameterConstants.kt:42:1</span><br><span class="message">The file ParameterConstants.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  39 </span>    val PARAMETER_MEDIAN_PRECIPITATION_INTENSITY = &quot;pmedian&quot;
+<span class="lineno">  40 </span>
+<span class="lineno">  41 </span>    val PARAMETER_WEATHER_SYMBOL = &quot;Wsymb2&quot;
+<span class="lineno">  42 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\constants\WeatherSymbolConstants.kt:59:1</span><br><span class="message">The file WeatherSymbolConstants.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  56 </span>
+<span class="lineno">  57 </span>    val WEATHER_SYMBOL_HEAVY_SNOWFALL = &quot;Ymnigt snöfall&quot;
+<span class="lineno">  58 </span>
+<span class="lineno">  59 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\ErrorEntity.kt:18:1</span><br><span class="message">The file ErrorEntity.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  15 </span>
+<span class="lineno">  16 </span>    data class Unknown(override val originalException: Throwable) : ErrorEntity()
+<span class="lineno">  17 </span>
+<span class="lineno">  18 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\State.kt:8:1</span><br><span class="message">The file State.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   5 </span>    object Complete: State()
+<span class="lineno">   6 </span>    object Idle: State()
+<span class="lineno">   7 </span>    object Gone: State()
+<span class="lineno">   8 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Candidates.kt:9:1</span><br><span class="message">The file Candidates.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>fun Candidates.returnCandidateWithHighestScore() : Candidate {
+<span class="lineno">   8 </span>    return this.candidates.maxBy { it.score }!!
+<span class="lineno">   9 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Location.kt:26:1</span><br><span class="message">The file Location.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  23 </span>    val longitude = BigDecimal(x).setScale(5, RoundingMode.CEILING)
+<span class="lineno">  24 </span>    val latitude = BigDecimal(y).setScale(5, RoundingMode.CEILING)
+<span class="lineno">  25 </span>    return Location(latitude.toDouble(), longitude.toDouble())
+<span class="lineno">  26 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\geocoding\Suggestion.kt:12:1</span><br><span class="message">The file Suggestion.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   9 </span>    val listOfCities = mutableListOf&lt;String&gt;()
+<span class="lineno">  10 </span>    forEach { suggestion -&gt; listOfCities.add(suggestion.text) }
+<span class="lineno">  11 </span>    return listOfCities
+<span class="lineno">  12 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\weather\Geometry.kt:6:1</span><br><span class="message">The file Geometry.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   3 </span>data class Geometry(
+<span class="lineno">   4 </span>    val coordinates: List&lt;List&lt;Double&gt;&gt;,
+<span class="lineno">   5 </span>    val type: String
+<span class="lineno">   6 </span><span class="error">)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\weather\Parameter.kt:9:1</span><br><span class="message">The file Parameter.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   6 </span>    var level: Int,
+<span class="lineno">   7 </span>    val unit: String,
+<span class="lineno">   8 </span>    val values: List&lt;String&gt;
+<span class="lineno">   9 </span><span class="error">)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\weather\TimeSeries.kt:6:1</span><br><span class="message">The file TimeSeries.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   3 </span>data class TimeSeries(
+<span class="lineno">   4 </span>    val parameters: List&lt;Parameter&gt;,
+<span class="lineno">   5 </span>    val validTime: String
+<span class="lineno">   6 </span><span class="error">)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\domainmodel\weather\Weather.kt:8:1</span><br><span class="message">The file Weather.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   5 </span>    val referenceTime: String,
+<span class="lineno">   6 </span>    val geometry: Geometry,
+<span class="lineno">   7 </span>    val timeSeries: List&lt;TimeSeries&gt;
+<span class="lineno">   8 </span><span class="error">)</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\ILocationHandler.kt:10:1</span><br><span class="message">The file ILocationHandler.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   7 </span>    suspend fun getDeviceLocation(): Location?
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span>
+<span class="lineno">  10 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IPermissionManager.kt:11:1</span><br><span class="message">The file IPermissionManager.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   8 </span>
+<span class="lineno">   9 </span>    fun permissionGranted() : Boolean
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IReversedGeocoding.kt:9:1</span><br><span class="message">The file IReversedGeocoding.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   6 </span>
+<span class="lineno">   7 </span>    fun getFromLocation(location : Location) : String
+<span class="lineno">   8 </span>
+<span class="lineno">   9 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\repository\IGeocodingRepository.kt:12:1</span><br><span class="message">The file IGeocodingRepository.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">   9 </span>    suspend fun getSuggestions(textSearch : String) : ResultWrapper&lt;Exception, Suggestions&gt;
+<span class="lineno">  10 </span>
+<span class="lineno">  11 </span>    suspend fun getCandidateLocation(city : String, magicKey : String) : ResultWrapper&lt;Exception, Candidates&gt;
+<span class="lineno">  12 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\repository\IWeatherRepository.kt:20:1</span><br><span class="message">The file IWeatherRepository.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  17 </span>    suspend fun deleteAll() : ResultWrapper&lt;Exception, Unit&gt;
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>
+<span class="lineno">  20 </span><span class="error">}</span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\test\java\com\benji\domain\domainmodel\geocoding\LocationTest.kt:42:1</span><br><span class="message">The file LocationTest.kt is not ending with a new line.</span>
+        <pre><code><span class="lineno">  39 </span>        assertDoesNotThrow{Location(56.00, 24.00)}
+<span class="lineno">  40 </span>    }
+<span class="lineno">  41 </span>
+<span class="lineno">  42 </span><span class="error">}</span>
+</code></pre>
+      </li>
+    </ul>
+  </details>
+  <details id="WildcardImport" open="open">
+    <summary class="rule-container"><span class="rule">WildcardImport: 7 </span><span class="description">Wildcard imports should be replaced with imports using fully qualified class names. Wildcard imports can lead to naming conflicts. A library update can introduce naming clashes with your classes which results in compilation errors.</span></summary>
+    <ul>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\MainActivity.kt:10:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   7 </span>import androidx.appcompat.app.AppCompatActivity
+<span class="lineno">   8 </span>import com.benji.weatherswe.locationweather.PermissionManager
+<span class="lineno">   9 </span>import com.benji.weatherswe.locationweather.PermissionManager.Companion.PERMISSION_CODE_LOCATION
+<span class="lineno">  10 </span><span class="error">import com.benji.weatherswe.utils.*</span>
+<span class="lineno">  11 </span>import com.google.android.gms.location.LocationSettingsResponse
+<span class="lineno">  12 </span>
+<span class="lineno">  13 </span>class MainActivity : AppCompatActivity() {
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:4:1</span><br><span class="message">android.view.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   1 </span>package com.benji.weatherswe.dayweather
+<span class="lineno">   2 </span>
+<span class="lineno">   3 </span>import android.os.Bundle
+<span class="lineno">   4 </span><span class="error">import android.view.*</span>
+<span class="lineno">   5 </span>import android.widget.ArrayAdapter
+<span class="lineno">   6 </span>import androidx.activity.addCallback
+<span class="lineno">   7 </span>import androidx.appcompat.widget.SearchView
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:16:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">  13 </span>import com.benji.domain.domainmodel.weather.HourlyOverview
+<span class="lineno">  14 </span>import com.benji.weatherswe.R
+<span class="lineno">  15 </span>import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
+<span class="lineno">  16 </span><span class="error">import com.benji.weatherswe.utils.*</span>
+<span class="lineno">  17 </span>import kotlinx.android.synthetic.main.fragment_day_weather.*
+<span class="lineno">  18 </span>
+<span class="lineno">  19 </span>
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:9:1</span><br><span class="message">com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   6 </span>import com.benji.data.ErrorHandlerImpl
+<span class="lineno">   7 </span>import com.benji.domain.ResultWrapper
+<span class="lineno">   8 </span>import com.benji.domain.domainmodel.ErrorEntity
+<span class="lineno">   9 </span><span class="error">import com.benji.domain.domainmodel.geocoding.*</span>
+<span class="lineno">  10 </span>import com.benji.domain.domainmodel.weather.DayForecast
+<span class="lineno">  11 </span>import com.benji.domain.domainmodel.weather.Hourly
+<span class="lineno">  12 </span>import com.benji.domain.domainmodel.weather.HourlyOverview
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherFragment.kt:18:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">  15 </span>import com.benji.domain.domainmodel.geocoding.Candidate
+<span class="lineno">  16 </span>import com.benji.weatherswe.R
+<span class="lineno">  17 </span>import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
+<span class="lineno">  18 </span><span class="error">import com.benji.weatherswe.utils.*</span>
+<span class="lineno">  19 </span>import com.google.android.gms.location.LocationSettingsResponse
+<span class="lineno">  20 </span>import com.squareup.moshi.Moshi
+<span class="lineno">  21 </span>import kotlinx.android.synthetic.main.location_weather_fragment.*
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherViewModel.kt:7:1</span><br><span class="message">com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">   4 </span>import androidx.lifecycle.LiveData
+<span class="lineno">   5 </span>import androidx.lifecycle.MutableLiveData
+<span class="lineno">   6 </span>import com.benji.domain.ResultWrapper
+<span class="lineno">   7 </span><span class="error">import com.benji.domain.domainmodel.geocoding.*</span>
+<span class="lineno">   8 </span>import com.benji.domain.location.ILocationHandler
+<span class="lineno">   9 </span>import com.benji.domain.location.IReversedGeocoding
+<span class="lineno">  10 </span>import com.benji.domain.repository.IGeocodingRepository
+</code></pre>
+      </li>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\utils\LocationSettings.kt:13:1</span><br><span class="message">com.google.android.gms.location.* is a wildcard import. Replace it with fully qualified imports.</span>
+        <pre><code><span class="lineno">  10 </span>import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks
+<span class="lineno">  11 </span>import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener
+<span class="lineno">  12 </span>import com.google.android.gms.common.api.ResolvableApiException
+<span class="lineno">  13 </span><span class="error">import com.google.android.gms.location.*</span>
+<span class="lineno">  14 </span>import com.google.android.gms.tasks.Task
+<span class="lineno">  15 </span>
+<span class="lineno">  16 </span>class LocationSettings(private val activity: MainActivity) : ConnectionCallbacks,
+</code></pre>
+      </li>
+    </ul>
+  </details>
+</div>
+
+
+</body>
+</html>

@@ -67,6 +67,26 @@ buildscript {
     }
 }
 
+plugins {
+    id("io.gitlab.arturbosch.detekt") version "1.5.1"
+}
+
+detekt {
+    toolVersion = "1.5.1"
+    input = files("$projectDir")
+    config = files("$project.projectDir/config/detekt/detekt.yml")
+    reports {
+        xml {
+            enabled = true
+            destination = file("$project.projectDir/detekt-report.xml")
+        }
+        html {
+            enabled = true
+            destination = file("$project.projectDir/detekt-report.html")
+        }
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -78,3 +98,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

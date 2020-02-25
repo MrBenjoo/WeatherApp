@@ -10,7 +10,7 @@ import com.benji.weatherswe.MainActivity
 
 class PermissionManager(private val activity: MainActivity): IPermissionManager {
 
-    override fun checkGrantResults(grantResults: IntArray): Boolean =
+    override fun approvedGrantResults(grantResults: IntArray): Boolean =
         grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
 
 

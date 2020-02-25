@@ -4,7 +4,7 @@ interface IPermissionManager {
 
     fun requestPermission()
 
-    fun checkGrantResults(grantResults: IntArray): Boolean
+    fun approvedGrantResults(grantResults: IntArray): Boolean
 
     fun permissionGranted() : Boolean
 
