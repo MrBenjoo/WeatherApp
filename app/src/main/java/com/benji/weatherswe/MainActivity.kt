@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         permissionManager = PermissionManager(this).also { it.requestPermission() }
         gpsBroadcastReceiver = GPSBroadcastReceiver(this)
         locationHandler = LocationHandler(this)
-        NetworkUtils(this.applicationContext).registerNetworkCallback()
     }
 
     override fun onRequestPermissionsResult(
