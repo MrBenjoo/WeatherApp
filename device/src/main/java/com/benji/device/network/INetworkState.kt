@@ -1,4 +1,4 @@
-package com.benji.weatherswe.utils.network
+package com.benji.device.network
 
 interface INetworkState {
 

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.benji.device.network.Event
+import com.benji.device.network.NetworkEvents
 import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.geocoding.Candidate
@@ -16,10 +18,6 @@ import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.extensions.*
-import com.benji.weatherswe.utils.network.Event
-import com.benji.weatherswe.utils.network.NetworkEvents
-import com.benji.weatherswe.utils.network.NetworkStateHolder
-import com.benji.weatherswe.utils.network.NetworkStateImp
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 

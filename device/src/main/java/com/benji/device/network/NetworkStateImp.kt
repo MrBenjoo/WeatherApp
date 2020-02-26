@@ -1,6 +1,6 @@
-package com.benji.weatherswe.utils.network
+package com.benji.device.network
 
-class NetworkStateImp : INetworkState {
+internal class NetworkStateImp : INetworkState {
 
     override var isConnected: Boolean = false
         set(value) {

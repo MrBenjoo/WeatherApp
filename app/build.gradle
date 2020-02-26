@@ -1,27 +1,27 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 def config = rootProject.extensions.getByName("ext")
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.0"
+    buildToolsVersion rootProject.buildToolsVersion
+
+
     defaultConfig {
         applicationId "com.benji.weatherswe"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode rootProject.versionCode
         versionName rootProject.versionName
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
     }
-    buildTypes {
 
+    buildTypes {
         release {
             testCoverageEnabled = true
             minifyEnabled true
@@ -52,7 +52,6 @@ android {
         }
     }
 
-
     testOptions {
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
 
@@ -66,11 +65,13 @@ android {
             resources.srcDirs = ['src/main/resources', 'src/test/java/com/benji/weatherswe/resources/']
         }
     }
+
 }
 
 dependencies {
     implementation project(":data")
     implementation project(":domain")
+    implementation project(":device")
 
     debugImplementation config.debugDependency.leakCanary
 

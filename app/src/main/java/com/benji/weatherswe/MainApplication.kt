@@ -1,7 +1,7 @@
 package com.benji.weatherswe
 
 import android.app.Application
-import com.benji.weatherswe.utils.network.NetworkStateHolder.registerConnectivityBroadcaster
+import com.benji.device.network.NetworkStateHolder.registerConnectivityBroadcaster
 
 class MainApplication : Application() {
 

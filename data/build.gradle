@@ -7,7 +7,7 @@ def config = rootProject.extensions.getByName("ext")
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.0"
+    buildToolsVersion rootProject.buildToolsVersion
 
 
     defaultConfig {

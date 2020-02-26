@@ -1,9 +1,9 @@
-package com.benji.weatherswe.utils.network
+package com.benji.device.network
 
 import android.net.ConnectivityManager
 import android.net.Network
 
-class NetworkCallbackImp(private val holder: NetworkStateImp) :
+internal class NetworkCallbackImp(private val holder: NetworkStateImp) :
     ConnectivityManager.NetworkCallback() {
 
     override fun onLost(network: Network) {
