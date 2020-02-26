@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
+buildscript { 
+    ext.kotlin_version = '1.3.50'
+
 
     ext {
         versionCode = 1
@@ -60,50 +62,50 @@ buildscript {
 
 
         architectureComponents = [
-                lifeCycleExtensions   : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
-                lifecycleViewmodelKtx : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
-                navigationFragment    : "androidx.navigation:navigation-fragment-ktx:${navigationVersion}",
-                navigationUI          : "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
+                lifeCycleExtensions  : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+                lifecycleViewmodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+                navigationFragment   : "androidx.navigation:navigation-fragment-ktx:${navigationVersion}",
+                navigationUI         : "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
         ]
 
         commonDependency = [
-                appCompat             : "androidx.appcompat:appcompat:${supportLibraryVersion}",
-                constraintLayout      : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
-                material              : "com.google.android.material:material:${materialVersion}",
-                recyclerView          : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
-                standardLibraryJDK8   : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
-                gmsServiceLocation    : "com.google.android.gms:play-services-location:${servicesLocationGMS}",
-                androidKTX            : "androidx.core:core-ktx:${ktxVersion}",
-                coroutinesAndroid     : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
-                legacySupportV4       : "androidx.legacy:legacy-support-v4:${legacySupportV4}"
+                appCompat          : "androidx.appcompat:appcompat:${supportLibraryVersion}",
+                constraintLayout   : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+                material           : "com.google.android.material:material:${materialVersion}",
+                recyclerView       : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
+                standardLibraryJDK8: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+                gmsServiceLocation : "com.google.android.gms:play-services-location:${servicesLocationGMS}",
+                androidKTX         : "androidx.core:core-ktx:${ktxVersion}",
+                coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
+                legacySupportV4    : "androidx.legacy:legacy-support-v4:${legacySupportV4}"
         ]
 
         testDependencies = [
-                junitApi              : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
-                junitEngine           : "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
-                mockk                 : "io.mockk:mockk:${mockkVersion}"
+                junitApi   : "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+                junitEngine: "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+                mockk      : "io.mockk:mockk:${mockkVersion}"
         ]
 
         androidTestDependencies = [
-                testRules             : "androidx.test:rules:${androidxTestVersion}",
-                testRunner            : "androidx.test:runner:${androidxTestVersion}",
-                testExtJunit          : "androidx.test.ext:junit:${androidxTestVersion}",
-                uiAutomator           : "com.android.support.test.uiautomator:uiautomator-v18:${uiAutomatorVersion}",
-                coreTesting           : "androidx.arch.core:core-testing:${coreTestingVersion}"
+                testRules   : "androidx.test:rules:${androidxTestVersion}",
+                testRunner  : "androidx.test:runner:${androidxTestVersion}",
+                testExtJunit: "androidx.test.ext:junit:${androidxTestVersion}",
+                uiAutomator : "com.android.support.test.uiautomator:uiautomator-v18:${uiAutomatorVersion}",
+                coreTesting : "androidx.arch.core:core-testing:${coreTestingVersion}"
         ]
 
         networkDependencies = [
-                retrofit2                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                retrofit2MoshiConverter  : "com.squareup.retrofit2:converter-moshi:${retrofitVersion}"
+                retrofit2              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                retrofit2MoshiConverter: "com.squareup.retrofit2:converter-moshi:${retrofitVersion}"
         ]
 
         debugDependency = [
-                leakCanary               : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+                leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
         ]
 
         miscellaneousDependencies = [
-                lottie : "com.airbnb.android:lottie:${lottieVersion}",
-                topSnackbar : "com.androidadvance:topsnackbar:${topSnackBarversion}"
+                lottie     : "com.airbnb.android:lottie:${lottieVersion}",
+                topSnackbar: "com.androidadvance:topsnackbar:${topSnackBarversion}"
         ]
     }
 
@@ -117,6 +119,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -151,4 +154,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
