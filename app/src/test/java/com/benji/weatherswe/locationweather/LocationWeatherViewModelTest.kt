@@ -3,7 +3,6 @@ package com.benji.weatherswe.locationweather
 
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
-import com.benji.domain.location.ILocationHandler
 import com.benji.domain.location.IReversedGeocoding
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.InstantExecutorExtension

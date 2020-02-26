@@ -20,6 +20,5 @@ class SharedViewModel : ViewModel() {
 
     lateinit var todayDate : String
 
-    val lastLocationReceived = MutableLiveData<Location>()
 
 }

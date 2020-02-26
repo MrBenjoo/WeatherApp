@@ -84,7 +84,6 @@ dependencies {
     implementation config.commonDependency.material
     implementation config.commonDependency.standardLibraryJDK8
     implementation config.commonDependency.coroutinesAndroid
-    implementation config.commonDependency.gmsServiceLocation
 
     // ---- ANDROID ARCHITECTURE DEPENDENCIES ----
     implementation config.architectureComponents.lifeCycleExtensions

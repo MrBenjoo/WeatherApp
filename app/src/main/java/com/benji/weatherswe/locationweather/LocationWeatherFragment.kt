@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.benji.device.location.LocationEvent
 import com.benji.device.network.Event
 import com.benji.device.network.NetworkEvents
 import com.benji.domain.constants.Constants
@@ -85,8 +86,8 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
 
-        activitySharedViewModel().lastLocationReceived.observe(viewLifecycleOwner, locationObserver)
 
+        LocationEvent.observe(viewLifecycleOwner, locationObserver)
         NetworkEvents.observe(viewLifecycleOwner, networkEventObserver)
     }
 
@@ -103,8 +104,6 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     private val locationObserver = Observer<Location> { location ->
         viewModel.onLocationReceived(location)
     }
-
-
 
 
     private val stateObserver = Observer<State> { state ->

@@ -1895,14 +1895,14 @@ pre {
 <span class="lineno">  82 </span><span class="error">}</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationHandler.kt:50:1</span><br><span class="message">The file LocationHandler.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\Gps.kt:50:1</span><br><span class="message">The file Gps.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">  47 </span>            Manifest.permission.ACCESS_FINE_LOCATION
 <span class="lineno">  48 </span>        ) == PackageManager.PERMISSION_GRANTED)
 <span class="lineno">  49 </span>
 <span class="lineno">  50 </span><span class="error">}</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\PermissionManager.kt:61:1</span><br><span class="message">The file PermissionManager.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\Permissions.kt:61:1</span><br><span class="message">The file Permissions.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">  58 </span>    }
 <span class="lineno">  59 </span>
 <span class="lineno">  60 </span>
@@ -2189,14 +2189,14 @@ pre {
 <span class="lineno">   8 </span><span class="error">)</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\ILocationHandler.kt:10:1</span><br><span class="message">The file ILocationHandler.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IGps.kt:10:1</span><br><span class="message">The file IGps.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">   7 </span>    suspend fun getDeviceLocation(): Location?
 <span class="lineno">   8 </span>
 <span class="lineno">   9 </span>
 <span class="lineno">  10 </span><span class="error">}</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IPermissionManager.kt:11:1</span><br><span class="message">The file IPermissionManager.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IPermissions.kt:11:1</span><br><span class="message">The file IPermissions.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">   8 </span>
 <span class="lineno">   9 </span>    fun permissionGranted() : Boolean
 <span class="lineno">  10 </span>
@@ -2238,8 +2238,8 @@ pre {
     <ul>
       <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\MainActivity.kt:10:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
         <pre><code><span class="lineno">   7 </span>import androidx.appcompat.app.AppCompatActivity
-<span class="lineno">   8 </span>import com.benji.weatherswe.locationweather.PermissionManager
-<span class="lineno">   9 </span>import com.benji.weatherswe.locationweather.PermissionManager.Companion.PERMISSION_CODE_LOCATION
+<span class="lineno">   8 </span>import com.benji.device.permission.Permissions
+<span class="lineno">   9 </span>import com.benji.device.permission.Permissions.Companion.PERMISSION_CODE_LOCATION
 <span class="lineno">  10 </span><span class="error">import com.benji.weatherswe.utils.*</span>
 <span class="lineno">  11 </span>import com.google.android.gms.location.LocationSettingsResponse
 <span class="lineno">  12 </span>
@@ -2291,7 +2291,7 @@ pre {
 <span class="lineno">   5 </span>import androidx.lifecycle.MutableLiveData
 <span class="lineno">   6 </span>import com.benji.domain.ResultWrapper
 <span class="lineno">   7 </span><span class="error">import com.benji.domain.domainmodel.geocoding.*</span>
-<span class="lineno">   8 </span>import com.benji.domain.location.ILocationHandler
+<span class="lineno">   8 </span>import com.benji.domain.location.IGps
 <span class="lineno">   9 </span>import com.benji.domain.location.IReversedGeocoding
 <span class="lineno">  10 </span>import com.benji.domain.repository.IGeocodingRepository
 </code></pre>

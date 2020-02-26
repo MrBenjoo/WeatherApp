@@ -1,5 +1,7 @@
 package com.benji.weatherswe.utils.extensions
 
+import android.content.Context
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.benji.weatherswe.MainActivity

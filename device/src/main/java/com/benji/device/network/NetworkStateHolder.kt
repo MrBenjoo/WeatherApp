@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkRequest
 
+
 object NetworkStateHolder : INetworkState {
 
     private lateinit var holder: NetworkStateImp
@@ -20,14 +21,17 @@ object NetworkStateHolder : INetworkState {
      */
     fun Application.registerConnectivityBroadcaster() {
 
-        holder = NetworkStateImp()
+        holder =
+            NetworkStateImp()
 
 
         //get connectivity manager
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         //register to network events
-        connectivityManager.registerNetworkCallback(NetworkRequest.Builder().build(), NetworkCallbackImp(holder))
+        connectivityManager.registerNetworkCallback(NetworkRequest.Builder().build(),
+            NetworkCallbackImp(holder)
+        )
 
     }
 

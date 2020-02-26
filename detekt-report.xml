@@ -154,15 +154,15 @@
 	<error line="37" column="30" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="44" column="26" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationHandler.kt">
-	<error line="50" column="1" severity="warning" message="The file LocationHandler.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\Gps.kt">
+	<error line="50" column="1" severity="warning" message="The file Gps.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\LocationWeatherViewModel.kt">
 	<error line="7" column="1" severity="warning" message="com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="111" column="64" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\PermissionManager.kt">
-	<error line="61" column="1" severity="warning" message="The file PermissionManager.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\Permissions.kt">
+	<error line="61" column="1" severity="warning" message="The file Permissions.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\MainActivity.kt">
 	<error line="10" column="1" severity="warning" message="com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
@@ -340,11 +340,11 @@
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\ErrorHandler.kt">
 	<error line="9" column="1" severity="warning" message="The file ErrorHandler.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\ILocationHandler.kt">
-	<error line="10" column="1" severity="warning" message="The file ILocationHandler.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IGps.kt">
+	<error line="10" column="1" severity="warning" message="The file IGps.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IPermissionManager.kt">
-	<error line="11" column="1" severity="warning" message="The file IPermissionManager.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IPermissions.kt">
+	<error line="11" column="1" severity="warning" message="The file IPermissions.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\domain\src\main\java\com\benji\domain\location\IReversedGeocoding.kt">
 	<error line="9" column="1" severity="warning" message="The file IReversedGeocoding.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
