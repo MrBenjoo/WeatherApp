@@ -22,14 +22,12 @@ internal class LocationWeatherViewModelTest {
 
     private val dispatcher: DispatcherProvider = mockk()
     private val geocodingRepository: IGeocodingRepository = mockk()
-    private val locationHandler: ILocationHandler = mockk()
     private val reverseGeocoding: IReversedGeocoding = mockk()
 
     private val locationWeatherViewModel =
         LocationWeatherViewModel(
             dispatcher,
             geocodingRepository,
-            locationHandler,
             reverseGeocoding
         )
 

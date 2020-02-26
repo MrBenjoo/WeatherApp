@@ -1,5 +1,6 @@
 package com.benji.weatherswe.utils
 
+import com.benji.weatherswe.utils.forecast.DateUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

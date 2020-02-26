@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
+def config = rootProject.extensions.getByName("ext")
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion "29.0.0"
@@ -42,27 +45,21 @@ android {
 dependencies {
     implementation project(":domain")
 
-    implementation "androidx.core:core:$rootProject.supportCompatVersion"
+    // ---- COMMON DEPENDENCIES ----
+    implementation config.commonDependency.legacySupportV4
+    implementation config.commonDependency.standardLibraryJDK8
+    implementation config.commonDependency.coroutinesAndroid
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    // ---- NETWORK DEPENDENCIES ----
+    implementation config.networkDependencies.retrofit2
+    implementation config.networkDependencies.retrofit2MoshiConverter
 
-    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    // ---- TEST DEPENDENCIES ----
+    testImplementation config.testDependencies.junitApi
+    testImplementation config.testDependencies.junitEngine
 
-    implementation 'com.google.code.gson:gson:2.8.5'
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test:core:1.1.0'
-
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.junitVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-engine:$rootProject.junitVersion"
-
-    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofitVersion"
-
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    // ---- ANDROID TEST DEPENDENCIES ----
+    androidTestImplementation config.androidTestDependencies.coreTesting
+    androidTestImplementation config.androidTestDependencies.testExtJunit
+    androidTestImplementation config.androidTestDependencies.testRunner
 }
