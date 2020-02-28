@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.benji.device.location.LocationEvent
@@ -17,14 +16,17 @@ import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
+import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideAutoCompleteCityAdapter
 import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator.provideViewModel
+import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.*
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.location_weather_fragment.*
 
 
 class LocationWeatherFragment : Fragment(), TextWatcher {
-    private lateinit var arrayAdapter: ArrayAdapter<String>
+    private val arrayAdapter: AutoCompleteCityAdapter by lazy { provideAutoCompleteCityAdapter(this) }
+
     private lateinit var viewModel: LocationWeatherViewModel
 
     override fun afterTextChanged(text: Editable?) {
@@ -48,23 +50,12 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = provideViewModel(this)
-        initArrayAdapter()
         initAutoCompleteTextView()
     }
 
 
     private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
-        arrayAdapter.clear()
-        arrayAdapter.addAll(suggestions)
-        arrayAdapter.notifyDataSetChanged()
-    }
-
-    private fun initArrayAdapter() {
-        arrayAdapter = ArrayAdapter(
-            mainActivity().applicationContext,
-            android.R.layout.simple_dropdown_item_1line,
-            emptyList<String>()
-        )
+        arrayAdapter.updateList(suggestions)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,7 +68,8 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
 
     private fun loadLatestSearchedCity(candidate: String) {
         val moshi = Moshi.Builder().build()
-        activitySharedViewModel().candidate = moshi.adapter(Candidate::class.java).fromJson(candidate)!!
+        activitySharedViewModel().candidate =
+            moshi.adapter(Candidate::class.java).fromJson(candidate)!!
         navigate(R.id.action_locationWeatherFragment_to_dayWeatherFragment)
     }
 
@@ -92,7 +84,7 @@ class LocationWeatherFragment : Fragment(), TextWatcher {
     }
 
     private val networkEventObserver = Observer<Event> { event ->
-        when(event) {
+        when (event) {
             is Event.ConnectivityLost -> showView(tv_location_connection)
             is Event.ConnectivityAvailable -> {
                 hideView(tv_location_connection)

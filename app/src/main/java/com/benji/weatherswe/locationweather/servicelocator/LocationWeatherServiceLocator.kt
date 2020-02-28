@@ -9,7 +9,9 @@ import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
 import com.benji.weatherswe.locationweather.LocationWeatherViewModel
 import com.benji.weatherswe.locationweather.ReveresedGeocoding
+import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.DispatcherProvider
+import com.benji.weatherswe.utils.extensions.mainActivity
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -40,6 +42,10 @@ object LocationWeatherServiceLocator {
             geoCodingRepository,
             ReveresedGeocoding(fragment.context!!)
         )
+
+    fun provideAutoCompleteCityAdapter(fragment: Fragment) : AutoCompleteCityAdapter {
+        return AutoCompleteCityAdapter(fragment.mainActivity().baseContext, emptyList())
+    }
 
 }
 

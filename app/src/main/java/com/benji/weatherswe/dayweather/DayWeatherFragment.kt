@@ -13,6 +13,8 @@ import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
+import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator
+import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.*
 import com.benji.weatherswe.utils.forecast.DateUtils
 import com.benji.weatherswe.utils.forecast.SymbolUtils
@@ -20,7 +22,11 @@ import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 
 class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
-    private lateinit var arrayAdapter: ArrayAdapter<String>
+    private val arrayAdapter: AutoCompleteCityAdapter by lazy {
+        LocationWeatherServiceLocator.provideAutoCompleteCityAdapter(
+            this
+        )
+    }
     private lateinit var viewModel: DayWeatherViewModel
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
     private lateinit var searchMenuItem: MenuItem
@@ -53,21 +59,11 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
-        arrayAdapter.clear()
-        arrayAdapter.addAll(suggestions)
-        arrayAdapter.notifyDataSetChanged()
+        arrayAdapter.updateList(suggestions)
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
         showTopText(errorMessage)
-    }
-
-    private fun initArrayAdapter() {
-        arrayAdapter = ArrayAdapter(
-            mainActivity().applicationContext,
-            android.R.layout.simple_dropdown_item_1line,
-            emptyList<String>()
-        )
     }
 
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
@@ -139,7 +135,6 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initArrayAdapter()
         recyclerview_day_weather.setHasFixedSize(true)
         setupToolbar(toolbar_day_weather)
         dayWeatherAdapter = DayWeatherAdapter(emptyList())
