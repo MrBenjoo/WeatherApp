@@ -1,6 +1,7 @@
 package com.benji.weatherswe.dayweather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
@@ -21,46 +22,18 @@ import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 
-class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
-    private val arrayAdapter: AutoCompleteCityAdapter by lazy {
-        LocationWeatherServiceLocator.provideAutoCompleteCityAdapter(
-            this
-        )
-    }
+class DayWeatherFragment : Fragment() {
+
     private lateinit var viewModel: DayWeatherViewModel
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
     private lateinit var searchMenuItem: MenuItem
     private val TAG = "DayWeatherFragment"
-
-    override fun onQueryTextChange(newText: String): Boolean {
-        viewModel.onSearchCity(newText)
-        return true
-    }
 
     private val candidateObserver = Observer<Candidate> { candidate ->
         activitySharedViewModel().candidate = candidate
         viewModel.getForecast(candidate)
     }
 
-    private fun setupSearchView(searchView: SearchView) {
-        searchView.apply {
-            setOnQueryTextListener(this@DayWeatherFragment)
-            queryHint = string(R.string.search_hint)
-        }
-
-        val searchAutoComplete = setupSearchAutoComplete(searchView).also {
-            it.setOnItemClickListener { _, _, index, _ ->
-                searchMenuItem.collapseActionView()
-                viewModel.onSuggestionClicked(index)
-            }
-        }
-
-        searchAutoComplete.setAdapter(arrayAdapter)
-    }
-
-    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
-        arrayAdapter.updateList(suggestions)
-    }
 
     private val errorObserver = Observer<String> { errorMessage ->
         showTopText(errorMessage)
@@ -159,13 +132,11 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
 
         viewModel.listOfDayForecast.observe(viewLifecycleOwner, weatherObserver)
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
-        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
         viewModel.forecastFirstHour.observe(viewLifecycleOwner, setWeatherFirstHour)
         viewModel.forecastSecondHour.observe(viewLifecycleOwner, setWeatherSecondHour)
         viewModel.forecastThirdHour.observe(viewLifecycleOwner, setWeatherThirdHour)
         viewModel.forecastFourthHour.observe(viewLifecycleOwner, setWeatherFourthHour)
         viewModel.forecastFifthHour.observe(viewLifecycleOwner, setWeatherFifthHour)
-        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
 
         viewModel.getForecast(activitySharedViewModel().candidate)
@@ -195,19 +166,17 @@ class DayWeatherFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_weather_view, menu)
-
-        searchMenuItem = menu.findItem(R.id.action_item_search)
-        setupSearchView(searchMenuItem.actionView as SearchView)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_item_favorite) {
-            viewModel.onMenuFavoriteClick()
-            true
-
-        } else super.onOptionsItemSelected(item)
+        return when(item.itemId) {
+            R.id.action_item_search -> {
+                navigate(R.id.action_dayWeatherFragment_to_searchCityFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
-    override fun onQueryTextSubmit(query: String): Boolean = true
 
 }

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import com.benji.weatherswe.R
 
 class AutoCompleteCityAdapter(context: Context, private val listOfCities: List<String>) :

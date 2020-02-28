@@ -19,7 +19,9 @@
             android:textColorHint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textCursorDrawable="@null"
+            android:backgroundTint="@color/colorPrimary"/>
 
         <ProgressBar
             android:id="@+id/loading_location_bar"

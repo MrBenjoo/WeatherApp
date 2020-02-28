@@ -1,17 +1,14 @@
 package com.benji.weatherswe.dayweather
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.benji.data.ErrorHandlerImpl
 import com.benji.domain.ResultWrapper
-import com.benji.domain.domainmodel.ErrorEntity
-import com.benji.domain.domainmodel.geocoding.*
+import com.benji.domain.domainmodel.geocoding.Candidate
+import com.benji.domain.domainmodel.geocoding.sixDecimals
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.domain.domainmodel.weather.Weather
-import com.benji.domain.repository.IGeocodingRepository
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.BaseViewModel
 import com.benji.weatherswe.hourweather.HourlyUtils
@@ -24,8 +21,7 @@ import kotlin.coroutines.CoroutineContext
 
 class DayWeatherViewModel(
     private val dispatcher: DispatcherProvider,
-    private val weatherRepository: IWeatherRepository,
-    private val geoCodingRepository: IGeocodingRepository
+    private val weatherRepository: IWeatherRepository
 ) : BaseViewModel(), CoroutineScope {
 
     private val _forecastFirstHour = MutableLiveData<HourlyOverview>()
@@ -45,14 +41,6 @@ class DayWeatherViewModel(
 
     private val _listOfDayForecast = MutableLiveData<List<DayForecast>>()
     val listOfDayForecast: LiveData<List<DayForecast>> = _listOfDayForecast
-
-    private val _citySuggestions = MutableLiveData<List<String>>()
-    val citySuggestions: LiveData<List<String>> = _citySuggestions
-
-    private var suggestions: List<Suggestion> = mutableListOf()
-
-    private val _candidate = MutableLiveData<Candidate>()
-    val candidate: LiveData<Candidate> = _candidate
 
     private var jobTracker = Job()
 
@@ -117,60 +105,13 @@ class DayWeatherViewModel(
         }
     }
 
-    fun onMenuFavoriteClick() {
-        Log.d("DayWeatherViewModel", "onMenuFavoriteClick")
-    }
-
-    fun onSearchCity(query: String) = launch {
-        if (query.trim() != "") {
-            val data = geoCodingRepository.getSuggestions(query)
-            when (data) {
-                is ResultWrapper.Success -> onSuggestionsReceived(data.value.suggestions)
-                is ResultWrapper.Error -> {
-                    handleErrors(ErrorHandlerImpl().getError(data.error))
-                }
-            }
-        }
-    }
-
-    private fun handleErrors(error: ErrorEntity) = when (error) {
+    /*private fun handleErrors(error: ErrorEntity) = when (error) {
         is ErrorEntity.Network -> setError("Nätverksfel")
         is ErrorEntity.NotFound -> setError("Ingen data tillgänglig för tillfället.")
         is ErrorEntity.AccessDenied -> setError("Förbjuden åtkomst.")
         is ErrorEntity.ServiceUnavailable -> setError("Servern är inte redo att hantera begäran")
         is ErrorEntity.Unknown -> setError("Ett fel uppstod.")
-    }
-
-
-    fun onSuggestionClicked(index: Int) = launch {
-        setInFlightState()
-
-        val city = suggestions[index].text
-        val magicKey = suggestions[index].magicKey
-
-        val data = geoCodingRepository.getCandidateLocation(city, magicKey)
-        handleGeoCodingData(data)
-
-        setCompletedState()
-    }
-
-    private fun handleGeoCodingData(data: ResultWrapper<Exception, Candidates>) {
-        when (data) {
-            is ResultWrapper.Success -> {
-                val candidates = data.value
-                _candidate.value = candidates.returnCandidateWithHighestScore()
-            }
-            is ResultWrapper.Error -> {
-                handleErrors(ErrorHandlerImpl().getError(data.error))
-            }
-        }
-    }
-
-
-    private fun onSuggestionsReceived(suggestions: List<Suggestion>) {
-        this.suggestions = suggestions
-        _citySuggestions.value = suggestions.returnCities()
-    }
+    }*/
 
     override fun onCleared() {
         super.onCleared()

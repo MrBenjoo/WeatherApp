@@ -31,8 +31,7 @@ object DayWeatherServiceLocator {
     private fun initDayWeatherViewModel(): DayWeatherViewModel =
         DayWeatherViewModel(
             DispatcherProvider,
-            weatherRepository,
-            LocationWeatherServiceLocator.geoCodingRepository
+            weatherRepository
         )
 
     private val weatherRepository: WeatherRepository by lazy {
