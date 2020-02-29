@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.benji.weatherswe.search.SearchCityFragment">
 
-    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+    <com.benji.weatherswe.search.ClearableAutoCompleteTextView
         android:id="@+id/autoCompleteTv_search_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

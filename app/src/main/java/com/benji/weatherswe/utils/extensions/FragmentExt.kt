@@ -72,6 +72,7 @@ fun Fragment.showView(view: View) {
     view.visibility = View.VISIBLE
 }
 
+
 fun Fragment.showText(text: String) {
     Snackbar.make(
         mainActivity().findViewById(android.R.id.content),

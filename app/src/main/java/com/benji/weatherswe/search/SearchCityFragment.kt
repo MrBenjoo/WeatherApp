@@ -3,19 +3,22 @@ package com.benji.weatherswe.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.R
 import com.benji.weatherswe.search.SearchCityServiceLocator.provideAutoCompleteCityAdapter
 import com.benji.weatherswe.search.SearchCityServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.activitySharedViewModel
+import com.benji.weatherswe.utils.extensions.hideKeyBoard
 import com.benji.weatherswe.utils.extensions.navigate
 import kotlinx.android.synthetic.main.search_city_fragment.*
+
 
 class SearchCityFragment : Fragment(), TextWatcher {
 
@@ -35,15 +38,29 @@ class SearchCityFragment : Fragment(), TextWatcher {
         initObservers()
     }
 
-    private fun initAutoCompleteTextView() = with(autoCompleteTv_search_city) {
-        setAdapter(arrayAdapter)
-        addTextChangedListener(this@SearchCityFragment)
-        setOnItemClickListener { _, _, index, _ ->
-            viewModel.onEvent(
-                SearchEvent.OnSuggestionClick(
-                    index
+    private fun initAutoCompleteTextView() {
+        with(autoCompleteTv_search_city) {
+            setAdapter(arrayAdapter)
+            addTextChangedListener(this@SearchCityFragment)
+            setOnItemClickListener { _, _, index, _ ->
+                viewModel.onEvent(
+                    SearchEvent.OnSuggestionClick(
+                        index
+                    )
                 )
-            )
+            }
+
+            onClearListener = object : ClearableAutoCompleteTextView.OnClearListener {
+                override fun onClear() {
+                    when (text.isNotEmpty()) {
+                        true -> setText("")
+                        false -> {
+                            hideKeyBoard(this@with)
+                            findNavController().navigateUp()
+                        }
+                    }
+                }
+            }
         }
     }
 

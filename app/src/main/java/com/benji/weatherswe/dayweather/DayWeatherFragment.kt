@@ -26,14 +26,7 @@ class DayWeatherFragment : Fragment() {
 
     private lateinit var viewModel: DayWeatherViewModel
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
-    private lateinit var searchMenuItem: MenuItem
     private val TAG = "DayWeatherFragment"
-
-    private val candidateObserver = Observer<Candidate> { candidate ->
-        activitySharedViewModel().candidate = candidate
-        viewModel.getForecast(candidate)
-    }
-
 
     private val errorObserver = Observer<String> { errorMessage ->
         showTopText(errorMessage)
