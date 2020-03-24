@@ -114,8 +114,8 @@ class DayWeatherFragment : Fragment() {
         mainActivity().setSupportActionBar(null)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)
         recyclerview_day_weather.adapter = dayWeatherAdapter
 

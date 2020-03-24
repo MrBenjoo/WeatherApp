@@ -78,11 +78,10 @@ class SearchCityFragment : Fragment(), TextWatcher {
         arrayAdapter.updateList(suggestions)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         when(arguments?.getString("navigatedFrom")) {
             "start" -> {
-                Log.d("SearchCityFragment", "navigatedFrom: start")
                 when (val candidate = prefsLoadLatestCandidate()) {
                     Constants.PREF_DEFAULT_VALUE -> noCitySearched()
                     else -> loadLatestSearchedCity(candidate)

@@ -43,13 +43,12 @@ class HourWeatherFragment : Fragment() {
         recyclerview_current_day.adapter = adapter
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         tv_hour_weather_day.text = activitySharedViewModel().currentDayForecast.day
         tv_hour_weather_date.text = activitySharedViewModel().currentDayForecast.date
         tv_hour_weather_city.text = activitySharedViewModel().candidate.address
         tv_hour_weather_temp.text = activitySharedViewModel().currentDayForecast.temperature + "\u00B0"
-        tv_hour_weather_description.text =
-            SymbolUtils.getWeatherSymbolDescription(activitySharedViewModel().currentDayForecast.weatherSymbol)
+        tv_hour_weather_description.text = SymbolUtils.getWeatherSymbolDescription(activitySharedViewModel().currentDayForecast.weatherSymbol)
     }
 }
