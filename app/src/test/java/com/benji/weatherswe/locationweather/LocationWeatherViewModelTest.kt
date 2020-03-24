@@ -3,7 +3,7 @@ package com.benji.weatherswe.locationweather
 
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
-import com.benji.domain.location.IReversedGeocoding
+import com.benji.domain.location.ISearchCityGeocoding
 import com.benji.domain.repository.IGeocodingRepository
 import com.benji.weatherswe.InstantExecutorExtension
 import com.benji.weatherswe.utils.DispatcherProvider
@@ -21,7 +21,7 @@ internal class LocationWeatherViewModelTest {
 
     private val dispatcher: DispatcherProvider = mockk()
     private val geocodingRepository: IGeocodingRepository = mockk()
-    private val reverseGeocoding: IReversedGeocoding = mockk()
+    private val reverseGeocoding: ISearchCityGeocoding = mockk()
 
     private val locationWeatherViewModel =
         LocationWeatherViewModel(

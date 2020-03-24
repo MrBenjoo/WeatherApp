@@ -1,21 +1,17 @@
 package com.benji.weatherswe.dayweather
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
 import androidx.activity.addCallback
-import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.benji.domain.domainmodel.State
-import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
-import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator
-import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.*
 import com.benji.weatherswe.utils.forecast.DateUtils
 import com.benji.weatherswe.utils.forecast.SymbolUtils
@@ -164,7 +160,9 @@ class DayWeatherFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.action_item_search -> {
-                navigate(R.id.action_dayWeatherFragment_to_searchCityFragment)
+                //navigate(R.id.action_dayWeatherFragment_to_searchCityFragment)
+                val bundle = bundleOf("navigatedFrom" to "dayWeatherFragment")
+                findNavController().navigate(R.id.action_dayWeatherFragment_to_searchCityFragment, bundle)
                 true
             }
             else -> super.onOptionsItemSelected(item)

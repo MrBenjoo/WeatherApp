@@ -8,7 +8,6 @@ import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.data.repository.WeatherRepository
 import com.benji.weatherswe.BaseViewModelFactory
 import com.benji.weatherswe.dayweather.DayWeatherViewModel
-import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator
 import com.benji.weatherswe.utils.DispatcherProvider
 import okhttp3.Cache
 import okhttp3.OkHttpClient

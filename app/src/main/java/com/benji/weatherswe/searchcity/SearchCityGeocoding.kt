@@ -1,16 +1,15 @@
-package com.benji.weatherswe.locationweather
+package com.benji.weatherswe.searchcity
 
 import android.content.Context
 import android.location.Geocoder
-import android.util.Log
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Location
-import com.benji.domain.location.IReversedGeocoding
+import com.benji.domain.location.ISearchCityGeocoding
 import java.io.IOException
 
-class ReveresedGeocoding(context: Context) : IReversedGeocoding {
+class SearchCityGeocoding(context: Context) : ISearchCityGeocoding {
 
-    private val TAG = "ReveresedGeocoding"
+    private val TAG = "SearchCityGeocoding"
 
     private var geocoder: Geocoder = Geocoder(context)
     private val MAX_RESULTS = 1

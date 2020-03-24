@@ -1,4 +1,4 @@
-package com.benji.weatherswe.search
+package com.benji.weatherswe.searchcity
 
 
 import android.annotation.SuppressLint

@@ -1,4 +1,4 @@
-package com.benji.weatherswe.search
+package com.benji.weatherswe.searchcity.servicelocator
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -7,7 +7,8 @@ import com.benji.data.datasource.remote.GeocodingAPI
 import com.benji.data.datasource.remote.GeocodingRemoteDataSource
 import com.benji.data.repository.GeocodingRepository
 import com.benji.weatherswe.BaseViewModelFactory
-import com.benji.weatherswe.locationweather.servicelocator.LocationWeatherServiceLocator
+import com.benji.weatherswe.searchcity.SearchCityGeocoding
+import com.benji.weatherswe.searchcity.SearchCityViewModel
 import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.mainActivity
 import retrofit2.Retrofit
@@ -22,12 +23,19 @@ object SearchCityServiceLocator {
     fun provideViewModel(fragment : Fragment) : SearchCityViewModel {
        return  ViewModelProvider(
             fragment,
-            BaseViewModelFactory { initSearchCityViewModel(fragment) }
+            BaseViewModelFactory {
+                initSearchCityViewModel(
+                    fragment
+                )
+            }
         ).get(SearchCityViewModel::class.java)
     }
 
     private fun initSearchCityViewModel(fragment: Fragment): SearchCityViewModel {
-        return SearchCityViewModel(geoCodingRepository)
+        return SearchCityViewModel(
+            geoCodingRepository,
+            SearchCityGeocoding(fragment.context!!)
+        )
     }
 
     fun provideAutoCompleteCityAdapter(fragment: Fragment) : AutoCompleteCityAdapter {

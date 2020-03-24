@@ -3,22 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/locationWeatherFragment">
-    <fragment
-        android:id="@+id/locationWeatherFragment"
-        android:name="com.benji.weatherswe.locationweather.LocationWeatherFragment"
-        android:label="location_weather_fragment"
-        tools:layout="@layout/location_weather_fragment">
-        <action
-            android:id="@+id/action_locationWeatherFragment_to_dayWeatherFragment"
-            app:destination="@id/dayWeatherFragment"
-
-            app:enterAnim="@anim/fade_in"
-
-            app:popExitAnim="@anim/fade_out"
-
-            />
-    </fragment>
+    app:startDestination="@id/searchCityFragment">
     <fragment
         android:id="@+id/dayWeatherFragment"
         android:name="com.benji.weatherswe.dayweather.DayWeatherFragment"
@@ -53,11 +38,15 @@
         tools:layout="@layout/fragment_current_weather" />
     <fragment
         android:id="@+id/searchCityFragment"
-        android:name="com.benji.weatherswe.search.SearchCityFragment"
+        android:name="com.benji.weatherswe.searchcity.SearchCityFragment"
         android:label="search_city_fragment"
         tools:layout="@layout/search_city_fragment" >
         <action
             android:id="@+id/action_searchCityFragment_to_dayWeatherFragment"
             app:destination="@id/dayWeatherFragment" />
+        <argument
+            android:name="navigatedFrom"
+            app:argType="string"
+            android:defaultValue="start" />
     </fragment>
 </navigation>
