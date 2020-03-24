@@ -26,6 +26,11 @@ class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
         )
     }
 
+    fun updateHourlyForecast(newListOfHourlyData: List<Hourly>) {
+        this.listOfHourlyData = newListOfHourlyData
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = listOfHourlyData.size
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {

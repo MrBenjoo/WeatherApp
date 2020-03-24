@@ -3,15 +3,18 @@ package com.benji.weatherswe.dayweather
 import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
 import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
+import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.extensions.*
 import com.benji.weatherswe.utils.forecast.DateUtils
 import com.benji.weatherswe.utils.forecast.SymbolUtils
@@ -20,9 +23,16 @@ import kotlinx.android.synthetic.main.fragment_day_weather.*
 
 class DayWeatherFragment : Fragment() {
 
-    private lateinit var viewModel: DayWeatherViewModel
+    private val viewModel: DayWeatherViewModel by lazy { provideViewModel(this) }
     private lateinit var dayWeatherAdapter: DayWeatherAdapter
     private val TAG = "DayWeatherFragment"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            activity?.finish()
+        }
+    }
 
     private val errorObserver = Observer<String> { errorMessage ->
         showTopText(errorMessage)
@@ -92,32 +102,24 @@ class DayWeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true) // required in order to show the items in the menu
-        return inflater.inflate(R.layout.fragment_day_weather, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerview_day_weather.setHasFixedSize(true)
-        setupToolbar(toolbar_day_weather)
+        val root = inflater.inflate(R.layout.fragment_day_weather, container, false)
+        val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerview_day_weather)
+        val toolbar = root.findViewById<Toolbar>(R.id.toolbar_day_weather)
+        recyclerView.setHasFixedSize(true)
+        setupToolbar(toolbar)
         dayWeatherAdapter = DayWeatherAdapter(emptyList())
-        tv_weather_day_time.text = DateUtils().getDayAndClock()
-        tv_day_weather_city.text = activitySharedViewModel().candidate.address
-        hideKeyBoard(view)
-        viewModel = DayWeatherServiceLocator.provideViewModel(this)
-    }
-
-    /**
-     * remove reference (activity --> toolbar) to no longer visible toolbar to avoid memory leak
-     */
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mainActivity().setSupportActionBar(null)
+        recyclerView.adapter = dayWeatherAdapter
+        return root
     }
 
     override fun onStart() {
         super.onStart()
+        view?.let { hideKeyBoard(it) }
+
+        tv_weather_day_time.text = DateUtils().getDayAndClock()
+        tv_day_weather_city.text = activitySharedViewModel().candidate.address
+
         dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)
-        recyclerview_day_weather.adapter = dayWeatherAdapter
 
         viewModel.listOfDayForecast.observe(viewLifecycleOwner, weatherObserver)
         viewModel.state.observe(viewLifecycleOwner, stateObserver)
@@ -129,13 +131,6 @@ class DayWeatherFragment : Fragment() {
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
 
         viewModel.getForecast(activitySharedViewModel().candidate)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            activity?.finish()
-        }
     }
 
     private val stateObserver = Observer<State> { state ->
@@ -152,17 +147,21 @@ class DayWeatherFragment : Fragment() {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_weather_view, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_item_search -> {
                 //navigate(R.id.action_dayWeatherFragment_to_searchCityFragment)
                 val bundle = bundleOf("navigatedFrom" to "dayWeatherFragment")
-                findNavController().navigate(R.id.action_dayWeatherFragment_to_searchCityFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_dayWeatherFragment_to_searchCityFragment,
+                    bundle
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.benji.device.location.GPSBroadcastReceiver
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(), IActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("LifeCycleTesting", "activity -> onCreate")
         setContentView(R.layout.activity_main)
         permissions = Permissions(this).also { it.request() }
         gpsBroadcastReceiver =

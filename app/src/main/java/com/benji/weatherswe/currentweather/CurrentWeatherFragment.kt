@@ -22,8 +22,8 @@ class CurrentWeatherFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_current_weather, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
         setLottieWeatherSymbol()
         setTVWeatherSymbol()
         setTime()

@@ -22,15 +22,12 @@ import com.benji.weatherswe.searchcity.servicelocator.SearchCityServiceLocator.p
 import com.benji.weatherswe.utils.AutoCompleteCityAdapter
 import com.benji.weatherswe.utils.extensions.*
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.search_city_fragment.*
 
 
 class SearchCityFragment : Fragment(), TextWatcher {
-
     private val viewModel: SearchCityViewModel by lazy { provideViewModel(this) }
-
-
     private val arrayAdapter: AutoCompleteCityAdapter by lazy { provideAutoCompleteCityAdapter(this) }
+    private lateinit var autoCompleteTv : ClearableAutoCompleteTextView
 
 
     override fun afterTextChanged(text: Editable?) {
@@ -38,14 +35,68 @@ class SearchCityFragment : Fragment(), TextWatcher {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val root = inflater.inflate(R.layout.search_city_fragment, container, false)
+        autoCompleteTv = root.findViewById<ClearableAutoCompleteTextView>(R.id.autoCompleteTv_search_city)
+        autoCompleteTv.setAdapter(arrayAdapter)
+        return root
+    }
+
+
+    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
+        arrayAdapter.updateList(suggestions)
+    }
+
+    override fun onStart() {
+        super.onStart()
         initAutoCompleteTextView()
-        initObservers()
+
+        when(arguments?.getString("navigatedFrom")) {
+            "start" -> {
+                when (val candidate = prefsLoadLatestCandidate()) {
+                    Constants.PREF_DEFAULT_VALUE -> noCitySearched()
+                    else -> loadLatestSearchedCity(candidate)
+                }
+            }
+            "dayWeatherFragment" -> {
+
+                Log.d("SearchCityFragment", "navigatedFrom: dayWeatherFragment")
+            }
+        }
+    }
+
+    private fun loadLatestSearchedCity(candidate: String) {
+        val moshi = Moshi.Builder().build()
+        activitySharedViewModel().candidate =
+            moshi.adapter(Candidate::class.java).fromJson(candidate)!!
+        navigate(R.id.action_searchCityFragment_to_dayWeatherFragment)
+    }
+
+    private fun noCitySearched() {
+
+        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
+        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
+
+        LocationEvent.observe(viewLifecycleOwner, locationObserver)
+        NetworkEvents.observe(viewLifecycleOwner, networkEventObserver)
+    }
+
+    private val networkEventObserver = Observer<Event> { event ->
+        when (event) {
+            is Event.ConnectivityLost -> Unit // showView(tv_location_connection)
+            is Event.ConnectivityAvailable -> {
+                 // hideView(tv_location_connection)
+                showText(getString(R.string.connection_success))
+            }
+        }
     }
 
     private fun initAutoCompleteTextView() {
-        with(autoCompleteTv_search_city) {
-            setAdapter(arrayAdapter)
+        with(autoCompleteTv) {
+            //setAdapter(arrayAdapter)
             addTextChangedListener(this@SearchCityFragment)
             setOnItemClickListener { _, _, index, _ ->
                 viewModel.onEvent(
@@ -69,55 +120,6 @@ class SearchCityFragment : Fragment(), TextWatcher {
         }
     }
 
-    private fun initObservers() {
-        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
-        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
-    }
-
-    private val citySuggestionsObserver = Observer<List<String>> { suggestions ->
-        arrayAdapter.updateList(suggestions)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        when(arguments?.getString("navigatedFrom")) {
-            "start" -> {
-                when (val candidate = prefsLoadLatestCandidate()) {
-                    Constants.PREF_DEFAULT_VALUE -> noCitySearched()
-                    else -> loadLatestSearchedCity(candidate)
-                }
-            }
-            "dayWeatherFragment" -> Log.d("SearchCityFragment", "navigatedFrom: dayWeatherFragment")
-        }
-    }
-
-    private fun loadLatestSearchedCity(candidate: String) {
-        val moshi = Moshi.Builder().build()
-        activitySharedViewModel().candidate =
-            moshi.adapter(Candidate::class.java).fromJson(candidate)!!
-        navigate(R.id.action_searchCityFragment_to_dayWeatherFragment)
-    }
-
-    private fun noCitySearched() {
-        viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
-
-        viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
-
-
-        LocationEvent.observe(viewLifecycleOwner, locationObserver)
-        NetworkEvents.observe(viewLifecycleOwner, networkEventObserver)
-    }
-
-    private val networkEventObserver = Observer<Event> { event ->
-        when (event) {
-            is Event.ConnectivityLost -> Unit // showView(tv_location_connection)
-            is Event.ConnectivityAvailable -> {
-                 // hideView(tv_location_connection)
-                showText(getString(R.string.connection_success))
-            }
-        }
-    }
-
     private val locationObserver = Observer<Location> { location ->
         viewModel.onEvent(SearchCityEvent.OnLocationReceived(location))
     }
@@ -134,15 +136,5 @@ class SearchCityFragment : Fragment(), TextWatcher {
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_city_fragment, container, false)
-    }
 }
 
-enum class NavigationID() {
-    DayWeatherFragment,
-    StartFragment
-}

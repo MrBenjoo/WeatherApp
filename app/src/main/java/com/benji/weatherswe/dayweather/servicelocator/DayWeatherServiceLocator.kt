@@ -1,6 +1,7 @@
 package com.benji.weatherswe.dayweather.servicelocator
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.benji.data.datasource.UrlManager
 import com.benji.data.datasource.remote.WeatherAPI
@@ -21,7 +22,7 @@ object DayWeatherServiceLocator {
     fun provideViewModel(fragment: Fragment): DayWeatherViewModel {
         this.cacheDir = fragment.context!!.cacheDir
 
-        return ViewModelProviders.of(
+        return ViewModelProvider(
             fragment,
             BaseViewModelFactory { initDayWeatherViewModel() }
         ).get(DayWeatherViewModel::class.java)
