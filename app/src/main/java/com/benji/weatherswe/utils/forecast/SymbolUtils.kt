@@ -82,5 +82,4 @@ object SymbolUtils {
         27 -> WeatherSymbolConstants.WEATHER_SYMBOL_HEAVY_SNOWFALL
         else -> "N/A"
     }
-
 }

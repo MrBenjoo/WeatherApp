@@ -6,7 +6,7 @@
     app:startDestination="@id/searchCityFragment">
     <fragment
         android:id="@+id/dayWeatherFragment"
-        android:name="com.benji.weatherswe.dayweather.DayWeatherFragment"
+        android:name="com.benji.weatherswe.daily.DailyFragment"
         android:label="day_weather_fragment"
         tools:layout="@layout/fragment_day_weather">
         <action
@@ -14,14 +14,14 @@
             app:destination="@id/hourWeatherFragment"
             app:enterAnim="@anim/fade_in"
 
-            app:popExitAnim="@anim/fade_out" />
+            />
         <action
             android:id="@+id/action_dayWeatherFragment_to_searchCityFragment"
             app:destination="@id/searchCityFragment" />
     </fragment>
     <fragment
         android:id="@+id/hourWeatherFragment"
-        android:name="com.benji.weatherswe.hourweather.HourWeatherFragment"
+        android:name="com.benji.weatherswe.hourly.HourlyFragment"
         android:label="hour_weather_fragment"
         tools:layout="@layout/fragment_hour_weather">
         <action
@@ -29,21 +29,22 @@
             app:destination="@id/currentWeatherFragment"
             app:enterAnim="@anim/fade_in"
 
-            app:popExitAnim="@anim/fade_out" />
+            />
     </fragment>
     <fragment
         android:id="@+id/currentWeatherFragment"
-        android:name="com.benji.weatherswe.currentweather.CurrentWeatherFragment"
+        android:name="com.benji.weatherswe.currently.CurrentlyFragment"
         android:label="current_weather_fragment"
         tools:layout="@layout/fragment_current_weather" />
     <fragment
         android:id="@+id/searchCityFragment"
-        android:name="com.benji.weatherswe.searchcity.SearchCityFragment"
+        android:name="com.benji.weatherswe.search.SearchFragment"
         android:label="search_city_fragment"
         tools:layout="@layout/search_city_fragment" >
         <action
             android:id="@+id/action_searchCityFragment_to_dayWeatherFragment"
-            app:destination="@id/dayWeatherFragment" />
+            app:destination="@id/dayWeatherFragment"
+            app:enterAnim="@anim/fade_in" />
         <argument
             android:name="navigatedFrom"
             app:argType="string"

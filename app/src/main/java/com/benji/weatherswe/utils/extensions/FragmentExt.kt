@@ -4,17 +4,14 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.androidadvance.topsnackbar.TSnackbar
 import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.MainActivity
-import com.benji.weatherswe.R
 import com.benji.weatherswe.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.Moshi
@@ -26,8 +23,7 @@ fun Fragment.navigate(id: Int) {
 }
 
 fun Fragment.activitySharedViewModel(): SharedViewModel =
-     ViewModelProviders.of(mainActivity()).get(SharedViewModel::class.java)
-
+    ViewModelProvider(mainActivity()).get(SharedViewModel::class.java)
 
 fun Fragment.setupToolbar(
     toolbar: Toolbar
@@ -54,25 +50,6 @@ fun Fragment.hideKeyBoard(view: View) {
 
 fun Fragment.string(id: Int): String = context!!.resources.getString(id)
 
-fun Fragment.getColor(color: Int): Int = ContextCompat.getColor(this.context!!, color)
-
-
-fun Fragment.setupSearchAutoComplete(searchView: SearchView): SearchView.SearchAutoComplete {
-    val searchAutoComplete =
-        searchView.findViewById<SearchView.SearchAutoComplete>(androidx.appcompat.R.id.search_src_text)
-    searchAutoComplete.setHintTextColor(getColor(R.color.colorPrimary))
-    return searchAutoComplete
-}
-
-fun Fragment.hideView(view: View) {
-    view.visibility = View.INVISIBLE
-}
-
-fun Fragment.showView(view: View) {
-    view.visibility = View.VISIBLE
-}
-
-
 fun Fragment.showText(text: String) {
     Snackbar.make(
         mainActivity().findViewById(android.R.id.content),
@@ -93,7 +70,6 @@ fun Fragment.showTopText(text: String) {
     snackbar.view.setBackgroundColor(Color.RED)
     snackbar.show()
 }
-
 
 fun Candidate.toJson(): String {
     return Moshi.Builder().build().adapter(Candidate::class.java)

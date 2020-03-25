@@ -120,7 +120,7 @@ pre {
   <details id="TooManyFunctions" open="open">
     <summary class="rule-container"><span class="rule">TooManyFunctions: 5 </span><span class="description">Too many functions inside a/an file/class/object/interface always indicate a violation of the single responsibility principle. Maybe the file/class/object/interface wants to manage too many things at once. Extract functionality which clearly belongs together.</span></summary>
     <ul>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\currentweather\CurrentWeatherFragment.kt:16:7</span><br><span class="message">Class 'CurrentWeatherFragment' with '13' functions detected. Defined threshold inside classes is set to '11'</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\currentweather\CurrentlyFragment.kt:16:7</span><br><span class="message">Class 'CurrentWeatherFragment' with '13' functions detected. Defined threshold inside classes is set to '11'</span>
         <pre><code><span class="lineno">  13 </span>import kotlinx.android.synthetic.main.fragment_current_weather.*
 <span class="lineno">  14 </span>
 <span class="lineno">  15 </span>
@@ -130,7 +130,7 @@ pre {
 <span class="lineno">  19 </span>        inflater: LayoutInflater, container: ViewGroup?,
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:20:7</span><br><span class="message">Class 'DayWeatherFragment' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyFragment.kt:20:7</span><br><span class="message">Class 'DayWeatherFragment' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
         <pre><code><span class="lineno">  17 </span>import kotlinx.android.synthetic.main.fragment_day_weather.*
 <span class="lineno">  18 </span>
 <span class="lineno">  19 </span>
@@ -140,7 +140,7 @@ pre {
 <span class="lineno">  23 </span>    private lateinit var dayWeatherAdapter: DayWeatherAdapter
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:25:7</span><br><span class="message">Class 'DayWeatherViewModel' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt:25:7</span><br><span class="message">Class 'DayWeatherViewModel' with '11' functions detected. Defined threshold inside classes is set to '11'</span>
         <pre><code><span class="lineno">  22 </span>import kotlinx.coroutines.launch
 <span class="lineno">  23 </span>import kotlin.coroutines.CoroutineContext
 <span class="lineno">  24 </span>
@@ -173,7 +173,7 @@ pre {
   <details id="EmptyCatchBlock" open="open">
     <summary class="rule-container"><span class="rule">EmptyCatchBlock: 2 </span><span class="description">Empty block of code detected. As they serve no purpose they should be removed.</span></summary>
     <ul>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:66:40</span><br><span class="message">This empty block of code can be removed.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt:66:40</span><br><span class="message">This empty block of code can be removed.</span>
         <pre><code><span class="lineno">  63 </span>        try {
 <span class="lineno">  64 </span>            val cacheSize = 10 * 1024 * 1024 // 10 MB
 <span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
@@ -224,7 +224,7 @@ pre {
   <details id="TooGenericExceptionCaught" open="open">
     <summary class="rule-container"><span class="rule">TooGenericExceptionCaught: 4 </span><span class="description">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span></summary>
     <ul>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:66:18</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt:66:18</span><br><span class="message">Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.</span>
         <pre><code><span class="lineno">  63 </span>        try {
 <span class="lineno">  64 </span>            val cacheSize = 10 * 1024 * 1024 // 10 MB
 <span class="lineno">  65 </span>            cache = Cache(cacheDir, cacheSize.toLong())
@@ -280,7 +280,7 @@ pre {
 <span class="lineno">  20 </span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:25:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyFragment.kt:25:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
         <pre><code><span class="lineno">  22 </span>    private lateinit var viewModel: DayWeatherViewModel
 <span class="lineno">  23 </span>    private lateinit var dayWeatherAdapter: DayWeatherAdapter
 <span class="lineno">  24 </span>    private lateinit var searchMenuItem: MenuItem
@@ -290,7 +290,7 @@ pre {
 <span class="lineno">  28 </span>        viewModel.onSearchCity(newText)
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchCityGeocoding.kt:11:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchGeocoding.kt:11:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
         <pre><code><span class="lineno">   8 </span>
 <span class="lineno">   9 </span>class ReveresedGeocoding(context: Context) : IReversedGeocoding {
 <span class="lineno">  10 </span>
@@ -300,7 +300,7 @@ pre {
 <span class="lineno">  14 </span>    private val MAX_RESULTS = 1
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchCityGeocoding.kt:14:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchGeocoding.kt:14:5</span><br><span class="message">Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*</span>
         <pre><code><span class="lineno">  11 </span>    private val TAG = &quot;ReveresedGeocoding&quot;
 <span class="lineno">  12 </span>
 <span class="lineno">  13 </span>    private var geocoder: Geocoder = Geocoder(context)
@@ -566,7 +566,7 @@ pre {
 <span class="lineno">  72 </span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:108:22</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt:108:22</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno"> 105 </span>
 <span class="lineno"> 106 </span>    fun setHourlyOverview(forecastTenDays: List&lt;DayForecast&gt;) {
 <span class="lineno"> 107 </span>        val listOfHourlyOverview = HourlyUtils.getFiveHourForecastData(forecastTenDays)
@@ -576,7 +576,7 @@ pre {
 <span class="lineno"> 111 </span>                0 -&gt; _forecastFirstHour.value = hourlyOverview
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:114:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt:114:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno"> 111 </span>                0 -&gt; _forecastFirstHour.value = hourlyOverview
 <span class="lineno"> 112 </span>                1 -&gt; _forecastSecondHour.value = hourlyOverview
 <span class="lineno"> 113 </span>                2 -&gt; _forecastThirdHour.value = hourlyOverview
@@ -586,7 +586,7 @@ pre {
 <span class="lineno"> 117 </span>        }
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:115:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt:115:17</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno"> 112 </span>                1 -&gt; _forecastSecondHour.value = hourlyOverview
 <span class="lineno"> 113 </span>                2 -&gt; _forecastThirdHour.value = hourlyOverview
 <span class="lineno"> 114 </span>                3 -&gt; _forecastFourthHour.value = hourlyOverview
@@ -596,7 +596,7 @@ pre {
 <span class="lineno"> 118 </span>    }
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:29</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt:64:29</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
 <span class="lineno">  62 </span>
 <span class="lineno">  63 </span>        try {
@@ -606,7 +606,7 @@ pre {
 <span class="lineno">  67 </span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:34</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt:64:34</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
 <span class="lineno">  62 </span>
 <span class="lineno">  63 </span>        try {
@@ -616,7 +616,7 @@ pre {
 <span class="lineno">  67 </span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt:64:41</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt:64:41</span><br><span class="message">This expression contains a magic number. Consider defining it to a well named constant.</span>
         <pre><code><span class="lineno">  61 </span>        var cache: Cache? = null
 <span class="lineno">  62 </span>
 <span class="lineno">  63 </span>        try {
@@ -1874,7 +1874,7 @@ pre {
 <span class="lineno">  28 </span><span class="error">}</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayUtils.kt:27:1</span><br><span class="message">The file DayUtils.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyUtils.kt:27:1</span><br><span class="message">The file DailyUtils.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">  24 </span>
 <span class="lineno">  25 </span>        return DayForecast(date, day, city, highestTemp, listOfHourlyData, weatherSymbol)
 <span class="lineno">  26 </span>    }
@@ -1909,7 +1909,7 @@ pre {
 <span class="lineno">  61 </span><span class="error">}</span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchCityGeocoding.kt:35:1</span><br><span class="message">The file SearchCityGeocoding.kt is not ending with a new line.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchGeocoding.kt:35:1</span><br><span class="message">The file SearchGeocoding.kt is not ending with a new line.</span>
         <pre><code><span class="lineno">  32 </span>        return stringBuilder.toString().trim()
 <span class="lineno">  33 </span>    }
 <span class="lineno">  34 </span>
@@ -2246,7 +2246,7 @@ pre {
 <span class="lineno">  13 </span>class MainActivity : AppCompatActivity() {
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:4:1</span><br><span class="message">android.view.* is a wildcard import. Replace it with fully qualified imports.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyFragment.kt:4:1</span><br><span class="message">android.view.* is a wildcard import. Replace it with fully qualified imports.</span>
         <pre><code><span class="lineno">   1 </span>package com.benji.weatherswe.dayweather
 <span class="lineno">   2 </span>
 <span class="lineno">   3 </span>import android.os.Bundle
@@ -2256,17 +2256,17 @@ pre {
 <span class="lineno">   7 </span>import androidx.appcompat.widget.SearchView
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt:16:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyFragment.kt:16:1</span><br><span class="message">com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports.</span>
         <pre><code><span class="lineno">  13 </span>import com.benji.domain.domainmodel.weather.HourlyOverview
 <span class="lineno">  14 </span>import com.benji.weatherswe.R
-<span class="lineno">  15 </span>import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
+<span class="lineno">  15 </span>import com.benji.weatherswe.dayweather.servicelocator.DailyServiceLocator
 <span class="lineno">  16 </span><span class="error">import com.benji.weatherswe.utils.*</span>
 <span class="lineno">  17 </span>import kotlinx.android.synthetic.main.fragment_day_weather.*
 <span class="lineno">  18 </span>
 <span class="lineno">  19 </span>
 </code></pre>
       </li>
-      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt:9:1</span><br><span class="message">com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports.</span>
+      <li><span class="location">C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt:9:1</span><br><span class="message">com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports.</span>
         <pre><code><span class="lineno">   6 </span>import com.benji.data.ErrorHandlerImpl
 <span class="lineno">   7 </span>import com.benji.domain.ResultWrapper
 <span class="lineno">   8 </span>import com.benji.domain.domainmodel.ErrorEntity

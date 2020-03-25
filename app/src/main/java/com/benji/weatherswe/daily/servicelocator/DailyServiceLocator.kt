@@ -1,14 +1,13 @@
-package com.benji.weatherswe.dayweather.servicelocator
+package com.benji.weatherswe.daily.servicelocator
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.benji.data.datasource.UrlManager
 import com.benji.data.datasource.remote.WeatherAPI
 import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.data.repository.WeatherRepository
-import com.benji.weatherswe.BaseViewModelFactory
-import com.benji.weatherswe.dayweather.DayWeatherViewModel
+import com.benji.weatherswe.base.BaseViewModelFactory
+import com.benji.weatherswe.daily.DailyViewModel
 import com.benji.weatherswe.utils.DispatcherProvider
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -16,20 +15,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 
-object DayWeatherServiceLocator {
+object DailyServiceLocator {
     private lateinit var cacheDir: File
 
-    fun provideViewModel(fragment: Fragment): DayWeatherViewModel {
+    fun provideViewModel(fragment: Fragment): DailyViewModel {
         this.cacheDir = fragment.context!!.cacheDir
 
         return ViewModelProvider(
             fragment,
             BaseViewModelFactory { initDayWeatherViewModel() }
-        ).get(DayWeatherViewModel::class.java)
+        ).get(DailyViewModel::class.java)
     }
 
-    private fun initDayWeatherViewModel(): DayWeatherViewModel =
-        DayWeatherViewModel(
+    private fun initDayWeatherViewModel(): DailyViewModel =
+        DailyViewModel(
             DispatcherProvider,
             weatherRepository
         )

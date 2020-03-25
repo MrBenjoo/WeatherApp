@@ -1,4 +1,4 @@
-package com.benji.weatherswe
+package com.benji.weatherswe.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

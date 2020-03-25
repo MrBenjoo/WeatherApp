@@ -1,4 +1,4 @@
-package com.benji.weatherswe.hourweather
+package com.benji.weatherswe.hourly
 
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Hourly
@@ -9,7 +9,6 @@ import com.benji.weatherswe.utils.forecast.SymbolUtils
 import com.benji.weatherswe.utils.forecast.TempUtils
 
 object HourlyUtils {
-
 
     fun getHourlyForecastData(timeSeries: TimeSeries): Hourly {
         val parameters = timeSeries.parameters
@@ -77,6 +76,4 @@ object HourlyUtils {
         }
         return tempList
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.benji.weatherswe.searchcity
+package com.benji.weatherswe.search
 
 import android.content.Context
 import android.location.Geocoder
@@ -7,9 +7,9 @@ import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.domain.location.ISearchCityGeocoding
 import java.io.IOException
 
-class SearchCityGeocoding(context: Context) : ISearchCityGeocoding {
+class SearchGeocoding(context: Context) : ISearchCityGeocoding {
 
-    private val TAG = "SearchCityGeocoding"
+    private val TAG = "SearchGeocoding"
 
     private var geocoder: Geocoder = Geocoder(context)
     private val MAX_RESULTS = 1

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <checkstyle version="4.3">
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\currentweather\CurrentWeatherFragment.kt">
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\currentweather\CurrentlyFragment.kt">
 	<error line="16" column="7" severity="warning" message="Class &apos;CurrentWeatherFragment&apos; with &apos;13&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherAdapter.kt">
@@ -33,13 +33,13 @@
 	<error line="68" column="9" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="69" column="9" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherFragment.kt">
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyFragment.kt">
 	<error line="20" column="7" severity="warning" message="Class &apos;DayWeatherFragment&apos; with &apos;11&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="25" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
 	<error line="4" column="1" severity="warning" message="android.view.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="16" column="1" severity="warning" message="com.benji.weatherswe.utils.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayWeatherViewModel.kt">
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyViewModel.kt">
 	<error line="25" column="7" severity="warning" message="Class &apos;DayWeatherViewModel&apos; with &apos;11&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="9" column="1" severity="warning" message="com.benji.domain.domainmodel.geocoding.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="108" column="22" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
@@ -111,7 +111,7 @@
 	<error line="81" column="9" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="82" column="9" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DayWeatherServiceLocator.kt">
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\servicelocator\DailyServiceLocator.kt">
 	<error line="66" column="40" severity="info" message="This empty block of code can be removed." source="detekt.EmptyCatchBlock" />
 	<error line="66" column="18" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
 	<error line="64" column="29" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
@@ -131,10 +131,10 @@
 	<error line="15" column="22" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
 	<error line="19" column="1" severity="warning" message="The file ResultWrapper.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchCityGeocoding.kt">
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\locationweather\SearchGeocoding.kt">
 	<error line="11" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
 	<error line="14" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
-	<error line="35" column="1" severity="warning" message="The file SearchCityGeocoding.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="35" column="1" severity="warning" message="The file SearchGeocoding.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\androidTest\java\com\benji\weatherswe\MainActivityTest.kt">
 	<error line="44" column="1" severity="warning" message="The file MainActivityTest.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
@@ -145,8 +145,8 @@
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\BaseViewModelFactory.kt">
 	<error line="10" column="1" severity="warning" message="The file BaseViewModelFactory.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DayUtils.kt">
-	<error line="27" column="1" severity="warning" message="The file DayUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyUtils.kt">
+	<error line="27" column="1" severity="warning" message="The file DailyUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt">
 	<error line="82" column="1" severity="warning" message="The file HourlyUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />

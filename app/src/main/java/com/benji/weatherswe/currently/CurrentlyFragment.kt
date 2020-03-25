@@ -1,5 +1,4 @@
-package com.benji.weatherswe.currentweather
-
+package com.benji.weatherswe.currently
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +11,7 @@ import com.benji.weatherswe.utils.extensions.activitySharedViewModel
 import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_current_weather.*
 
-
-class CurrentWeatherFragment : Fragment() {
+class CurrentlyFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,5 +95,4 @@ class CurrentWeatherFragment : Fragment() {
     private fun setTemperature() {
         tv_current_weather_temperature.text = activitySharedViewModel().hourly.temp + "\u00B0"
     }
-
 }

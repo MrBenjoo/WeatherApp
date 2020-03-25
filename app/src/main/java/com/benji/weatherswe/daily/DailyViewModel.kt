@@ -1,5 +1,6 @@
-package com.benji.weatherswe.dayweather
+package com.benji.weatherswe.daily
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benji.domain.ResultWrapper
@@ -10,8 +11,8 @@ import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
-import com.benji.weatherswe.BaseViewModel
-import com.benji.weatherswe.hourweather.HourlyUtils
+import com.benji.weatherswe.base.BaseViewModel
+import com.benji.weatherswe.hourly.HourlyUtils
 import com.benji.weatherswe.utils.DispatcherProvider
 import com.benji.weatherswe.utils.forecast.DateUtils
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +20,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class DayWeatherViewModel(
+class DailyViewModel(
     private val dispatcher: DispatcherProvider,
     private val weatherRepository: IWeatherRepository
 ) : BaseViewModel(), CoroutineScope {
@@ -49,12 +50,8 @@ class DayWeatherViewModel(
 
 
     fun getForecast(candidate: Candidate) = launch {
-        setInFlightState()
-
         val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
         handleWeatherData(data, candidate)
-
-        setCompletedState()
     }
 
     private fun handleWeatherData(data: ResultWrapper<Exception, Weather>, candidate: Candidate) =
@@ -66,7 +63,7 @@ class DayWeatherViewModel(
                 processWeatherData(candidate, forecast, date)
                 listOfDayForecast.value?.let { setHourlyOverview(it) }
             }
-            is ResultWrapper.Error -> TODO("implement logic for ResultWrapper.Error")
+            is ResultWrapper.Error -> Log.d("Error", "An operation is not implemented: implement logic for ResultWrapper.Error")
         }
 
 
@@ -79,7 +76,7 @@ class DayWeatherViewModel(
             val forecastDate = DateUtils().getFormattedTime(timeSeries.validTime)
 
             if (forecastDate != currentDate) {
-                val day = DayUtils.getDayForecast(currentDate, candidate, listOfHourlyData)
+                val day = DailyUtils.getDayForecast(currentDate, candidate, listOfHourlyData)
                 listOfDayForecast.add(day)
                 listOfHourlyData = mutableListOf()
                 currentDate = forecastDate

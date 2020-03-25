@@ -1,22 +1,22 @@
-package com.benji.weatherswe.dayweather
-
+package com.benji.weatherswe.daily
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.weatherswe.R
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
-
-class DayWeatherAdapter(var data: List<DayForecast>?) :
+class DayWeatherAdapter(var listOfDayForecast: List<DayForecast>?) :
     RecyclerView.Adapter<DayWeatherAdapter.MainViewHolder>() {
 
-    private val TAG = "DayWeatherAdapter"
-    val rowData = MutableLiveData<RowData>()
-
+    private val _rowData = MutableLiveData<RowData>()
+    val rowData: LiveData<RowData> = _rowData
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,16 +25,16 @@ class DayWeatherAdapter(var data: List<DayForecast>?) :
         )
     }
 
-    override fun getItemCount(): Int = data?.size ?: 0
+    override fun getItemCount(): Int = listOfDayForecast?.size ?: 0
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        data?.let {
+        listOfDayForecast?.let {
             with(holder) {
                 val forecast = it[position]
-                day.text = forecast.day
-                image.setAnimation(getWeatherSymbolImage(forecast.weatherSymbol))
+                weekday.text = forecast.day
+                weatherSymbol.setAnimation(getWeatherSymbolImage(forecast.weatherSymbol))
                 temperature.text = forecast.temperature + "\u00B0"
-                bind(forecast, this@DayWeatherAdapter.rowData)
+                bind(forecast, this@DayWeatherAdapter._rowData)
             }
         }
     }
@@ -70,16 +70,15 @@ class DayWeatherAdapter(var data: List<DayForecast>?) :
         else -> R.raw.lottie_weather_sunny
     }
 
-
-    fun setList(list: List<DayForecast>) {
-        data = list
+    fun setList(newListOfDayForecast: List<DayForecast>) {
+        listOfDayForecast = newListOfDayForecast
         notifyDataSetChanged()
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val day = itemView.tv_row_list_day
-        val image = itemView.img_row_list_weather
-        val temperature = itemView.tv_row_list_temperature
+        val weekday: AppCompatTextView = itemView.tv_row_list_day
+        val weatherSymbol: LottieAnimationView = itemView.img_row_list_weather
+        val temperature: AppCompatTextView = itemView.tv_row_list_temperature
 
         fun bind(forecast: DayForecast, rowData: MutableLiveData<RowData>) {
             itemView.setOnClickListener { rowData.value = RowData(adapterPosition, forecast) }

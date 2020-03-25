@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/scene"
-    tools:context="com.benji.weatherswe.hourweather.HourWeatherFragment">
+    tools:context="com.benji.weatherswe.hourly.HourlyFragment">
 
     <TextView
         android:id="@+id/tv_hour_weather_day"

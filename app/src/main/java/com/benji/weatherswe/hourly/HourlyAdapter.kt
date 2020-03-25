@@ -1,4 +1,4 @@
-package com.benji.weatherswe.hourweather
+package com.benji.weatherswe.hourly
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +11,8 @@ import com.benji.weatherswe.R
 import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.item_day_forecast.view.*
 
-class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
-    RecyclerView.Adapter<HourWeatherAdapter.MainViewHolder>() {
+class HourlyAdapter(private var listOfHourlyData: List<Hourly>) :
+    RecyclerView.Adapter<HourlyAdapter.MainViewHolder>() {
 
 
     private val _rowData = MutableLiveData<Hourly>()
@@ -39,7 +39,7 @@ class HourWeatherAdapter(private var listOfHourlyData: List<Hourly>) :
             day.text = hourly.validTime
             temperature.text = hourly.temp + "\u00B0"
             image.setAnimation(SymbolUtils.getWeatherSymbolLottie(hourly.weatherSymbol))
-            bind(hourly, this@HourWeatherAdapter._rowData)
+            bind(hourly, this@HourlyAdapter._rowData)
         }
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/motion_scene_day"
-    tools:context="com.benji.weatherswe.dayweather.DayWeatherFragment">
+    tools:context="com.benji.weatherswe.daily.DailyFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_day_weather_city"

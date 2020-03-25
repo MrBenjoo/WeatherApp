@@ -1,4 +1,4 @@
-package com.benji.weatherswe.dayweather
+package com.benji.weatherswe.daily
 
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.weather.DayForecast
@@ -8,7 +8,7 @@ import com.benji.weatherswe.utils.forecast.SymbolUtils
 import com.benji.weatherswe.utils.forecast.TempUtils
 
 
-object DayUtils {
+object DailyUtils {
 
     fun getDayForecast(
         date: String,

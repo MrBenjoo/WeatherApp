@@ -36,17 +36,16 @@ class DateUtils {
         return dayOfWeek
     }
 
+    /**
+     * This method is almost the same as above except no argument is needed to be passed.
+     * The above method is needed to get the weekday from the api while this one is needed
+     * to get the current day without having to first call getCurrentTime and then pass it in to
+     * getDay.
+     */
+    fun getDay(): String = getDay(getCurrentTime())
+
     fun getTodayDate(): String {
         val inputFormat = SimpleDateFormat("dd/MM", Locale.getDefault())
         return inputFormat.format(Calendar.getInstance().time)
     }
-
-    fun getDayAndClock(): String {
-        val inputFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val day = getDay(getCurrentTime())
-        val clock = inputFormat.format(Date())
-        return "$day, $clock"
-    }
-
-
 }

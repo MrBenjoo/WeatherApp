@@ -16,5 +16,4 @@ object TempUtils {
         parameter?.let { tempCurrent = parameter.values[0].toDouble() }
         return tempCurrent.roundToInt().toString()
     }
-
 }

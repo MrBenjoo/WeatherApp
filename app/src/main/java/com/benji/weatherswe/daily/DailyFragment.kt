@@ -1,4 +1,4 @@
-package com.benji.weatherswe.dayweather
+package com.benji.weatherswe.daily
 
 import android.os.Bundle
 import android.view.*
@@ -9,29 +9,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.benji.domain.domainmodel.State
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.HourlyOverview
 import com.benji.weatherswe.R
-import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator
-import com.benji.weatherswe.dayweather.servicelocator.DayWeatherServiceLocator.provideViewModel
+import com.benji.weatherswe.daily.servicelocator.DailyServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.extensions.*
 import com.benji.weatherswe.utils.forecast.DateUtils
 import com.benji.weatherswe.utils.forecast.SymbolUtils
 import kotlinx.android.synthetic.main.fragment_day_weather.*
 
+class DailyFragment : Fragment() {
 
-class DayWeatherFragment : Fragment() {
-
-    private val viewModel: DayWeatherViewModel by lazy { provideViewModel(this) }
-    private lateinit var dayWeatherAdapter: DayWeatherAdapter
-    private val TAG = "DayWeatherFragment"
+    private val viewModel: DailyViewModel by lazy { provideViewModel(this) }
+    private var dayWeatherAdapter: DayWeatherAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            activity?.finish()
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(this) { activity?.finish() }
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
@@ -41,20 +35,16 @@ class DayWeatherFragment : Fragment() {
     private val weatherObserver = Observer<List<DayForecast>> { weekdayForecast ->
         val candidateJson = activitySharedViewModel().candidate.toJson()
         prefsStoreCandidate(candidateJson)
-
         val weatherSymbol = weekdayForecast[0].weatherSymbol
         val weatherSymbolDescription = SymbolUtils.getWeatherSymbolDescription(weatherSymbol)
         val weatherSymbolLottie = SymbolUtils.getWeatherSymbolLottie(weatherSymbol)
-
         tv_day_weather_city.text = activitySharedViewModel().candidate.address
         tv_day_weather_description.text = weatherSymbolDescription
         img_day_weather_symbol.setAnimation(weatherSymbolLottie)
         img_day_weather_symbol.playAnimation()
         tv_day_weather_temp.text = weekdayForecast[0].temperature + "\u00B0"
-
-        dayWeatherAdapter.setList(weekdayForecast)
+        dayWeatherAdapter?.setList(weekdayForecast)
     }
-
 
     private val setWeatherFirstHour = Observer<HourlyOverview> { hourlyOverview ->
         lottie_day_weather_1.setAnimation(hourlyOverview.weatherSymbol)
@@ -116,13 +106,13 @@ class DayWeatherFragment : Fragment() {
         super.onStart()
         view?.let { hideKeyBoard(it) }
 
-        tv_weather_day_time.text = DateUtils().getDayAndClock()
+        tv_weather_day_time.text = DateUtils().getDay()
+
         tv_day_weather_city.text = activitySharedViewModel().candidate.address
 
-        dayWeatherAdapter.rowData.observe(viewLifecycleOwner, listClickObserver)
+        dayWeatherAdapter?.rowData?.observe(viewLifecycleOwner, listClickObserver)
 
         viewModel.listOfDayForecast.observe(viewLifecycleOwner, weatherObserver)
-        viewModel.state.observe(viewLifecycleOwner, stateObserver)
         viewModel.forecastFirstHour.observe(viewLifecycleOwner, setWeatherFirstHour)
         viewModel.forecastSecondHour.observe(viewLifecycleOwner, setWeatherSecondHour)
         viewModel.forecastThirdHour.observe(viewLifecycleOwner, setWeatherThirdHour)
@@ -133,21 +123,6 @@ class DayWeatherFragment : Fragment() {
         viewModel.getForecast(activitySharedViewModel().candidate)
     }
 
-    private val stateObserver = Observer<State> { state ->
-        when (state) {
-            State.InFlight -> {
-                loading_day_bar.visibility = View.GONE
-            }
-            State.Complete, State.Idle, State.Gone -> {
-                loading_day_bar.visibility = View.GONE
-            }
-            else -> {
-                loading_day_bar.visibility = View.VISIBLE
-            }
-        }
-    }
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_weather_view, menu)
@@ -156,8 +131,7 @@ class DayWeatherFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_item_search -> {
-                //navigate(R.id.action_dayWeatherFragment_to_searchCityFragment)
-                val bundle = bundleOf("navigatedFrom" to "dayWeatherFragment")
+                val bundle = bundleOf("navigatedFrom" to DailyFragment::class.java.simpleName)
                 findNavController().navigate(
                     R.id.action_dayWeatherFragment_to_searchCityFragment,
                     bundle
@@ -168,5 +142,8 @@ class DayWeatherFragment : Fragment() {
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dayWeatherAdapter = null
+    }
 }

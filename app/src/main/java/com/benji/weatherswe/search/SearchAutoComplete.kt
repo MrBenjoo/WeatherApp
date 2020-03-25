@@ -1,5 +1,4 @@
-package com.benji.weatherswe.searchcity
-
+package com.benji.weatherswe.search
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,8 +10,7 @@ import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.res.ResourcesCompat
 import com.benji.weatherswe.R
 
-
-class ClearableAutoCompleteTextView : AppCompatAutoCompleteTextView, OnTouchListener {
+class SearchAutoComplete : AppCompatAutoCompleteTextView, OnTouchListener {
 
     lateinit var onClearListener: OnClearListener
 
@@ -69,6 +67,5 @@ class ClearableAutoCompleteTextView : AppCompatAutoCompleteTextView, OnTouchList
 
         this.setOnTouchListener(this)
     }
-
 }
 

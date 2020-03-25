@@ -2,7 +2,7 @@ package com.benji.weatherswe.utils
 
 import com.benji.domain.domainmodel.weather.DayForecast
 import com.benji.domain.domainmodel.weather.Weather
-import com.benji.weatherswe.hourweather.HourlyUtils
+import com.benji.weatherswe.hourly.HourlyUtils
 import com.benji.weatherswe.no_test_only_helper_functions.TestUtils
 import com.squareup.moshi.Moshi
 import org.junit.jupiter.api.Assertions.assertEquals

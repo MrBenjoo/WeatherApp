@@ -1,4 +1,4 @@
-package com.benji.weatherswe.utils
+package com.benji.weatherswe.search
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import com.benji.weatherswe.R
 
 class AutoCompleteCityAdapter(context: Context, private val listOfCities: List<String>) :
@@ -74,8 +73,9 @@ class AutoCompleteCityAdapter(context: Context, private val listOfCities: List<S
         selectedListOfCities = suggestions
         notifyDataSetChanged()
     }
+
+    class ViewHolder {
+        var cityTextView : TextView? = null
+    }
 }
 
-class ViewHolder {
-    var cityTextView : TextView? = null
-}

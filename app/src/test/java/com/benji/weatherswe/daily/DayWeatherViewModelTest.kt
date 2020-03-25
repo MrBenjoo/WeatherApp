@@ -1,4 +1,4 @@
-package com.benji.weatherswe.dayweather
+package com.benji.weatherswe.daily
 
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(InstantExecutorExtension::class)
 internal class DayWeatherViewModelTest {
 
-    private lateinit var viewModel: DayWeatherViewModel
+    private lateinit var viewModel: DailyViewModel
     private lateinit var mockedWeatherData: Weather
 
     private val weatherRepository: IWeatherRepository = mockk()
@@ -31,7 +31,7 @@ internal class DayWeatherViewModelTest {
 
     @BeforeEach
     fun setup() {
-        viewModel = DayWeatherViewModel(dispatcher, weatherRepository, geocodingRepository)
+        viewModel = DailyViewModel(dispatcher, weatherRepository, geocodingRepository)
         val jsonWeatherString = TestUtils.loadJsonFromResources("JSON_WEATHER")
 
         val moshiBuild = Moshi.Builder().build()
