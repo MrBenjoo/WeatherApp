@@ -1,8 +1,7 @@
 package com.benji.domain.domainmodel
 
 sealed class State {
-    object InFlight: State()
+    object Loading: State()
     object Complete: State()
-    object Idle: State()
     object Gone: State()
 }

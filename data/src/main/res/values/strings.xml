@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">data</string>
+
+    <string name="forecast_hourly_overview">%1$s %2$s</string>
 </resources>

@@ -4,15 +4,20 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.androidadvance.topsnackbar.TSnackbar
 import com.benji.domain.constants.Constants
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.weatherswe.MainActivity
+import com.benji.weatherswe.R
 import com.benji.weatherswe.SharedViewModel
+import com.benji.weatherswe.daily.DailyFragment
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.moshi.Moshi
 
@@ -22,7 +27,7 @@ fun Fragment.navigate(id: Int) {
     view!!.findNavController().navigate(id)
 }
 
-fun Fragment.activitySharedViewModel(): SharedViewModel =
+fun Fragment.sharedViewModel(): SharedViewModel =
     ViewModelProvider(mainActivity()).get(SharedViewModel::class.java)
 
 fun Fragment.setupToolbar(
@@ -32,9 +37,14 @@ fun Fragment.setupToolbar(
     mainActivity().supportActionBar?.title = null
 }
 
-fun Fragment.prefsStoreCandidate(candidateJson: String) {
+fun Fragment.prefsStoreCandidate() {
+    val candidateJson = sharedViewModel().candidate.toJson()
     val prefs = mainActivity().getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
     prefs.edit().putString(Constants.PREF_KEY_CITY, candidateJson).apply()
+}
+
+fun Fragment.initBackPressFinishActivity() {
+    requireActivity().onBackPressedDispatcher.addCallback(this) { activity?.finish() }
 }
 
 fun Fragment.prefsLoadLatestCandidate(): String =
@@ -43,9 +53,11 @@ fun Fragment.prefsLoadLatestCandidate(): String =
         .getString(Constants.PREF_KEY_CITY, Constants.PREF_DEFAULT_VALUE).toString()
 
 
-fun Fragment.hideKeyBoard(view: View) {
-    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
+fun Fragment.hideKeyBoard() {
+    view?.let {
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
+    }
 }
 
 fun Fragment.string(id: Int): String = context!!.resources.getString(id)
@@ -71,7 +83,24 @@ fun Fragment.showTopText(text: String) {
     snackbar.show()
 }
 
+fun DailyFragment.navigateToSearchFragment() : Boolean{
+    val bundle = bundleOf("navigatedFrom" to DailyFragment::class.java.simpleName)
+    findNavController().navigate(
+        R.id.action_dayWeatherFragment_to_searchCityFragment,
+        bundle
+    )
+    return true
+}
+
 fun Candidate.toJson(): String {
     return Moshi.Builder().build().adapter(Candidate::class.java)
         .toJson(this)
+}
+
+fun Fragment.hideView(view: View) {
+    view.visibility = View.GONE
+}
+
+fun Fragment.showView(view: View) {
+    view.visibility = View.VISIBLE
 }

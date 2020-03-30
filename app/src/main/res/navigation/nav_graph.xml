@@ -8,46 +8,50 @@
         android:id="@+id/dayWeatherFragment"
         android:name="com.benji.weatherswe.daily.DailyFragment"
         android:label="day_weather_fragment"
-        tools:layout="@layout/fragment_day_weather">
+        tools:layout="@layout/fragment_daily">
         <action
             android:id="@+id/action_dayWeatherFragment_to_hourWeatherFragment"
             app:destination="@id/hourWeatherFragment"
-            app:enterAnim="@anim/fade_in"
 
-            />
+            app:enterAnim="@anim/fragment_enter_slide_in_right"
+            app:exitAnim="@anim/fragment_exit_slide_out_left"
+            app:popEnterAnim="@anim/fragment_pop_enter_slide_in_left"
+            app:popExitAnim="@anim/fragment_pop_exit_slide_out_right" />
         <action
             android:id="@+id/action_dayWeatherFragment_to_searchCityFragment"
-            app:destination="@id/searchCityFragment" />
+            app:destination="@id/searchCityFragment"
+            app:enterAnim="@anim/fragment_enter_slide_up" />
     </fragment>
     <fragment
         android:id="@+id/hourWeatherFragment"
         android:name="com.benji.weatherswe.hourly.HourlyFragment"
         android:label="hour_weather_fragment"
-        tools:layout="@layout/fragment_hour_weather">
+        tools:layout="@layout/fragment_hourly">
         <action
             android:id="@+id/action_hourWeatherFragment_to_currentWeatherFragment"
             app:destination="@id/currentWeatherFragment"
-            app:enterAnim="@anim/fade_in"
 
-            />
+            app:enterAnim="@anim/fragment_enter_slide_in_right"
+            app:exitAnim="@anim/fragment_exit_slide_out_left"
+            app:popEnterAnim="@anim/fragment_pop_enter_slide_in_left"
+            app:popExitAnim="@anim/fragment_pop_exit_slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/currentWeatherFragment"
         android:name="com.benji.weatherswe.currently.CurrentlyFragment"
         android:label="current_weather_fragment"
-        tools:layout="@layout/fragment_current_weather" />
+        tools:layout="@layout/fragment_currently" />
     <fragment
         android:id="@+id/searchCityFragment"
         android:name="com.benji.weatherswe.search.SearchFragment"
         android:label="search_city_fragment"
-        tools:layout="@layout/search_city_fragment" >
-        <action
-            android:id="@+id/action_searchCityFragment_to_dayWeatherFragment"
-            app:destination="@id/dayWeatherFragment"
-            app:enterAnim="@anim/fade_in" />
+        tools:layout="@layout/fragment_search" >
         <argument
             android:name="navigatedFrom"
             app:argType="string"
             android:defaultValue="start" />
+        <action
+            android:id="@+id/action_searchCityFragment_to_dayWeatherFragment"
+            app:destination="@id/dayWeatherFragment" />
     </fragment>
 </navigation>

@@ -26,15 +26,13 @@
         android:layout_height="0dp"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_row_list_temperature"
-        app:layout_constraintHorizontal_bias="0.81"
-        app:layout_constraintStart_toEndOf="@+id/tv_row_list_day"
         app:layout_constraintTop_toTopOf="@+id/tv_row_list_day"
-        app:lottie_autoPlay="false"
 
-        
-         />
+
+        app:lottie_autoPlay="false" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_row_list_temperature"

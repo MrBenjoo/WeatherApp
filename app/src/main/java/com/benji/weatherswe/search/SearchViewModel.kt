@@ -1,20 +1,19 @@
 package com.benji.weatherswe.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.*
 import com.benji.domain.location.ISearchCityGeocoding
 import com.benji.domain.repository.IGeocodingRepository
+import com.benji.weatherswe.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val repo: IGeocodingRepository,
     private val reversedGeocoding: ISearchCityGeocoding
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _citySuggestions = MutableLiveData<List<String>>()
     val citySuggestions: LiveData<List<String>> = _citySuggestions
@@ -48,9 +47,7 @@ class SearchViewModel(
             is ResultWrapper.Success -> {
                 _candidate.value = data.value.returnCandidateWithHighestScore()
             }
-            is ResultWrapper.Error -> {
-                Log.d("SearchViewModel", "error: " + data.error.message)
-            }
+            is ResultWrapper.Error -> _error.value = data.error.message
         }
     }
 
@@ -60,9 +57,7 @@ class SearchViewModel(
                 suggestions = data.value.suggestions
                 _citySuggestions.value = suggestions.returnCities()
             }
-            is ResultWrapper.Error -> {
-                Log.d("SearchViewModel", "error: " + data.error.message)
-            }
+            is ResultWrapper.Error -> _error.value = data.error.message
         }
     }
 
@@ -70,7 +65,7 @@ class SearchViewModel(
         location?.let {
             when (val city = reversedGeocoding.getFromLocation(location)) {
                 is ResultWrapper.Success -> _candidate.value = Candidate(city.value, location, 100)
-                is ResultWrapper.Error -> Log.d("LocWVM", "onLocationReceived error")
+                is ResultWrapper.Error -> _error.value = city.error.message
             }
         }
     }

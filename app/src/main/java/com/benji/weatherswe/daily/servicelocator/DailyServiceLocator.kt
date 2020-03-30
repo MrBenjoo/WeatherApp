@@ -8,7 +8,6 @@ import com.benji.data.datasource.remote.WeatherRemoteDataSource
 import com.benji.data.repository.WeatherRepository
 import com.benji.weatherswe.base.BaseViewModelFactory
 import com.benji.weatherswe.daily.DailyViewModel
-import com.benji.weatherswe.utils.DispatcherProvider
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -29,7 +28,6 @@ object DailyServiceLocator {
 
     private fun initDayWeatherViewModel(): DailyViewModel =
         DailyViewModel(
-            DispatcherProvider,
             weatherRepository
         )
 

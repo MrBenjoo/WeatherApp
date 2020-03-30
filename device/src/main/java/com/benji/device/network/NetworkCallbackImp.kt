@@ -11,6 +11,9 @@ internal class NetworkCallbackImp(private val holder: NetworkStateImp) :
     }
 
     override fun onAvailable(network: Network) {
-        holder.isConnected = true
+        when(holder.isConnected) {
+            true -> Unit // unnecessary to send network available if it is already available
+            false -> holder.isConnected = true
+        }
     }
 }

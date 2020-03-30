@@ -23,13 +23,7 @@ class MainActivity : AppCompatActivity(), IActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("LifeCycleTesting", "activity -> onCreate")
         setContentView(R.layout.activity_main)
-        permissions = Permissions(this).also { it.request() }
-        gpsBroadcastReceiver =
-            GPSBroadcastReceiver().also { it.gpsStatus.observe(this, gpsStatusObserver) }
-        gps = Gps(this)
-
     }
 
     override fun onRequestPermissionsResult(
@@ -74,6 +68,10 @@ class MainActivity : AppCompatActivity(), IActivity {
 
     override fun onStart() {
         super.onStart()
+        permissions = Permissions(this).also { it.request() }
+        gpsBroadcastReceiver =
+            GPSBroadcastReceiver().also { it.gpsStatus.observe(this, gpsStatusObserver) }
+        gps = Gps(this)
         registerReceiver(gpsBroadcastReceiver, GPSBroadcastReceiver.getIntentFilter())
     }
 

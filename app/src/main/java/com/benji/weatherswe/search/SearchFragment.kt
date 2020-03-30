@@ -8,19 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.benji.device.location.LocationEvent
 import com.benji.device.network.Event
 import com.benji.device.network.NetworkEvents
-import com.benji.domain.constants.Constants
+import com.benji.domain.constants.Constants.PREF_DEFAULT_VALUE
 import com.benji.domain.domainmodel.geocoding.Candidate
 import com.benji.domain.domainmodel.geocoding.Location
 import com.benji.weatherswe.R
+import com.benji.weatherswe.daily.DailyFragment
 import com.benji.weatherswe.search.servicelocator.SearchServiceLocator.provideViewModel
 import com.benji.weatherswe.utils.extensions.*
 import com.squareup.moshi.Moshi
-import kotlinx.android.synthetic.main.search_city_fragment.*
-
+import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment(), TextWatcher {
     private val viewModel: SearchViewModel by lazy { provideViewModel(this) }
@@ -30,7 +29,7 @@ class SearchFragment : Fragment(), TextWatcher {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.search_city_fragment, container, false)
+        val root = inflater.inflate(R.layout.fragment_search, container, false)
         val autoCompleteTv =
             root.findViewById<SearchAutoComplete>(R.id.autoCompleteTv_search_city)
         arrayAdapter = AutoCompleteCityAdapter(
@@ -50,8 +49,8 @@ class SearchFragment : Fragment(), TextWatcher {
     }
 
     private val candidateObserver = Observer<Candidate> { candidate ->
-        view?.let { hideKeyBoard(it) }
-        activitySharedViewModel().candidate = candidate
+        hideKeyBoard()
+        sharedViewModel().candidate = candidate
         navigate(R.id.action_searchCityFragment_to_dayWeatherFragment)
     }
 
@@ -77,8 +76,8 @@ class SearchFragment : Fragment(), TextWatcher {
                     when (text.isNotEmpty()) {
                         true -> setText("")
                         false -> {
-                            hideKeyBoard(this@with)
-                            findNavController().navigateUp()
+                            hideKeyBoard()
+                            navigate(R.id.action_searchCityFragment_to_dayWeatherFragment)
                         }
                     }
                 }
@@ -89,31 +88,27 @@ class SearchFragment : Fragment(), TextWatcher {
     override fun onStart() {
         super.onStart()
         initAutoCompleteTextView()
-
         val navigatedFrom = arguments?.getString("navigatedFrom")
-        when (navigatedFrom) {
-            "start" -> {
-                val candidate = prefsLoadLatestCandidate()
-                when (candidate) {
-                    Constants.PREF_DEFAULT_VALUE -> noCitySearched()
-                    else -> loadLatestSearchedCity(candidate)
-                }
-            }
-            "DailyFragment" -> noCitySearched()
+        val candidate = prefsLoadLatestCandidate()
+        when {
+            candidate == PREF_DEFAULT_VALUE || navigatedFrom == DailyFragment::class.java.simpleName -> noCitySearched(navigatedFrom)
+            else -> loadLatestSearchedCity(candidate)
         }
     }
 
     private fun loadLatestSearchedCity(candidate: String) {
         val moshi = Moshi.Builder().build()
-        activitySharedViewModel().candidate =
+        sharedViewModel().candidate =
             moshi.adapter(Candidate::class.java).fromJson(candidate)!!
         navigate(R.id.action_searchCityFragment_to_dayWeatherFragment)
     }
 
-    private fun noCitySearched() {
+    private fun noCitySearched(navigatedFrom: String?) {
         viewModel.citySuggestions.observe(viewLifecycleOwner, citySuggestionsObserver)
         viewModel.candidate.observe(viewLifecycleOwner, candidateObserver)
-        LocationEvent.observe(viewLifecycleOwner, locationObserver)
+        when(navigatedFrom) {
+            "start" -> LocationEvent.observe(viewLifecycleOwner, locationObserver)
+        }
         NetworkEvents.observe(viewLifecycleOwner, networkEventObserver)
     }
 

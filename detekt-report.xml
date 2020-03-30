@@ -148,8 +148,8 @@
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\dayweather\DailyUtils.kt">
 	<error line="27" column="1" severity="warning" message="The file DailyUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\HourlyUtils.kt">
-	<error line="82" column="1" severity="warning" message="The file HourlyUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\main\java\com\benji\weatherswe\hourweather\DailyUtils.kt">
+	<error line="82" column="1" severity="warning" message="The file DailyUtils.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 	<error line="29" column="38" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="37" column="30" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="44" column="26" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
@@ -209,8 +209,8 @@
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\DateUtilsTest.kt">
 	<error line="70" column="1" severity="warning" message="The file DateUtilsTest.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
-<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\HourlyUtilsTest.kt">
-	<error line="115" column="1" severity="warning" message="The file HourlyUtilsTest.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+<file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\DailyUtilsTest.kt">
+	<error line="115" column="1" severity="warning" message="The file DailyUtilsTest.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
 </file>
 <file name="C:\Users\benjo\AndroidStudioProjects\WeatherSwe\app\src\test\java\com\benji\weatherswe\utils\SymbolUtilsTest.kt">
 	<error line="51" column="1" severity="warning" message="The file SymbolUtilsTest.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
