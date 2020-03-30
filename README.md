@@ -35,6 +35,8 @@ from the Android Architecture library are utilised: navigation, viewModel, liveD
   </tr>
  </table>
 
+App screenshots created with <a href="https://previewed.app/">Previewed</a>
+
 <img src="/previews/preview.gif" align="right" width="32%"/>
 
 ## APIs and Architectures Used
