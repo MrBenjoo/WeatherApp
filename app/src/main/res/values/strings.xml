@@ -13,4 +13,5 @@
 
     <string name="connection_unsuccess">Ingen anslutning</string>
     <string name="connection_success">Anslutning återupprättad</string>
+    <string name="transition_lottie_weather">lottie weather symbol</string>
 </resources>

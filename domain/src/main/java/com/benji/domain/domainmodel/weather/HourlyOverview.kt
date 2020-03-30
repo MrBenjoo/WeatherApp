@@ -6,3 +6,4 @@ data class HourlyOverview (
     val weatherSymbol : Int
 )
 
+

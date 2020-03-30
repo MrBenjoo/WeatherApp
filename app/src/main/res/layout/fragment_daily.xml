@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionlayout_day_weather"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/motion_scene_day"
+    tools:context="com.benji.weatherswe.daily.DailyFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_day_weather_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="@style/CustomTextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/h1_guideline"
+        tools:text="Malmö" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_weather_day_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:textColor="@color/colorPrimaryTransparency"
+        android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_city"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_city"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_weather_city"
+        tools:text="Torsdag, 13:00" />
+
+    <ProgressBar
+        android:id="@+id/progress_loader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_18"
+        android:textColor="@color/colorPrimaryTransparency"
+        android:textAppearance="@style/CustomTextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintEnd_toEndOf="@+id/tv_weather_day_time"
+        app:layout_constraintStart_toStartOf="@+id/tv_weather_day_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_weather_day_time"
+        tools:text="20°" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_day_weather_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:textColor="@color/colorPrimaryTransparency"
+        android:textAppearance="@style/CustomTextAppearance.SecondaryText.Body2"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_temp"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_temp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_weather_temp"
+        tools:text="Soligt" />
+
+    <ProgressBar
+        android:id="@+id/loading_day_bar"
+        style="@style/MyProgressBarCircular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_day_weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_day_weather_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_place"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_day_weather_city"
+        app:layout_constraintEnd_toStartOf="@+id/tv_day_weather_city"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_city" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h1_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_day_weather_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tv_day_weather_lottie_temp_1"
+        app:layout_constraintEnd_toStartOf="@+id/lottie_day_weather_2"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_day_weather_description"
+        app:layout_constraintVertical_bias="1.0"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_scale="0.15"
+        app:lottie_speed="1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_day_weather_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/lottie_day_weather_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lottie_day_weather_1"
+        app:layout_constraintTop_toTopOf="@+id/lottie_day_weather_1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_scale="0.15"
+        app:lottie_speed="1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_day_weather_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="@string/transition_lottie_weather"
+        app:layout_constraintEnd_toStartOf="@+id/lottie_day_weather_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lottie_day_weather_2"
+        app:layout_constraintTop_toTopOf="@+id/lottie_day_weather_1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_scale="0.15"
+        app:lottie_speed="1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_day_weather_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/lottie_day_weather_5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lottie_day_weather_3"
+        app:layout_constraintTop_toTopOf="@+id/lottie_day_weather_1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_scale="0.15"
+        app:lottie_speed="1" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_day_weather_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lottie_day_weather_4"
+        app:layout_constraintTop_toTopOf="@+id/lottie_day_weather_1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_scale="0.15"
+        app:lottie_speed="1" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_temp_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/tv_day_weather_lottie_time_1"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_day_weather_1"
+        app:layout_constraintStart_toStartOf="@+id/lottie_day_weather_1"
+        tools:text="18c" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_temp_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_day_weather_2"
+        app:layout_constraintStart_toStartOf="@+id/lottie_day_weather_2"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_temp_1"
+        tools:text="18c" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_temp_3"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_day_weather_3"
+        app:layout_constraintStart_toStartOf="@+id/lottie_day_weather_3"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_temp_1"
+        tools:text="18c" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_temp_4"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_day_weather_4"
+        app:layout_constraintStart_toStartOf="@+id/lottie_day_weather_4"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_temp_1"
+        tools:text="18c" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_temp_5"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/lottie_day_weather_5"
+        app:layout_constraintStart_toStartOf="@+id/lottie_day_weather_5"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_temp_1"
+        tools:text="18c" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_time_1"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/card_view_day_weather"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_lottie_temp_1"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_lottie_temp_1"
+        tools:text="13:00" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_time_2"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_lottie_temp_2"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_lottie_temp_2"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_time_1"
+        tools:text="13:00" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_time_3"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_lottie_temp_3"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_lottie_temp_3"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_time_1"
+        tools:text="13:00" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_time_4"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_lottie_temp_4"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_lottie_temp_4"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_time_1"
+        tools:text="13:00" />
+
+    <TextView
+        android:id="@+id/tv_day_weather_lottie_time_5"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_day_weather_lottie_temp_5"
+        app:layout_constraintStart_toStartOf="@+id/tv_day_weather_lottie_temp_5"
+        app:layout_constraintTop_toTopOf="@+id/tv_day_weather_lottie_time_1"
+        tools:text="13:00" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h2_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6019152" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_day_weather"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/h2_guideline">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_day_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+
+
+

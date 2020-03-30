@@ -18,7 +18,7 @@ abstract class BaseViewModel : ViewModel() {
     val state: LiveData<State>
         get() = _state
 
-    private val _error = MutableLiveData<String>()
+    protected val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
 
@@ -26,8 +26,8 @@ abstract class BaseViewModel : ViewModel() {
         _error.value = error
     }
 
-    protected fun setInFlightState() {
-        _state.value = State.InFlight
+    protected fun setLoadingState() {
+        _state.value = State.Loading
     }
 
     protected fun setCompletedState() {
@@ -36,10 +36,6 @@ abstract class BaseViewModel : ViewModel() {
 
     private fun setGoneState() {
         _state.value = State.Gone
-    }
-
-    fun setIdleState() {
-        _state.value = State.Idle
     }
 
     override fun onCleared() {

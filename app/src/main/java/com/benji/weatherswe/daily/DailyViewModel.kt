@@ -1,29 +1,20 @@
 package com.benji.weatherswe.daily
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.benji.domain.ResultWrapper
 import com.benji.domain.domainmodel.geocoding.Candidate
-import com.benji.domain.domainmodel.geocoding.sixDecimals
 import com.benji.domain.domainmodel.weather.DayForecast
-import com.benji.domain.domainmodel.weather.Hourly
 import com.benji.domain.domainmodel.weather.HourlyOverview
-import com.benji.domain.domainmodel.weather.Weather
 import com.benji.domain.repository.IWeatherRepository
 import com.benji.weatherswe.base.BaseViewModel
-import com.benji.weatherswe.hourly.HourlyUtils
-import com.benji.weatherswe.utils.DispatcherProvider
-import com.benji.weatherswe.utils.forecast.DateUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import com.benji.weatherswe.utils.extensions.getCurrentWeatherOverview
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class DailyViewModel(
-    private val dispatcher: DispatcherProvider,
     private val weatherRepository: IWeatherRepository
-) : BaseViewModel(), CoroutineScope {
+) : BaseViewModel() {
 
     private val _forecastFirstHour = MutableLiveData<HourlyOverview>()
     val forecastFirstHour: LiveData<HourlyOverview> = _forecastFirstHour
@@ -43,56 +34,28 @@ class DailyViewModel(
     private val _listOfDayForecast = MutableLiveData<List<DayForecast>>()
     val listOfDayForecast: LiveData<List<DayForecast>> = _listOfDayForecast
 
-    private var jobTracker = Job()
+    private val _currentWeatherOverview = MutableLiveData<CurrentWeatherOverview>()
+    val currentWeatherOverview: LiveData<CurrentWeatherOverview> = _currentWeatherOverview
 
-    override val coroutineContext: CoroutineContext
-        get() = dispatcher.provideUIContext() + jobTracker
-
-
-    fun getForecast(candidate: Candidate) = launch {
-        val data = weatherRepository.getWeatherForecast(candidate.location.sixDecimals())
-        handleWeatherData(data, candidate)
-    }
-
-    private fun handleWeatherData(data: ResultWrapper<Exception, Weather>, candidate: Candidate) =
+    fun getForecastData(candidate: Candidate) = viewModelScope.launch {
+        setLoadingState()
+        val data = weatherRepository.getListOfDayForecast(candidate)
         when (data) {
             is ResultWrapper.Success -> {
-                val forecast = data.value
-                val date = DateUtils().getCurrentTime()
-
-                processWeatherData(candidate, forecast, date)
-                listOfDayForecast.value?.let { setHourlyOverview(it) }
+                _listOfDayForecast.value = data.value
+                listOfDayForecast.value?.let { setFiveHourForecast(it) }
+                setForecastOverview()
             }
-            is ResultWrapper.Error -> Log.d("Error", "An operation is not implemented: implement logic for ResultWrapper.Error")
+            is ResultWrapper.Error -> _error.value = "Ett fel uppstod."
         }
-
-
-    fun processWeatherData(candidate: Candidate, weather: Weather, date: String) {
-        var currentDate = date
-        var listOfHourlyData = mutableListOf<Hourly>()
-        val listOfDayForecast = mutableListOf<DayForecast>()
-
-        weather.timeSeries.forEach { timeSeries ->
-            val forecastDate = DateUtils().getFormattedTime(timeSeries.validTime)
-
-            if (forecastDate != currentDate) {
-                val day = DailyUtils.getDayForecast(currentDate, candidate, listOfHourlyData)
-                listOfDayForecast.add(day)
-                listOfHourlyData = mutableListOf()
-                currentDate = forecastDate
-            }
-
-            listOfHourlyData.add(HourlyUtils.getHourlyForecastData(timeSeries))
-        }
-
-        this._listOfDayForecast.value = listOfDayForecast
+        setCompletedState()
     }
 
-    fun setHourlyOverview(forecastTenDays: List<DayForecast>) {
-        val listOfHourlyOverview = HourlyUtils.getFiveHourForecastData(forecastTenDays)
-        for (i in 0..4) {
-            val hourlyOverview = listOfHourlyOverview[i]
-            when (i) {
+    private fun setFiveHourForecast(listOfDayForecast: List<DayForecast>) {
+        val listOfHourlyOverview = DailyUtils.getFiveHourForecast(listOfDayForecast)
+        for (hour in 0..4) {
+            val hourlyOverview = listOfHourlyOverview[hour]
+            when (hour) {
                 0 -> _forecastFirstHour.value = hourlyOverview
                 1 -> _forecastSecondHour.value = hourlyOverview
                 2 -> _forecastThirdHour.value = hourlyOverview
@@ -102,20 +65,18 @@ class DailyViewModel(
         }
     }
 
-    /*private fun handleErrors(error: ErrorEntity) = when (error) {
-        is ErrorEntity.Network -> setError("Nätverksfel")
-        is ErrorEntity.NotFound -> setError("Ingen data tillgänglig för tillfället.")
-        is ErrorEntity.AccessDenied -> setError("Förbjuden åtkomst.")
-        is ErrorEntity.ServiceUnavailable -> setError("Servern är inte redo att hantera begäran")
-        is ErrorEntity.Unknown -> setError("Ett fel uppstod.")
-    }*/
-
-    override fun onCleared() {
-        super.onCleared()
-        jobTracker.cancel()
+    private fun setForecastOverview() {
+        listOfDayForecast.value?.let {
+            _currentWeatherOverview.value = it[0].getCurrentWeatherOverview()
+        }
     }
-
 }
+
+data class CurrentWeatherOverview(
+    val symbolDescription: String,
+    val weatherSymbol: Int,
+    val temperature: String
+)
 
 
 

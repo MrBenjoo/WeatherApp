@@ -1,7 +1,7 @@
 package com.benji.weatherswe.utils
 
 import com.benji.domain.domainmodel.weather.Hourly
-import com.benji.weatherswe.utils.forecast.SymbolUtils
+import com.benji.data.utils.SymbolUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

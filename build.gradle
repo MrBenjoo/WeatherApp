@@ -101,7 +101,7 @@ buildscript {
         ]
 
         debugDependency = [
-                leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+                //leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
         ]
 
         miscellaneousDependencies = [
